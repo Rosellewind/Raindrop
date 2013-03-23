@@ -11,12 +11,9 @@
 		3DC6BE2716FE33E200E682EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE2516FE33E200E682EB /* InfoPlist.strings */; };
 		3DC6BE2916FE33E200E682EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6BE2816FE33E200E682EB /* main.m */; };
 		3DC6BE2D16FE33E200E682EB /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE2B16FE33E200E682EB /* Credits.rtf */; };
-		3DC6BE3016FE33E200E682EB /* DropAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6BE2F16FE33E200E682EB /* DropAppDelegate.m */; };
-		3DC6BE3316FE33E200E682EB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE3116FE33E200E682EB /* MainMenu.xib */; };
 		3DC6BE3B16FE33E200E682EB /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC6BE3A16FE33E200E682EB /* SenTestingKit.framework */; };
 		3DC6BE3C16FE33E200E682EB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC6BE1C16FE33E200E682EB /* Cocoa.framework */; };
 		3DC6BE4416FE33E200E682EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE4216FE33E200E682EB /* InfoPlist.strings */; };
-		3DC6BE4716FE33E200E682EB /* DropTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6BE4616FE33E200E682EB /* DropTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,15 +37,10 @@
 		3DC6BE2816FE33E200E682EB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3DC6BE2A16FE33E200E682EB /* Drop-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Drop-Prefix.pch"; sourceTree = "<group>"; };
 		3DC6BE2C16FE33E200E682EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		3DC6BE2E16FE33E200E682EB /* DropAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropAppDelegate.h; sourceTree = "<group>"; };
-		3DC6BE2F16FE33E200E682EB /* DropAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DropAppDelegate.m; sourceTree = "<group>"; };
-		3DC6BE3216FE33E200E682EB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		3DC6BE3916FE33E200E682EB /* DropTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DropTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC6BE3A16FE33E200E682EB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		3DC6BE4116FE33E200E682EB /* DropTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DropTests-Info.plist"; sourceTree = "<group>"; };
 		3DC6BE4316FE33E200E682EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3DC6BE4516FE33E200E682EB /* DropTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropTests.h; sourceTree = "<group>"; };
-		3DC6BE4616FE33E200E682EB /* DropTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DropTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,9 +106,6 @@
 		3DC6BE2216FE33E200E682EB /* Drop */ = {
 			isa = PBXGroup;
 			children = (
-				3DC6BE2E16FE33E200E682EB /* DropAppDelegate.h */,
-				3DC6BE2F16FE33E200E682EB /* DropAppDelegate.m */,
-				3DC6BE3116FE33E200E682EB /* MainMenu.xib */,
 				3DC6BE2316FE33E200E682EB /* Supporting Files */,
 			);
 			path = Drop;
@@ -137,8 +126,6 @@
 		3DC6BE3F16FE33E200E682EB /* DropTests */ = {
 			isa = PBXGroup;
 			children = (
-				3DC6BE4516FE33E200E682EB /* DropTests.h */,
-				3DC6BE4616FE33E200E682EB /* DropTests.m */,
 				3DC6BE4016FE33E200E682EB /* Supporting Files */,
 			);
 			path = DropTests;
@@ -227,7 +214,6 @@
 			files = (
 				3DC6BE2716FE33E200E682EB /* InfoPlist.strings in Resources */,
 				3DC6BE2D16FE33E200E682EB /* Credits.rtf in Resources */,
-				3DC6BE3316FE33E200E682EB /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,7 +249,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DC6BE2916FE33E200E682EB /* main.m in Sources */,
-				3DC6BE3016FE33E200E682EB /* DropAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,7 +256,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DC6BE4716FE33E200E682EB /* DropTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,14 +284,6 @@
 				3DC6BE2C16FE33E200E682EB /* en */,
 			);
 			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		3DC6BE3116FE33E200E682EB /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3DC6BE3216FE33E200E682EB /* en */,
-			);
-			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 		3DC6BE4216FE33E200E682EB /* InfoPlist.strings */ = {
