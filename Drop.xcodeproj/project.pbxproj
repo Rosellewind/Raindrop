@@ -14,6 +14,38 @@
 		3DC6BE3B16FE33E200E682EB /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC6BE3A16FE33E200E682EB /* SenTestingKit.framework */; };
 		3DC6BE3C16FE33E200E682EB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC6BE1C16FE33E200E682EB /* Cocoa.framework */; };
 		3DC6BE4416FE33E200E682EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE4216FE33E200E682EB /* InfoPlist.strings */; };
+		3DC6BE7A16FE348300E682EB /* a.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE5016FE348300E682EB /* a.txt */; };
+		3DC6BE7B16FE348300E682EB /* aCup.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE5116FE348300E682EB /* aCup.png */; };
+		3DC6BE7C16FE348300E682EB /* aCup.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE5216FE348300E682EB /* aCup.txt */; };
+		3DC6BE7D16FE348300E682EB /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6BE5316FE348300E682EB /* Animation.cpp */; };
+		3DC6BE7E16FE348300E682EB /* back1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE5516FE348300E682EB /* back1.jpg */; };
+		3DC6BE7F16FE348300E682EB /* background.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE5616FE348300E682EB /* background.txt */; };
+		3DC6BE8016FE348300E682EB /* bCup.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE5716FE348300E682EB /* bCup.png */; };
+		3DC6BE8116FE348300E682EB /* bCup.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE5816FE348300E682EB /* bCup.txt */; };
+		3DC6BE8216FE348300E682EB /* Cup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6BE5916FE348300E682EB /* Cup.cpp */; };
+		3DC6BE8316FE348300E682EB /* dCup.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE5B16FE348300E682EB /* dCup.png */; };
+		3DC6BE8416FE348300E682EB /* dCup.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE5C16FE348300E682EB /* dCup.txt */; };
+		3DC6BE8516FE348300E682EB /* Drop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6BE5D16FE348300E682EB /* Drop.cpp */; };
+		3DC6BE8616FE348300E682EB /* drop.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE5F16FE348300E682EB /* drop.png */; };
+		3DC6BE8716FE348300E682EB /* eCup.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE6016FE348300E682EB /* eCup.png */; };
+		3DC6BE8816FE348300E682EB /* eCup.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE6116FE348300E682EB /* eCup.txt */; };
+		3DC6BE8916FE348300E682EB /* fCup.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE6216FE348300E682EB /* fCup.png */; };
+		3DC6BE8A16FE348300E682EB /* fCup.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE6316FE348300E682EB /* fCup.txt */; };
+		3DC6BE8B16FE348300E682EB /* Frame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6BE6416FE348300E682EB /* Frame.cpp */; };
+		3DC6BE8C16FE348300E682EB /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6BE6616FE348300E682EB /* Game.cpp */; };
+		3DC6BE8D16FE348300E682EB /* game.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE6816FE348300E682EB /* game.txt */; };
+		3DC6BE8E16FE348300E682EB /* gCup.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE6916FE348300E682EB /* gCup.png */; };
+		3DC6BE8F16FE348300E682EB /* gCup.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE6A16FE348300E682EB /* gCup.txt */; };
+		3DC6BE9016FE348300E682EB /* hcCup.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE6B16FE348300E682EB /* hcCup.png */; };
+		3DC6BE9116FE348300E682EB /* hcCup.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE6C16FE348300E682EB /* hcCup.txt */; };
+		3DC6BE9216FE348300E682EB /* lcCup.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE6D16FE348300E682EB /* lcCup.png */; };
+		3DC6BE9316FE348300E682EB /* lcCup.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE6E16FE348300E682EB /* lcCup.txt */; };
+		3DC6BE9416FE348300E682EB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6BE6F16FE348300E682EB /* main.cpp */; };
+		3DC6BE9516FE348300E682EB /* pane.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE7016FE348300E682EB /* pane.png */; };
+		3DC6BE9616FE348300E682EB /* pane.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE7116FE348300E682EB /* pane.txt */; };
+		3DC6BE9716FE348300E682EB /* RaindropGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6BE7316FE348300E682EB /* RaindropGame.cpp */; };
+		3DC6BE9816FE348300E682EB /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6BE7616FE348300E682EB /* SDLMain.m */; };
+		3DC6BE9916FE348300E682EB /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6BE7816FE348300E682EB /* Sprite.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +73,47 @@
 		3DC6BE3A16FE33E200E682EB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		3DC6BE4116FE33E200E682EB /* DropTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DropTests-Info.plist"; sourceTree = "<group>"; };
 		3DC6BE4316FE33E200E682EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3DC6BE5016FE348300E682EB /* a.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = a.txt; sourceTree = "<group>"; };
+		3DC6BE5116FE348300E682EB /* aCup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aCup.png; sourceTree = "<group>"; };
+		3DC6BE5216FE348300E682EB /* aCup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = aCup.txt; sourceTree = "<group>"; };
+		3DC6BE5316FE348300E682EB /* Animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animation.cpp; sourceTree = "<group>"; };
+		3DC6BE5416FE348300E682EB /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
+		3DC6BE5516FE348300E682EB /* back1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = back1.jpg; sourceTree = "<group>"; };
+		3DC6BE5616FE348300E682EB /* background.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = background.txt; sourceTree = "<group>"; };
+		3DC6BE5716FE348300E682EB /* bCup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bCup.png; sourceTree = "<group>"; };
+		3DC6BE5816FE348300E682EB /* bCup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bCup.txt; sourceTree = "<group>"; };
+		3DC6BE5916FE348300E682EB /* Cup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cup.cpp; sourceTree = "<group>"; };
+		3DC6BE5A16FE348300E682EB /* Cup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cup.h; sourceTree = "<group>"; };
+		3DC6BE5B16FE348300E682EB /* dCup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dCup.png; sourceTree = "<group>"; };
+		3DC6BE5C16FE348300E682EB /* dCup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dCup.txt; sourceTree = "<group>"; };
+		3DC6BE5D16FE348300E682EB /* Drop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Drop.cpp; sourceTree = "<group>"; };
+		3DC6BE5E16FE348300E682EB /* Drop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drop.h; sourceTree = "<group>"; };
+		3DC6BE5F16FE348300E682EB /* drop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drop.png; sourceTree = "<group>"; };
+		3DC6BE6016FE348300E682EB /* eCup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eCup.png; sourceTree = "<group>"; };
+		3DC6BE6116FE348300E682EB /* eCup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = eCup.txt; sourceTree = "<group>"; };
+		3DC6BE6216FE348300E682EB /* fCup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fCup.png; sourceTree = "<group>"; };
+		3DC6BE6316FE348300E682EB /* fCup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fCup.txt; sourceTree = "<group>"; };
+		3DC6BE6416FE348300E682EB /* Frame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Frame.cpp; sourceTree = "<group>"; };
+		3DC6BE6516FE348300E682EB /* Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Frame.h; sourceTree = "<group>"; };
+		3DC6BE6616FE348300E682EB /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		3DC6BE6716FE348300E682EB /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		3DC6BE6816FE348300E682EB /* game.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = game.txt; sourceTree = "<group>"; };
+		3DC6BE6916FE348300E682EB /* gCup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gCup.png; sourceTree = "<group>"; };
+		3DC6BE6A16FE348300E682EB /* gCup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gCup.txt; sourceTree = "<group>"; };
+		3DC6BE6B16FE348300E682EB /* hcCup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hcCup.png; sourceTree = "<group>"; };
+		3DC6BE6C16FE348300E682EB /* hcCup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hcCup.txt; sourceTree = "<group>"; };
+		3DC6BE6D16FE348300E682EB /* lcCup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lcCup.png; sourceTree = "<group>"; };
+		3DC6BE6E16FE348300E682EB /* lcCup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lcCup.txt; sourceTree = "<group>"; };
+		3DC6BE6F16FE348300E682EB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3DC6BE7016FE348300E682EB /* pane.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pane.png; sourceTree = "<group>"; };
+		3DC6BE7116FE348300E682EB /* pane.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pane.txt; sourceTree = "<group>"; };
+		3DC6BE7216FE348300E682EB /* ProtoGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtoGame.h; sourceTree = "<group>"; };
+		3DC6BE7316FE348300E682EB /* RaindropGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RaindropGame.cpp; sourceTree = "<group>"; };
+		3DC6BE7416FE348300E682EB /* RaindropGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaindropGame.h; sourceTree = "<group>"; };
+		3DC6BE7516FE348300E682EB /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = "<group>"; };
+		3DC6BE7616FE348300E682EB /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = "<group>"; };
+		3DC6BE7816FE348300E682EB /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
+		3DC6BE7916FE348300E682EB /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +140,48 @@
 		3DC6BE1016FE33E200E682EB = {
 			isa = PBXGroup;
 			children = (
+				3DC6BE5016FE348300E682EB /* a.txt */,
+				3DC6BE5116FE348300E682EB /* aCup.png */,
+				3DC6BE5216FE348300E682EB /* aCup.txt */,
+				3DC6BE5316FE348300E682EB /* Animation.cpp */,
+				3DC6BE5416FE348300E682EB /* Animation.h */,
+				3DC6BE5516FE348300E682EB /* back1.jpg */,
+				3DC6BE5616FE348300E682EB /* background.txt */,
+				3DC6BE5716FE348300E682EB /* bCup.png */,
+				3DC6BE5816FE348300E682EB /* bCup.txt */,
+				3DC6BE5916FE348300E682EB /* Cup.cpp */,
+				3DC6BE5A16FE348300E682EB /* Cup.h */,
+				3DC6BE5B16FE348300E682EB /* dCup.png */,
+				3DC6BE5C16FE348300E682EB /* dCup.txt */,
+				3DC6BE5D16FE348300E682EB /* Drop.cpp */,
+				3DC6BE5E16FE348300E682EB /* Drop.h */,
+				3DC6BE5F16FE348300E682EB /* drop.png */,
+				3DC6BE6016FE348300E682EB /* eCup.png */,
+				3DC6BE6116FE348300E682EB /* eCup.txt */,
+				3DC6BE6216FE348300E682EB /* fCup.png */,
+				3DC6BE6316FE348300E682EB /* fCup.txt */,
+				3DC6BE6416FE348300E682EB /* Frame.cpp */,
+				3DC6BE6516FE348300E682EB /* Frame.h */,
+				3DC6BE6616FE348300E682EB /* Game.cpp */,
+				3DC6BE6716FE348300E682EB /* Game.h */,
+				3DC6BE6816FE348300E682EB /* game.txt */,
+				3DC6BE6916FE348300E682EB /* gCup.png */,
+				3DC6BE6A16FE348300E682EB /* gCup.txt */,
+				3DC6BE6B16FE348300E682EB /* hcCup.png */,
+				3DC6BE6C16FE348300E682EB /* hcCup.txt */,
+				3DC6BE6D16FE348300E682EB /* lcCup.png */,
+				3DC6BE6E16FE348300E682EB /* lcCup.txt */,
+				3DC6BE6F16FE348300E682EB /* main.cpp */,
+				3DC6BE7016FE348300E682EB /* pane.png */,
+				3DC6BE7116FE348300E682EB /* pane.txt */,
+				3DC6BE7216FE348300E682EB /* ProtoGame.h */,
+				3DC6BE7316FE348300E682EB /* RaindropGame.cpp */,
+				3DC6BE7416FE348300E682EB /* RaindropGame.h */,
+				3DC6BE7516FE348300E682EB /* SDLMain.h */,
+				3DC6BE7616FE348300E682EB /* SDLMain.m */,
+				3DC6BE7716FE348300E682EB /* sounds */,
+				3DC6BE7816FE348300E682EB /* Sprite.cpp */,
+				3DC6BE7916FE348300E682EB /* Sprite.h */,
 				3DC6BE2216FE33E200E682EB /* Drop */,
 				3DC6BE3F16FE33E200E682EB /* DropTests */,
 				3DC6BE1B16FE33E200E682EB /* Frameworks */,
@@ -138,6 +253,13 @@
 				3DC6BE4216FE33E200E682EB /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3DC6BE7716FE348300E682EB /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +336,29 @@
 			files = (
 				3DC6BE2716FE33E200E682EB /* InfoPlist.strings in Resources */,
 				3DC6BE2D16FE33E200E682EB /* Credits.rtf in Resources */,
+				3DC6BE7A16FE348300E682EB /* a.txt in Resources */,
+				3DC6BE7B16FE348300E682EB /* aCup.png in Resources */,
+				3DC6BE7C16FE348300E682EB /* aCup.txt in Resources */,
+				3DC6BE7E16FE348300E682EB /* back1.jpg in Resources */,
+				3DC6BE7F16FE348300E682EB /* background.txt in Resources */,
+				3DC6BE8016FE348300E682EB /* bCup.png in Resources */,
+				3DC6BE8116FE348300E682EB /* bCup.txt in Resources */,
+				3DC6BE8316FE348300E682EB /* dCup.png in Resources */,
+				3DC6BE8416FE348300E682EB /* dCup.txt in Resources */,
+				3DC6BE8616FE348300E682EB /* drop.png in Resources */,
+				3DC6BE8716FE348300E682EB /* eCup.png in Resources */,
+				3DC6BE8816FE348300E682EB /* eCup.txt in Resources */,
+				3DC6BE8916FE348300E682EB /* fCup.png in Resources */,
+				3DC6BE8A16FE348300E682EB /* fCup.txt in Resources */,
+				3DC6BE8D16FE348300E682EB /* game.txt in Resources */,
+				3DC6BE8E16FE348300E682EB /* gCup.png in Resources */,
+				3DC6BE8F16FE348300E682EB /* gCup.txt in Resources */,
+				3DC6BE9016FE348300E682EB /* hcCup.png in Resources */,
+				3DC6BE9116FE348300E682EB /* hcCup.txt in Resources */,
+				3DC6BE9216FE348300E682EB /* lcCup.png in Resources */,
+				3DC6BE9316FE348300E682EB /* lcCup.txt in Resources */,
+				3DC6BE9516FE348300E682EB /* pane.png in Resources */,
+				3DC6BE9616FE348300E682EB /* pane.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +394,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DC6BE2916FE33E200E682EB /* main.m in Sources */,
+				3DC6BE7D16FE348300E682EB /* Animation.cpp in Sources */,
+				3DC6BE8216FE348300E682EB /* Cup.cpp in Sources */,
+				3DC6BE8516FE348300E682EB /* Drop.cpp in Sources */,
+				3DC6BE8B16FE348300E682EB /* Frame.cpp in Sources */,
+				3DC6BE8C16FE348300E682EB /* Game.cpp in Sources */,
+				3DC6BE9416FE348300E682EB /* main.cpp in Sources */,
+				3DC6BE9716FE348300E682EB /* RaindropGame.cpp in Sources */,
+				3DC6BE9816FE348300E682EB /* SDLMain.m in Sources */,
+				3DC6BE9916FE348300E682EB /* Sprite.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
