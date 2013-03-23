@@ -46,6 +46,8 @@
 		3DC6BE9716FE348300E682EB /* RaindropGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6BE7316FE348300E682EB /* RaindropGame.cpp */; };
 		3DC6BE9816FE348300E682EB /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6BE7616FE348300E682EB /* SDLMain.m */; };
 		3DC6BE9916FE348300E682EB /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6BE7816FE348300E682EB /* Sprite.cpp */; };
+		3DC6BE9C16FE35B200E682EB /* SDL_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC6BE9A16FE35B200E682EB /* SDL_image.framework */; };
+		3DC6BE9D16FE35B200E682EB /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC6BE9B16FE35B200E682EB /* SDL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +116,8 @@
 		3DC6BE7616FE348300E682EB /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = "<group>"; };
 		3DC6BE7816FE348300E682EB /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
 		3DC6BE7916FE348300E682EB /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
+		3DC6BE9A16FE35B200E682EB /* SDL_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_image.framework; path = /Library/Frameworks/SDL_image.framework; sourceTree = "<absolute>"; };
+		3DC6BE9B16FE35B200E682EB /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DC6BE9C16FE35B200E682EB /* SDL_image.framework in Frameworks */,
+				3DC6BE9D16FE35B200E682EB /* SDL.framework in Frameworks */,
 				3DC6BE1D16FE33E200E682EB /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,6 +207,8 @@
 		3DC6BE1B16FE33E200E682EB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3DC6BE9A16FE35B200E682EB /* SDL_image.framework */,
+				3DC6BE9B16FE35B200E682EB /* SDL.framework */,
 				3DC6BE1C16FE33E200E682EB /* Cocoa.framework */,
 				3DC6BE3A16FE33E200E682EB /* SenTestingKit.framework */,
 				3DC6BE1E16FE33E200E682EB /* Other Frameworks */,
@@ -477,9 +485,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = /Library/Frameworks/SDL.framework/Headers;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = "";
 			};
 			name = Debug;
 		};
@@ -504,7 +513,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				SDKROOT = macosx;
+				SDKROOT = "";
 			};
 			name = Release;
 		};
