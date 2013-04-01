@@ -20,7 +20,6 @@ void RaindropGame::init(string fname, int cups, int drops, int speed, int latenc
 }
 
 void RaindropGame::run(){
-    
     SDL_Event event;
     long last = SDL_GetTicks();
     SDL_Delay(100);
@@ -87,7 +86,7 @@ void RaindropGame::run(){
 					}
                     break;
                 default:
-                    cout<<"events issue"<<endl;
+                    cout<<"other event"<<endl;
 			}//ends event.type switch
         }//ends event detection while loop
         
@@ -116,6 +115,7 @@ void RaindropGame::run(){
     }//while !done loop ends
     
     SDL_Quit();
+     
 }//run ends
 
 void RaindropGame::setDraggedObject(int x, int y){

@@ -1,3 +1,9 @@
+/*
+ g++ -o Raindrop -I /Library/Frameworks/SDL.framework/Headers -framework SDL -framework SDL_image -framework Cocoa SDLMain.m main.cpp Game.cpp Frame.cpp Animation.cpp Sprite.cpp Drop.cpp Cup.cpp ProtoGame.h RaindropGame.cpp
+
+
+*/
+
 #ifdef _WIN32
 #include "SDL/SDL.h"
 #elif __APPLE__

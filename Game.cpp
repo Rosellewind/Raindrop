@@ -18,6 +18,7 @@ void Game::init(string fname){
     //init sdl
     SDL_Init(SDL_INIT_EVERYTHING);
     screen = SDL_SetVideoMode(SCREENWIDTH, SCREENHEIGHT, 16, SDL_ANYFORMAT|SDL_HWSURFACE|SDL_DOUBLEBUF);
+
     //set title
     in.open(fname.c_str());
     getline(in, title);
@@ -27,6 +28,7 @@ void Game::init(string fname){
     //set background
     background->init("background.txt");
     sprites.insert(sprites.begin(), background);
+    
     pane->init("pane.txt", 0, GAMESCREENHEIGHT);
     sprites.insert(sprites.begin(), pane);
 }

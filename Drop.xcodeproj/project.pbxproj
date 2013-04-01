@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D4070BE17093A37004373A5 /* a.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3D4070BD17093A37004373A5 /* a.txt */; };
 		3DC6BE1D16FE33E200E682EB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC6BE1C16FE33E200E682EB /* Cocoa.framework */; };
 		3DC6BE2716FE33E200E682EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE2516FE33E200E682EB /* InfoPlist.strings */; };
 		3DC6BE2D16FE33E200E682EB /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE2B16FE33E200E682EB /* Credits.rtf */; };
 		3DC6BE3B16FE33E200E682EB /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC6BE3A16FE33E200E682EB /* SenTestingKit.framework */; };
 		3DC6BE3C16FE33E200E682EB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC6BE1C16FE33E200E682EB /* Cocoa.framework */; };
 		3DC6BE4416FE33E200E682EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE4216FE33E200E682EB /* InfoPlist.strings */; };
-		3DC6BE7A16FE348300E682EB /* a.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE5016FE348300E682EB /* a.txt */; };
 		3DC6BE7B16FE348300E682EB /* aCup.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE5116FE348300E682EB /* aCup.png */; };
 		3DC6BE7C16FE348300E682EB /* aCup.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE5216FE348300E682EB /* aCup.txt */; };
 		3DC6BE7D16FE348300E682EB /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6BE5316FE348300E682EB /* Animation.cpp */; };
@@ -85,6 +85,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3D4070BD17093A37004373A5 /* a.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = a.txt; sourceTree = "<group>"; };
 		3DC6BE1916FE33E200E682EB /* Drop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC6BE1C16FE33E200E682EB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		3DC6BE1F16FE33E200E682EB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -98,7 +99,6 @@
 		3DC6BE3A16FE33E200E682EB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		3DC6BE4116FE33E200E682EB /* DropTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DropTests-Info.plist"; sourceTree = "<group>"; };
 		3DC6BE4316FE33E200E682EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3DC6BE5016FE348300E682EB /* a.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = a.txt; sourceTree = "<group>"; };
 		3DC6BE5116FE348300E682EB /* aCup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aCup.png; sourceTree = "<group>"; };
 		3DC6BE5216FE348300E682EB /* aCup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = aCup.txt; sourceTree = "<group>"; };
 		3DC6BE5316FE348300E682EB /* Animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animation.cpp; sourceTree = "<group>"; };
@@ -276,7 +276,7 @@
 			children = (
 				3DD7E2CD16FE3D830052017B /* sounds */,
 				3DD7E2BA16FE3C7C0052017B /* Cups */,
-				3DC6BE5016FE348300E682EB /* a.txt */,
+				3D4070BD17093A37004373A5 /* a.txt */,
 				3DC6BE5516FE348300E682EB /* back1.jpg */,
 				3DC6BE5616FE348300E682EB /* background.txt */,
 				3DC6BE5F16FE348300E682EB /* drop.png */,
@@ -284,7 +284,7 @@
 				3DC6BE7016FE348300E682EB /* pane.png */,
 				3DC6BE7116FE348300E682EB /* pane.txt */,
 			);
-			path = Resources;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		3DD7E2BA16FE3C7C0052017B /* Cups */ = {
@@ -401,7 +401,6 @@
 			files = (
 				3DC6BE2716FE33E200E682EB /* InfoPlist.strings in Resources */,
 				3DC6BE2D16FE33E200E682EB /* Credits.rtf in Resources */,
-				3DC6BE7A16FE348300E682EB /* a.txt in Resources */,
 				3DC6BE7B16FE348300E682EB /* aCup.png in Resources */,
 				3DC6BE7C16FE348300E682EB /* aCup.txt in Resources */,
 				3DC6BE7E16FE348300E682EB /* back1.jpg in Resources */,
@@ -433,6 +432,7 @@
 				3DD7E2DD16FE3D830052017B /* hc.mp3 in Resources */,
 				3DD7E2DE16FE3D830052017B /* lc.mp3 in Resources */,
 				3DD7E2DF16FE3D830052017B /* rain.mp3 in Resources */,
+				3D4070BE17093A37004373A5 /* a.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

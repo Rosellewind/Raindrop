@@ -16,7 +16,7 @@
 using namespace std;
 
 class Animation{
-    vector<Frame> frames;
+    vector<Frame*> frames;
     long totalTime;
 public:
     void init(string fname);
