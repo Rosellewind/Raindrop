@@ -4,20 +4,17 @@
 #include <climits>
 
 
-long Frame::getTime(){
-    return time;
-}
-
-void Frame::init(string fname, long newTime = LONG_MAX){
-    initCount ++;
-    cout<<"tag: "<<tag<<" initCount: "<<initCount;
-
+Frame::Frame(string fname, long newTime = LONG_MAX){
     time = newTime;
     image = IMG_Load(fname.c_str());
-
+    
     src.x = src.y = dest.x = dest.y = 0;
     src.w = dest.w = image->w;
     src.h = dest.h = image->h;
+}
+
+long Frame::getTime(){
+    return time;
 }
 
 void Frame::draw(SDL_Surface *screen, int x, int y){    
@@ -28,26 +25,9 @@ void Frame::draw(SDL_Surface *screen, int x, int y){
 SDL_Rect Frame::getRect(){
     return dest;
 }
-Frame::Frame(){
-    defaultCount++;
-    tag = -1;
-    time = 0;
-    cout<<"tag: "<<tag<<" defaultCount: "<<defaultCount<<endl;
-}
-/*
-Frame::Frame(string fname, long newTime = LONG_MAX){
-    time = newTime;
-    image = IMG_Load(fname.c_str());
-    
-    src.x = src.y = dest.x = dest.y = 0;
-    src.w = dest.w = image->w;
-    src.h = dest.h = image->h;
-}
-*/
  
 Frame::~Frame(){
-    if (image){
-//        SDL_FreeSurface(image);
-        image = NULL;
-    }
+    cout<<"deleting" <<image->w<<endl;
+    SDL_FreeSurface(image);
+    image = NULL;
 }

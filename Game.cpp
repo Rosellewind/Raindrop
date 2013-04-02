@@ -8,11 +8,11 @@
 #include "Game.h"
 
 
-void Game::init(string fname){
+Game::Game(string fname){
     string title;
     done = false;
-    Sprite *background = new Sprite;
-    Sprite *pane = new Sprite;
+    Sprite *background;
+    Sprite *pane;
     ifstream in;
     
     //init sdl
@@ -26,10 +26,10 @@ void Game::init(string fname){
     SDL_WM_SetCaption(title.c_str(), NULL);
     
     //set background
-    background->init("background.txt");
+    background = new Sprite("background.txt");
     sprites.insert(sprites.begin(), background);
     
-    pane->init("pane.txt", 0, GAMESCREENHEIGHT);
+    pane = new Sprite("pane.txt", 0, GAMESCREENHEIGHT);
     sprites.insert(sprites.begin(), pane);
 }
 
@@ -49,5 +49,13 @@ void Game::run(){
         SDL_Flip(screen);
     }
     SDL_Quit();
+}
+
+Game::~Game(){
+    SDL_FreeSurface(screen);
+    screen = NULL;
+    for (int i = 0; i<sprites.size(); i++) {
+        delete sprites[i];
+    }
 }
 

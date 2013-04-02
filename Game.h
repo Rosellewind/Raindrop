@@ -23,8 +23,9 @@ protected:
     bool done;
     vector<Sprite*> sprites;
 public:
-    virtual void init(string fname);
+    Game(string fname);
     void run();
+    ~Game();
 };
 
 #endif

@@ -6,7 +6,7 @@
 #include "Animation.h"
 
 
-void Animation::init(string fname){
+Animation::Animation(string fname){
     int n;
     ifstream in(fname.c_str());
     in>>n;
@@ -17,8 +17,7 @@ void Animation::init(string fname){
         string f2name;
         in>>t>>f2name;
         totalTime += t;
-        Frame *f = new Frame;
-        f->init(f2name, t);
+        Frame *f = new Frame(f2name, t);
         frames.insert(frames.end(), f);
     }
     in.close();
@@ -38,4 +37,10 @@ void Animation::draw(SDL_Surface *screen, int x, int y, long elapsed){
 
 SDL_Rect Animation::getRect(){
     return frames[0]->getRect();
+}
+
+Animation::~Animation(){
+    for (int i = 0; i<frames.size(); i++) {
+        delete frames[i];
+    }
 }

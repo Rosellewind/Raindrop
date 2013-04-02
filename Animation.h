@@ -18,9 +18,10 @@ class Animation{
     vector<Frame*> frames;
     long totalTime;
 public:
-    void init(string fname);
+    Animation(string fname);
     void draw(SDL_Surface *screen, int x, int y, long elapsed);
     SDL_Rect getRect();
+    ~Animation();
 };
 
 #endif

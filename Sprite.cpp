@@ -4,13 +4,11 @@
 #include "Sprite.h"
 #include "Animation.h"
 
-
-void Sprite::init(string fname,
+Sprite::Sprite(string fname,
                   float newXPos, float newYPos,
                   float newXVel, float newYVel,
                   float newXAcc, float newYAcc){
-    animation = new Animation;
-    animation->init(fname.c_str());
+    animation = new Animation(fname.c_str());
     xPos = newXPos;
     yPos = newYPos;
     xVel = newXVel;
@@ -50,20 +48,9 @@ bool Sprite::isAlive(){
     return 1;
 }
 
-void Sprite::startDragging(int x, int y){
-    SDL_Rect rect = getRect();
-    isDragging = true;
-    offsetX = x - rect.x;
-    offsetY = y - rect.y;
-}
-
 void Sprite::dragTo(int x, int y){
     xPos = (float)x - offsetX;
 	yPos = (float)y - offsetY;
-}
-
-void Sprite::stopDragging(){
-    isDragging = false;
 }
 
 bool Sprite::checkCollisionByCenter(SDL_Rect rect1){
@@ -77,4 +64,19 @@ bool Sprite::checkCollisionByCenter(SDL_Rect rect1){
     else return 0;
 }
 
+void Sprite::startDragging(int x, int y){
+    SDL_Rect rect = getRect();
+    isDragging = true;
+    offsetX = x - rect.x;
+    offsetY = y - rect.y;
+}
+
+void Sprite::stopDragging(){
+    isDragging = false;
+}
+
+Sprite::~Sprite(){
+    if (animation) 
+        delete animation;
+}
 

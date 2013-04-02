@@ -8,8 +8,7 @@
 #include "RaindropGame.h"
 #include "Game.h"
 
-void RaindropGame::init(string fname, int cups, int drops, int speed, int latency){
-    Game::init(fname);
+RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int latency):Game(fname){
     gameSpeed = speed;
     numCups = cups;
     numDrops = drops;
@@ -34,9 +33,8 @@ void RaindropGame::run(){
         
         //add drops if needed
         while (drops.size() < numDrops && elapsed > last + minLatency) {
-            Drop *d = new Drop;
             int x = (rand()%20)*0.05*SCREENWIDTH;
-            d->init("a.txt", PLAIN, x, gameSpeed);
+            Drop *d = new Drop("a.txt", PLAIN, x, gameSpeed);
             drops.insert(drops.end(), d);
             last = SDL_GetTicks();
         }
@@ -46,7 +44,6 @@ void RaindropGame::run(){
             if (drops[i]->isAlive() == 0) {
                 Drop *d = drops[i];
                 drops.erase(drops.begin()+i);
-//                cout<<"game image->w"<<d->animation->frames[0]->image->w;
                 delete d;
             }
         }//for all, for each, algorithms part
@@ -145,4 +142,11 @@ bool RaindropGame::checkClickCup(int x, int y){
     return 0;
 }
 
-
+RaindropGame::~RaindropGame(){
+    for (int i = 0; i<drops.size(); i++){
+        delete drops[i];
+    }
+    for (int i = 0; i<cups.size(); i++){
+        delete cups[i];
+    }
+}

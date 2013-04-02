@@ -33,9 +33,9 @@ class RaindropGame: public Game{
     bool checkClickCup(int x, int y);
     void setDraggedObject(int x, int y);
 public:
-    void init(string fname, int cups = 3, int drops = 10, int speed = 50, int latency = 800);
+    RaindropGame(string fname, int cups = 3, int drops = 10, int speed = 50, int latency = 800);
     void run();
-    
+    ~RaindropGame();
     
 };
 #endif

@@ -9,7 +9,7 @@ public:
     Type type;
     bool isCaught;
     
-    void init(string fname, Type type, int x, int gameSpeed);
+    Drop(string fname, Type type, int x, int gameSpeed);
     void update(long elapsed);
     bool isAlive();
 };

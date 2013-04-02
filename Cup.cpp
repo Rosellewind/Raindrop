@@ -5,6 +5,13 @@
 string Note_String[] = {"lc", "d", "e", "f", "g", "a", "b", "hc"};
 string Type_String[] = {"plain", "color", "slow", "drain"};
 
+
+Cup::Cup(string fname, Note n, int x):Sprite(fname, x, GAMESCREENHEIGHT-62){
+    Sprite::Sprite(fname, x, GAMESCREENHEIGHT-62);
+    note = n;
+    topOfCup = GAMESCREENHEIGHT - getRect().h;
+}
+
 void Cup::update(long elapsed){
     Sprite::update(elapsed);
 };
@@ -28,22 +35,20 @@ void Cup::raiseNote(){
         note = LC;
     string newFile = Note_String[note] + "Cup.txt";
     delete animation;
-    animation = new Animation;
-    animation->init(newFile.c_str());
+    animation = new Animation(newFile.c_str());
 }
 
-void Cup::init(string fname, Note n, int x){
-    Sprite::init(fname, x, GAMESCREENHEIGHT-62);
-    note = n;
-    topOfCup = GAMESCREENHEIGHT - getRect().h;
+void Cup::dragTo(int x, int y){
+    xPos = (float)x - offsetX;
+	yPos = topOfCup;
 }
 
+//class methods
 vector<Cup*> Cup::initCups(int numCups, SDL_Surface *screen){
     vector<Cup*> cups(numCups);
     for (int i = 0; i<numCups; i++) {
-        Cup *c = new Cup();
         int x = (rand()%10)*0.1*SCREENWIDTH;
-        c->init("lcCup.txt", LC, x);
+        Cup *c = new Cup("lcCup.txt", LC, x);
         cups[i] = c;
     }
     return cups;
@@ -66,9 +71,4 @@ void Cup::checkCollisions(vector<Cup*> cups, vector<Drop*> drops){
     }
 }
 
-void Cup::dragTo(int x, int y){
-    //    Sprite::dragTo(x, topOfCup);
-    xPos = (float)x - offsetX;
-	yPos = topOfCup;
-}
 

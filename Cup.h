@@ -12,8 +12,10 @@ public:
     void raiseNote();
     int topOfCup;
     
-    void init(string fname, Note n = LC, int x = 0);
+    Cup(string fname, Note n = LC, int x = 0);
     void dragTo(int x, int y);
+    
+    //class methods
     static vector<Cup*> initCups(int numCups, SDL_Surface*screen);
     static void checkCollisions(vector<Cup*> cups, vector<Drop*> drops);
 };

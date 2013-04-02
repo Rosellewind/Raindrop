@@ -24,12 +24,10 @@
 using namespace std;
 
 int main(int argc, char **argv){
-    RaindropGame game;
-    
     //menu screen, pick level, settings
     
     //game screen
-    game.init("game.txt",3);//init with settings
+    RaindropGame game("game.txt",3);//init with settings
     game.run();
     
     //won/lost screen

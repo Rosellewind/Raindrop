@@ -16,8 +16,8 @@
 #include <string>
 
 using namespace std;
-static int defaultCount = 0;
-static int initCount = 0;
+
+
 class Frame{
 
     int tag;
@@ -25,11 +25,10 @@ class Frame{
     SDL_Rect src, dest;
     long time;
 public:
+    Frame(string fname, long newTime);
     long getTime();
-    void init(string fname, long newTime);
     void draw(SDL_Surface *screen, int x, int y);
     SDL_Rect getRect();
-    Frame();
     ~Frame();
 };
 
