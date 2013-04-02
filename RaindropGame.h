@@ -18,6 +18,7 @@
 #include "Cup.h"
 
 #include "Game.h"
+#include "Pane.h"
 
 class RaindropGame: public Game{
     int numCups;
@@ -29,6 +30,8 @@ class RaindropGame: public Game{
     float timestampMouseDown;
     bool isDragging;
     Sprite *objDragged;
+    Sprite *background;
+    Pane *pane;
     
     bool checkClickCup(int x, int y);
     void setDraggedObject(int x, int y);

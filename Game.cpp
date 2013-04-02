@@ -11,8 +11,6 @@
 Game::Game(string fname){
     string title;
     done = false;
-    Sprite *background;
-    Sprite *pane;
     ifstream in;
     
     //init sdl
@@ -24,15 +22,6 @@ Game::Game(string fname){
     getline(in, title);
     in.close();
     SDL_WM_SetCaption(title.c_str(), NULL);
-    
-    //set background
-    background = new Sprite("background.txt");
-    sprites.insert(sprites.begin(), background);
-    
-    //set pane
-    
-    pane = new Sprite("pane.txt", 0, GAMESCREENHEIGHT);
-    sprites.insert(sprites.begin(), pane);
 }
 
 void Game::run(){

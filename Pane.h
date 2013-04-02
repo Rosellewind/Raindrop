@@ -21,6 +21,7 @@ class Pane{
 public:
     Pane();
     void draw(SDL_Surface *screen);
+    void applySurface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL);
 };
 
 #endif

@@ -16,6 +16,16 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     isDragging = false;
     timestampMouseDown = 0;
     objDragged = NULL;
+    
+    SDL_Surface *dash;
+
+    
+    //set background
+    background = new Sprite("background.txt");
+    sprites.insert(sprites.begin(), background);
+    
+    //set pane
+    pane = new Pane();
 }
 
 void RaindropGame::run(){
@@ -109,6 +119,10 @@ void RaindropGame::run(){
             cups[i]->update(elapsed);
             cups[i]->draw(screen, elapsed);
         }
+        
+        //draw control pane
+        pane->draw(screen);
+        
         SDL_Flip(screen);
     }//while !done loop ends
     
