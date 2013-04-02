@@ -7,7 +7,6 @@ string Type_String[] = {"plain", "color", "slow", "drain"};
 
 
 Cup::Cup(string fname, Note n, int x):Sprite(fname, x, GAMESCREENHEIGHT-62){
-    Sprite::Sprite(fname, x, GAMESCREENHEIGHT-62);
     note = n;
     topOfCup = GAMESCREENHEIGHT - getRect().h;
 }

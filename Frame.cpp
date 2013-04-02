@@ -27,7 +27,6 @@ SDL_Rect Frame::getRect(){
 }
  
 Frame::~Frame(){
-    cout<<"deleting" <<image->w<<endl;
     SDL_FreeSurface(image);
     image = NULL;
 }
