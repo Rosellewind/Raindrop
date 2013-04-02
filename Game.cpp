@@ -29,6 +29,8 @@ Game::Game(string fname){
     background = new Sprite("background.txt");
     sprites.insert(sprites.begin(), background);
     
+    //set pane
+    
     pane = new Sprite("pane.txt", 0, GAMESCREENHEIGHT);
     sprites.insert(sprites.begin(), pane);
 }

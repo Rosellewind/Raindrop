@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D1C44D9170B498D00586C40 /* Pane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D1C44D8170B498D00586C40 /* Pane.cpp */; };
+		3D1C44DB170B514B00586C40 /* SDL_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D1C44DA170B514B00586C40 /* SDL_ttf.framework */; };
+		3D1C44DC170B517A00586C40 /* SDL_ttf.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3D1C44DA170B514B00586C40 /* SDL_ttf.framework */; };
 		3D4070BE17093A37004373A5 /* a.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3D4070BD17093A37004373A5 /* a.txt */; };
 		3DC6BE1D16FE33E200E682EB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC6BE1C16FE33E200E682EB /* Cocoa.framework */; };
 		3DC6BE2716FE33E200E682EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE2516FE33E200E682EB /* InfoPlist.strings */; };
@@ -77,6 +80,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3D1C44DC170B517A00586C40 /* SDL_ttf.framework in CopyFiles */,
 				3DC6BEA016FE37CB00E682EB /* SDL_image.framework in CopyFiles */,
 				3DC6BEA116FE37CB00E682EB /* SDL.framework in CopyFiles */,
 			);
@@ -85,6 +89,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3D1C44D7170B497E00586C40 /* Pane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pane.h; sourceTree = "<group>"; };
+		3D1C44D8170B498D00586C40 /* Pane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pane.cpp; sourceTree = "<group>"; };
+		3D1C44DA170B514B00586C40 /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_ttf.framework; path = /Library/Frameworks/SDL_ttf.framework; sourceTree = "<absolute>"; };
 		3D4070BD17093A37004373A5 /* a.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = a.txt; sourceTree = "<group>"; };
 		3DC6BE1916FE33E200E682EB /* Drop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC6BE1C16FE33E200E682EB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -157,6 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D1C44DB170B514B00586C40 /* SDL_ttf.framework in Frameworks */,
 				3DC6BE9C16FE35B200E682EB /* SDL_image.framework in Frameworks */,
 				3DC6BE9D16FE35B200E682EB /* SDL.framework in Frameworks */,
 				3DC6BE1D16FE33E200E682EB /* Cocoa.framework in Frameworks */,
@@ -192,6 +200,8 @@
 				3DC6BE5916FE348300E682EB /* Cup.cpp */,
 				3DC6BE5E16FE348300E682EB /* Drop.h */,
 				3DC6BE5D16FE348300E682EB /* Drop.cpp */,
+				3D1C44D7170B497E00586C40 /* Pane.h */,
+				3D1C44D8170B498D00586C40 /* Pane.cpp */,
 				3DC6BE6616FE348300E682EB /* Game.cpp */,
 				3DC6BE6716FE348300E682EB /* Game.h */,
 				3DC6BE7316FE348300E682EB /* RaindropGame.cpp */,
@@ -216,6 +226,7 @@
 		3DC6BE1B16FE33E200E682EB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3D1C44DA170B514B00586C40 /* SDL_ttf.framework */,
 				3DC6BE9A16FE35B200E682EB /* SDL_image.framework */,
 				3DC6BE9B16FE35B200E682EB /* SDL.framework */,
 				3DC6BE1C16FE33E200E682EB /* Cocoa.framework */,
@@ -476,6 +487,7 @@
 				3DC6BE9716FE348300E682EB /* RaindropGame.cpp in Sources */,
 				3DC6BE9816FE348300E682EB /* SDLMain.m in Sources */,
 				3DC6BE9916FE348300E682EB /* Sprite.cpp in Sources */,
+				3D1C44D9170B498D00586C40 /* Pane.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
