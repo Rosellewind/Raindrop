@@ -25,7 +25,7 @@ void RaindropGame::run(){
     SDL_Delay(100);
     
     //add cups
-    cups = Cup::initCups(3, screen);
+    cups = Cup::initCups(numCups, screen);
     
     
     //run loop
@@ -46,6 +46,7 @@ void RaindropGame::run(){
             if (drops[i]->isAlive() == 0) {
                 Drop *d = drops[i];
                 drops.erase(drops.begin()+i);
+//                cout<<"game image->w"<<d->animation->frames[0]->image->w;
                 delete d;
             }
         }//for all, for each, algorithms part

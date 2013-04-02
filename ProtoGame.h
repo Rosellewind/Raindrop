@@ -11,3 +11,11 @@ enum Note{LC, D, E, F, G, A, B, HC};
 
 
 #endif
+
+/*
+class ProtoGame{
+public:
+    static int screenwidth;
+};
+int ProtoGame::screenwidth = 640;   //this part should be in .cpp file
+*/

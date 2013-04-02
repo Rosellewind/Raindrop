@@ -12,7 +12,6 @@
 
 #include <vector>
 #include "Frame.h"
-
 using namespace std;
 
 class Animation{

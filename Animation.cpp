@@ -26,9 +26,7 @@ void Animation::init(string fname){
 
 void Animation::draw(SDL_Surface *screen, int x, int y, long elapsed){
     long currentFrameTime = elapsed % totalTime;
-    for (int i = 0; i < frames.size(); i++) {
-        //            frames[i].draw(screen, x, y);
-        
+    for (int i = 0; i < frames.size(); i++) {        
         if (frames[i]->getTime() > currentFrameTime){
             frames[i]->draw(screen, x, y);
             break;

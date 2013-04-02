@@ -9,6 +9,9 @@ long Frame::getTime(){
 }
 
 void Frame::init(string fname, long newTime = LONG_MAX){
+    initCount ++;
+    cout<<"tag: "<<tag<<" initCount: "<<initCount;
+
     time = newTime;
     image = IMG_Load(fname.c_str());
 
@@ -25,7 +28,26 @@ void Frame::draw(SDL_Surface *screen, int x, int y){
 SDL_Rect Frame::getRect(){
     return dest;
 }
-
+Frame::Frame(){
+    defaultCount++;
+    tag = -1;
+    time = 0;
+    cout<<"tag: "<<tag<<" defaultCount: "<<defaultCount<<endl;
+}
+/*
+Frame::Frame(string fname, long newTime = LONG_MAX){
+    time = newTime;
+    image = IMG_Load(fname.c_str());
+    
+    src.x = src.y = dest.x = dest.y = 0;
+    src.w = dest.w = image->w;
+    src.h = dest.h = image->h;
+}
+*/
+ 
 Frame::~Frame(){
-//    SDL_FreeSurface(image);
+    if (image){
+//        SDL_FreeSurface(image);
+        image = NULL;
+    }
 }
