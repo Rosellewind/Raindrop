@@ -4,7 +4,7 @@
 #include "Sprite.h"
 #include "ProtoGame.h"
 #include "Drop.h"
-class Cup: public Sprite{
+class Cup : public Sprite{
 public:
     
     Note note;
@@ -15,7 +15,7 @@ public:
     Cup(string fname, Note n = LC, int x = 0);
     void dragTo(int x, int y);
     
-    //class methods
+    //class methods 
     static vector<Cup*> initCups(int numCups, SDL_Surface*screen);
     static void checkCollisions(vector<Cup*> cups, vector<Drop*> drops);
 };

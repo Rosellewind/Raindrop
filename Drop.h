@@ -4,7 +4,7 @@
 #include "Sprite.h"
 #include "ProtoGame.h"
 
-class Drop: public Sprite{
+class Drop : public Sprite{
 public:
     Type type;
     bool isCaught;

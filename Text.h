@@ -1,5 +1,5 @@
-#ifndef PANE_H
-#define PANE_H
+#ifndef TEXT_H
+#define TEXT_H
 
 #ifdef _WIN32
 #include "SDL/SDL.h"
@@ -14,19 +14,22 @@
 #elif __unix__
 #endif
 
-#include <vector>
-#include "Text.h"
+#include <string>
 
 using namespace std;
-class Pane{
+
+
+class Text {
+    SDL_Surface *textSurface;
     SDL_Rect rect;
-    vector<Text*> staticText;
-    //    pool;
-    
+
 public:
-    Pane();
+    Text(string textString, int x, int y, string fontName = "lazy.ttf", int fontSize = 28, SDL_Color textColor = { 255, 255, 255 });
     void draw(SDL_Surface *screen);
-    ~Pane();
+    ~Text();
 };
+
+
+
 
 #endif

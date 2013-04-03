@@ -17,9 +17,6 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     timestampMouseDown = 0;
     objDragged = NULL;
     
-    SDL_Surface *dash;
-
-    
     //set background
     background = new Sprite("background.txt");
     sprites.insert(sprites.begin(), background);
