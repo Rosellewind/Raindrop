@@ -1,0 +1,10 @@
+Resources/sounds/rain.mp3
+8
+Resources/sounds/lc.mp3
+Resources/sounds/d.mp3
+Resources/sounds/e.mp3
+Resources/sounds/f.mp3
+Resources/sounds/g.mp3
+Resources/sounds/a.mp3
+Resources/sounds/b.mp3
+Resources/sounds/hc.mp3
