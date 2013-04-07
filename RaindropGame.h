@@ -28,7 +28,7 @@ class RaindropGame: public Game{
     vector<Cup*> cups;
     float timestampMouseDown;
     bool isDragging;
-    Sprite *objDragged;
+    Cup *objDragged;
     SoundPlayer *soundplayer;
     
     bool checkClickCup(int x, int y);

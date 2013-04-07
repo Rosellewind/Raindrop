@@ -20,7 +20,6 @@ void Frame::init(string fname, long newTime = LONG_MAX){
 void Frame::draw(SDL_Surface *screen, int x, int y){    
     dest.x = x; dest.y = y;
     SDL_BlitSurface(image, &src, screen, &dest);
-    cout<<"draw"<<endl;
 }
 
 SDL_Rect Frame::getRect(){

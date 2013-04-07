@@ -24,7 +24,7 @@ void RaindropGame::init(string fname, int cups, int drops, int speed, int latenc
     soundplayer->init(44100, 2, 4096);
     soundplayer->load_sounds("audio.txt");
 }
-
+    
 void RaindropGame::run(){
     
     SDL_Event event;
@@ -34,7 +34,29 @@ void RaindropGame::run(){
     //add cups
     cups = Cup::initCups(3, screen);
     
+    soundplayer->setMusicVolume(20);
+    soundplayer->playMusic();
     
+    vector<Note> notes;
+    notes.push_back(LC);
+    notes.push_back(D);
+    notes.push_back(E);
+    notes.push_back(F);
+    notes.push_back(G);
+    notes.push_back(A);
+    notes.push_back(B);
+    notes.push_back(HC);
+    notes.push_back(HC);
+    notes.push_back(B);
+    notes.push_back(A);
+    notes.push_back(G);
+    notes.push_back(F);
+    notes.push_back(E);
+    notes.push_back(D);
+    notes.push_back(LC);
+
+    soundplayer->playNoteSequence(notes);
+
     //run loop
     while (!done) {
         long elapsed = SDL_GetTicks();
@@ -120,7 +142,7 @@ void RaindropGame::run(){
         }
         SDL_Flip(screen);
     }//while !done loop ends
-    
+    soundplayer->cleanup();
     SDL_Quit();
 }//run ends
 
@@ -132,6 +154,7 @@ void RaindropGame::setDraggedObject(int x, int y){
             if( ( x > cupRect.x ) && ( x < cupRect.x + cupRect.w ) && ( y > cupRect.y ) && ( y < cupRect.y + cupRect.h ) ){
                 objDragged = cups[i];
                 objDragged->startDragging(x,y);
+                soundplayer->playSound(objDragged->note);
                 found = 1;
                 break;
             }
