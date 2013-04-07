@@ -16,7 +16,7 @@
 #include "Sprite.h"
 #include "Drop.h"
 #include "Cup.h"
-
+#include "SoundPlayer.h"
 #include "Game.h"
 
 class RaindropGame: public Game{
@@ -29,6 +29,7 @@ class RaindropGame: public Game{
     float timestampMouseDown;
     bool isDragging;
     Sprite *objDragged;
+    SoundPlayer *soundplayer;
     
     bool checkClickCup(int x, int y);
     void setDraggedObject(int x, int y);

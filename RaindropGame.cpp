@@ -8,6 +8,7 @@
 #include "RaindropGame.h"
 #include "Game.h"
 
+
 void RaindropGame::init(string fname, int cups, int drops, int speed, int latency){
     Game::init(fname);
     gameSpeed = speed;
@@ -17,6 +18,11 @@ void RaindropGame::init(string fname, int cups, int drops, int speed, int latenc
     isDragging = false;
     timestampMouseDown = 0;
     objDragged = NULL;
+
+     //setup sound
+    soundplayer = new SoundPlayer();
+    soundplayer->init(44100, 2, 4096);
+    soundplayer->load_sounds("audio.txt");
 }
 
 void RaindropGame::run(){
