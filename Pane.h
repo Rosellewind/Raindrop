@@ -16,6 +16,8 @@
 
 #include <vector>
 #include "Text.h"
+#include "ProtoGame.h"
+#include "Animation.h"
 
 using namespace std;
 class Pane{
@@ -24,13 +26,15 @@ class Pane{
     vector<Text*> staticText;
     Text *pointsText;
     Text *levelText;
-    //    pool;
+    Animation *pool;
+    SDL_Rect poolRect;
     
 public:
     Pane();
-    void draw(SDL_Surface *screen);
+    void draw(SDL_Surface *screen, long elapsed);
     void updatePoints(int points);
     void updateLevel(int level);
+    void flashColor(Note note);
     ~Pane();
 };
 

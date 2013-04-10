@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Pane.h"
-#include "ProtoGame.h"
 
 using namespace std;
 
@@ -25,7 +24,11 @@ Pane::Pane(){
     SDL_Rect rect2 = text3->getRect();
     levelText = new Text("1", rect2.x + rect2.w, rect2.y);
     
-     
+    //pool
+    pool = new Animation("ltBluePool.txt");
+    SDL_Rect tempRect = pool->getRect();
+    poolRect = {static_cast<Sint16>(rect.w/2 - tempRect.w/2), static_cast<Sint16>(rect.h/2 - tempRect.h/2 + rect.y), tempRect.w, tempRect.h};
+    cout<<poolRect.x<<" "<<poolRect.y<<" "<<poolRect.w<<" "<<poolRect.h<<endl;
 }
 
 void Pane::updatePoints(int points){
@@ -38,7 +41,14 @@ void Pane::updateLevel(int level){
     levelText->updateText(newText);
 }
 
-void Pane::draw(SDL_Surface *screen){///////change to just update changes
+void Pane::flashColor(Note note){/////////change to update instead on delete/new
+    string newFile = Note_String[note] + "Pool.txt";
+
+    delete pool;
+    pool = new Animation(newFile);
+}
+
+void Pane::draw(SDL_Surface *screen, long elapsed){///////change to just update changes
 
     //background
     Uint32 color32bit = SDL_MapRGB(screen->format, 66, 54, 48);
@@ -51,6 +61,7 @@ void Pane::draw(SDL_Surface *screen){///////change to just update changes
     }
     pointsText->draw(screen);
     levelText->draw(screen);
+    pool->draw(screen, poolRect.x, poolRect.y, elapsed);
 }
 
 Pane::~Pane(){

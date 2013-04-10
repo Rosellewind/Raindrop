@@ -9,6 +9,8 @@ const int GAMESCREENHEIGHT=480;
 enum Type{PLAIN, COLOR, SLOW, DRAIN};
 enum Note{LC, D, E, F, G, A, B, HC};
 
+const std::string Note_String[] = {"lc", "d", "e", "f", "g", "a", "b", "hc"};
+
 
 #endif
 

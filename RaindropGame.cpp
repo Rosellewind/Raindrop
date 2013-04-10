@@ -118,7 +118,7 @@ void RaindropGame::run(){
         }
         
         //draw control pane
-        pane->draw(screen);
+        pane->draw(screen, elapsed);
         
         SDL_Flip(screen);
     }//while !done loop ends

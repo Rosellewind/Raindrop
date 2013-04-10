@@ -2,7 +2,6 @@
 #include <vector>
 #include <iostream>
 
-string Note_String[] = {"lc", "d", "e", "f", "g", "a", "b", "hc"};
 string Type_String[] = {"plain", "color", "slow", "drain"};
 
 
