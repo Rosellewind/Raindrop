@@ -23,14 +23,13 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     
     //set pane
     pane = new Pane();
-}
 
      //setup sound
     soundplayer = new SoundPlayer();
     soundplayer->init(44100, 2, 4096);
     soundplayer->load_sounds("audio.txt");
 }
-    
+
 void RaindropGame::run(){
     SDL_Event event;
     long last = SDL_GetTicks();
@@ -42,6 +41,9 @@ void RaindropGame::run(){
     soundplayer->setMusicVolume(20);
     soundplayer->playMusic();
     
+    cups = Cup::initCups(numCups, screen);
+    notes.push_back(LC);
+    soundplayer->setMusicVolume(20);
     vector<Note> notes;
     notes.push_back(LC);
     notes.push_back(D);
@@ -62,9 +64,6 @@ void RaindropGame::run(){
 
     soundplayer->playNoteSequence(notes);
 
-    //run loop
-    while (!done) {
-        long elapsed = SDL_GetTicks();
         
         //add drops if needed
         while (drops.size() < numDrops && elapsed > last + minLatency) {
@@ -149,11 +148,12 @@ void RaindropGame::run(){
         pane->draw(screen, elapsed);
         
         SDL_Flip(screen);
-    }//while !done loop ends
     soundplayer->cleanup();
-    SDL_Quit();
-     
-}//run ends
+        //draw control pane
+        pane->draw(screen, elapsed);
+        
+//    SDL_Quit();
+//}//run ends
 
 void RaindropGame::setDraggedObject(int x, int y){
     bool found = 0;
@@ -168,7 +168,6 @@ void RaindropGame::setDraggedObject(int x, int y){
                 break;
             }
         }
-        //add for other obj that can be dragged
     }
     
 }

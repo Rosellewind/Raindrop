@@ -12,7 +12,7 @@
 #include <SDL/SDL_main.h>
 #include <SDL/SDL_thread.h>
 #include <SDL_mixer/SDL_mixer.h>
-
+//#include "SDL/SDL_thread.h"
 #endif
 
 #include <iostream>

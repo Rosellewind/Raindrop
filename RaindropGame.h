@@ -32,6 +32,8 @@ class RaindropGame: public Game{
     Sprite *objDragged;
     Sprite *background;
     Pane *pane;
+//    Cup *objDragged;
+    SoundPlayer *soundplayer;
     
     bool checkClickCup(int x, int y);
     void setDraggedObject(int x, int y);
