@@ -116,6 +116,7 @@ void RaindropGame::run(){
                     break;
                 default:
                     cout<<"events issue"<<endl;
+                    break;
 			}//ends event.type switch
         }//ends event detection while loop
         

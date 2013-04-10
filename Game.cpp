@@ -13,6 +13,7 @@ void Game::init(string fname){
     done = false;
     Sprite *background = new Sprite;
     Sprite *pane = new Sprite;
+
     ifstream in;
     
     //init sdl
@@ -29,6 +30,7 @@ void Game::init(string fname){
     sprites.insert(sprites.begin(), background);
     pane->init("pane.txt", 0, GAMESCREENHEIGHT);
     sprites.insert(sprites.begin(), pane);
+
 }
 
 void Game::run(){
