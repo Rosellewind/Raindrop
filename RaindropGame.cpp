@@ -105,7 +105,8 @@ void RaindropGame::run(){
 						int x = event.button.x; int y = event.button.y;
 						//check to see if it is on click/draggable object
 						if (checkClickCup(x, y)) {
-							;//audioPlayer.playNote(cup->note);, need cup         
+                            soundplayer->playSound(objDragged->note);
+        
 						}
                     }
 					break;
@@ -170,7 +171,6 @@ void RaindropGame::setDraggedObject(int x, int y){
             if( ( x > cupRect.x ) && ( x < cupRect.x + cupRect.w ) && ( y > cupRect.y ) && ( y < cupRect.y + cupRect.h ) ){
                 objDragged = cups[i];
                 objDragged->startDragging(x,y);
-                soundplayer->playSound(objDragged->note);
                 found = 1;
                 break;
             }
