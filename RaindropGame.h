@@ -16,7 +16,7 @@
 #include "Sprite.h"
 #include "Drop.h"
 #include "Cup.h"
-
+#include "SoundPlayer.h"
 #include "Game.h"
 #include "Pane.h"
 
