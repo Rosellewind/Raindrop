@@ -39,11 +39,13 @@ void SoundPlayer::load_sounds(string fname){
 	}
 	in.close();
 }
+
 void SoundPlayer::playMusic(){
 	if(Mix_PlayMusic(music, -1) == -1){
 		cout<<"Error playing music"<<endl;
 	}
 }
+
 void SoundPlayer::setMusicVolume(int newVolume){
 	int vol = newVolume;
 	if(vol < 0)
@@ -52,6 +54,7 @@ void SoundPlayer::setMusicVolume(int newVolume){
 		vol = MIX_MAX_VOLUME;
 	Mix_VolumeMusic(vol);
 }
+
 void SoundPlayer::playSound(){
 	if(sounds.size()>0){
 		if(Mix_PlayChannel(2, sounds.front(), 0) == -1){
@@ -68,6 +71,29 @@ void SoundPlayer::playSound(Note n){
 		}
 	}
 }
+
+void SoundPlayer::togglePauseMusic(){
+	//music is paused
+	if(Mix_PausedMusic()==1){
+		Mix_ResumeMusic();
+	}
+	//music is playing
+	else{
+		Mix_PauseMusic();
+	}
+}
+
+void SoundPlayer::playNoteSequence(vector<Note> newNotes){
+	notes = newNotes;
+	sequenceCounter = 0;
+	SDL_Thread *thread;
+	thread = SDL_CreateThread(SoundPlayer::sequenceThread, this);
+	if(thread == NULL){
+		cout<<"Error starting thread..."<<endl;
+	}
+
+}
+
 int SoundPlayer::sequenceThread(void *player){
 	SoundPlayer *sp = (SoundPlayer*)player;
 	sp->playSound(sp->notes[sp->sequenceCounter]);
@@ -82,26 +108,6 @@ int SoundPlayer::sequenceThread(void *player){
 	return 0;
 }
 
-void SoundPlayer::playNoteSequence(vector<Note> newNotes){
-	notes = newNotes;
-	sequenceCounter = 0;
-	SDL_Thread *thread;
-	thread = SDL_CreateThread(SoundPlayer::sequenceThread, this);
-	if(thread == NULL){
-		cout<<"Error starting thread..."<<endl;
-	}
-
-}
-void SoundPlayer::togglePauseMusic(){
-	//music is paused
-	if(Mix_PausedMusic()==1){
-		Mix_ResumeMusic();
-	}
-	//music is playing
-	else{
-		Mix_PauseMusic();
-	}
-}
 void SoundPlayer::cleanup(){
 	Mix_FreeMusic(music);
 	for(int i=0; i< sounds.size();i++){
@@ -109,4 +115,8 @@ void SoundPlayer::cleanup(){
 	}
 	Mix_Quit();
 	Mix_CloseAudio();
+}
+
+SoundPlayer::~SoundPlayer(){
+    //put clean-up here?
 }

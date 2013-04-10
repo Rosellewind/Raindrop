@@ -12,7 +12,6 @@
 #include <SDL/SDL_main.h>
 #include <SDL/SDL_thread.h>
 #include <SDL_mixer/SDL_mixer.h>
-//#include "SDL/SDL_thread.h"
 #endif
 
 #include <iostream>
@@ -20,6 +19,7 @@
 #include <fstream>
 #include <vector>
 #include "ProtoGame.h"
+
 using namespace std;
 
 class SoundPlayer{
@@ -34,14 +34,15 @@ public:
 	SoundPlayer();
 	void init(int freq, int channels, int chunkSize);
 	void load_sounds(string fname);
-	void cleanup();
 	void playMusic();
-	void setMusicVolume(int newVolume);
+	void setMusicVolume(int newVolume);                    
 	void playSound();
 	void playSound(Note n);
 	void togglePauseMusic();	
 	void playNoteSequence(vector<Note> notes);
 	static int sequenceThread(void *notes);
+	void cleanup();
+    ~SoundPlayer();
 };
 
 #endif

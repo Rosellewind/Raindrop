@@ -48,8 +48,8 @@ void Pane::flashColor(Note note){/////////change to update instead on delete/new
     pool = new Animation(newFile);
 }
 
-void Pane::draw(SDL_Surface *screen, long elapsed){///////change to just update changes
-
+void Pane::draw(SDL_Surface *screen, long elapsed){
+    
     //background
     Uint32 color32bit = SDL_MapRGB(screen->format, 66, 54, 48);
 

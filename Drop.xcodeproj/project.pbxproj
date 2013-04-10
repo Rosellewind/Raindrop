@@ -14,6 +14,9 @@
 		3D1C44E6170BA59500586C40 /* Text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D1C44E4170BA59500586C40 /* Text.cpp */; };
 		3D5F2AF61715C22B00AEF369 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 3D5F2AF51715C22B00AEF369 /* Resources */; };
 		3D5F2AF71715C22B00AEF369 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 3D5F2AF51715C22B00AEF369 /* Resources */; };
+		3D5F2AFA1715CB2A00AEF369 /* SoundPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D5F2AF81715CB2900AEF369 /* SoundPlayer.cpp */; };
+		3D5F2AFB1715CD7900AEF369 /* SoundPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D5F2AF81715CB2900AEF369 /* SoundPlayer.cpp */; };
+		3D5F2AFD1715CEA200AEF369 /* SDL_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5F2AFC1715CEA100AEF369 /* SDL_mixer.framework */; };
 		3DC6BE1D16FE33E200E682EB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC6BE1C16FE33E200E682EB /* Cocoa.framework */; };
 		3DC6BE2716FE33E200E682EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE2516FE33E200E682EB /* InfoPlist.strings */; };
 		3DC6BE2D16FE33E200E682EB /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE2B16FE33E200E682EB /* Credits.rtf */; };
@@ -67,6 +70,9 @@
 		3D1C44E3170BA58B00586C40 /* Text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Text.h; sourceTree = "<group>"; };
 		3D1C44E4170BA59500586C40 /* Text.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Text.cpp; sourceTree = "<group>"; };
 		3D5F2AF51715C22B00AEF369 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
+		3D5F2AF81715CB2900AEF369 /* SoundPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundPlayer.cpp; sourceTree = "<group>"; };
+		3D5F2AF91715CB2900AEF369 /* SoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundPlayer.h; sourceTree = "<group>"; };
+		3D5F2AFC1715CEA100AEF369 /* SDL_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_mixer.framework; path = /Library/Frameworks/SDL_mixer.framework; sourceTree = "<absolute>"; };
 		3DC6BE1916FE33E200E682EB /* Drop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC6BE1C16FE33E200E682EB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		3DC6BE1F16FE33E200E682EB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -107,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D5F2AFD1715CEA200AEF369 /* SDL_mixer.framework in Frameworks */,
 				3D1C44DB170B514B00586C40 /* SDL_ttf.framework in Frameworks */,
 				3DC6BE9C16FE35B200E682EB /* SDL_image.framework in Frameworks */,
 				3DC6BE9D16FE35B200E682EB /* SDL.framework in Frameworks */,
@@ -151,6 +158,8 @@
 				3D1C44DE170B58B600586C40 /* Pane.cpp */,
 				3D1C44E3170BA58B00586C40 /* Text.h */,
 				3D1C44E4170BA59500586C40 /* Text.cpp */,
+				3D5F2AF81715CB2900AEF369 /* SoundPlayer.cpp */,
+				3D5F2AF91715CB2900AEF369 /* SoundPlayer.h */,
 				3DC6BE6F16FE348300E682EB /* main.cpp */,
 				3DC6BE2216FE33E200E682EB /* Drop */,
 				3DC6BE3F16FE33E200E682EB /* DropTests */,
@@ -171,6 +180,7 @@
 		3DC6BE1B16FE33E200E682EB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3D5F2AFC1715CEA100AEF369 /* SDL_mixer.framework */,
 				3D1C44DA170B514B00586C40 /* SDL_ttf.framework */,
 				3DC6BE9A16FE35B200E682EB /* SDL_image.framework */,
 				3DC6BE9B16FE35B200E682EB /* SDL.framework */,
@@ -349,6 +359,7 @@
 				3DC6BE9916FE348300E682EB /* Sprite.cpp in Sources */,
 				3D1C44DF170B58B600586C40 /* Pane.cpp in Sources */,
 				3D1C44E5170BA59500586C40 /* Text.cpp in Sources */,
+				3D5F2AFB1715CD7900AEF369 /* SoundPlayer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D1C44E6170BA59500586C40 /* Text.cpp in Sources */,
+				3D5F2AFA1715CB2A00AEF369 /* SoundPlayer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
