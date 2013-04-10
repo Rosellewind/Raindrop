@@ -1,7 +1,6 @@
 /*
- g++ -o Raindrop -I /Library/Frameworks/SDL.framework/Headers -framework SDL -framework SDL_image -framework Cocoa SDLMain.m main.cpp Game.cpp Frame.cpp Animation.cpp Sprite.cpp Drop.cpp Cup.cpp ProtoGame.h RaindropGame.cpp
-
-
+ on mac:
+ g++ -o Raindrop -I /Library/Frameworks/SDL.framework/Headers -framework SDL -framework SDL_image -framework Cocoa SDLMain.m main.cpp Game.cpp Frame.cpp Animation.cpp Sprite.cpp Drop.cpp Cup.cpp ProtoGame.h RaindropGame.cpp Pane.cpp Text.cpp
 */
 
 #ifdef _WIN32
@@ -9,8 +8,7 @@
 #elif __APPLE__
 #include <SDL/SDL.h>
 #include <SDL/SDL_main.h>
-#include <SDL_image/SDL_image.h>
-
+ 
 #elif __unix__
 #endif
 

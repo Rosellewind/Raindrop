@@ -20,12 +20,17 @@
 using namespace std;
 class Pane{
     SDL_Rect rect;
+    SDL_Color paneColor;
     vector<Text*> staticText;
+    Text *pointsText;
+    Text *levelText;
     //    pool;
     
 public:
     Pane();
     void draw(SDL_Surface *screen);
+    void updatePoints(int points);
+    void updateLevel(int level);
     ~Pane();
 };
 

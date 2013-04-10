@@ -14,6 +14,28 @@
 		3D1C44E2170B90E700586C40 /* lazy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D1C44E0170B90E700586C40 /* lazy.ttf */; };
 		3D1C44E5170BA59500586C40 /* Text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D1C44E4170BA59500586C40 /* Text.cpp */; };
 		3D1C44E6170BA59500586C40 /* Text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D1C44E4170BA59500586C40 /* Text.cpp */; };
+		3D2079F517158175006A0FFA /* Arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079F417158175006A0FFA /* Arial.ttf */; };
+		3D2079F617158644006A0FFA /* Arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079F417158175006A0FFA /* Arial.ttf */; };
+		3D207A021715979E006A0FFA /* aPool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079F81715979E006A0FFA /* aPool.png */; };
+		3D207A031715979E006A0FFA /* aPool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079F81715979E006A0FFA /* aPool.png */; };
+		3D207A041715979E006A0FFA /* bPool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079F91715979E006A0FFA /* bPool.png */; };
+		3D207A051715979E006A0FFA /* bPool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079F91715979E006A0FFA /* bPool.png */; };
+		3D207A061715979E006A0FFA /* clearPool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079FA1715979E006A0FFA /* clearPool.png */; };
+		3D207A071715979E006A0FFA /* clearPool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079FA1715979E006A0FFA /* clearPool.png */; };
+		3D207A081715979E006A0FFA /* dPool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079FB1715979E006A0FFA /* dPool.png */; };
+		3D207A091715979E006A0FFA /* dPool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079FB1715979E006A0FFA /* dPool.png */; };
+		3D207A0A1715979E006A0FFA /* ePool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079FC1715979E006A0FFA /* ePool.png */; };
+		3D207A0B1715979E006A0FFA /* ePool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079FC1715979E006A0FFA /* ePool.png */; };
+		3D207A0C1715979E006A0FFA /* fPool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079FD1715979E006A0FFA /* fPool.png */; };
+		3D207A0D1715979E006A0FFA /* fPool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079FD1715979E006A0FFA /* fPool.png */; };
+		3D207A0E1715979E006A0FFA /* gPool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079FE1715979E006A0FFA /* gPool.png */; };
+		3D207A0F1715979E006A0FFA /* gPool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079FE1715979E006A0FFA /* gPool.png */; };
+		3D207A101715979E006A0FFA /* hcPool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079FF1715979E006A0FFA /* hcPool.png */; };
+		3D207A111715979E006A0FFA /* hcPool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2079FF1715979E006A0FFA /* hcPool.png */; };
+		3D207A121715979E006A0FFA /* lcPool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D207A001715979E006A0FFA /* lcPool.png */; };
+		3D207A131715979E006A0FFA /* lcPool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D207A001715979E006A0FFA /* lcPool.png */; };
+		3D207A141715979E006A0FFA /* ltBluePool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D207A011715979E006A0FFA /* ltBluePool.png */; };
+		3D207A151715979E006A0FFA /* ltBluePool.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D207A011715979E006A0FFA /* ltBluePool.png */; };
 		3D4070BE17093A37004373A5 /* a.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3D4070BD17093A37004373A5 /* a.txt */; };
 		3DC6BE1D16FE33E200E682EB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC6BE1C16FE33E200E682EB /* Cocoa.framework */; };
 		3DC6BE2716FE33E200E682EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE2516FE33E200E682EB /* InfoPlist.strings */; };
@@ -99,6 +121,17 @@
 		3D1C44E0170B90E700586C40 /* lazy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lazy.ttf; sourceTree = "<group>"; };
 		3D1C44E3170BA58B00586C40 /* Text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Text.h; sourceTree = "<group>"; };
 		3D1C44E4170BA59500586C40 /* Text.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Text.cpp; sourceTree = "<group>"; };
+		3D2079F417158175006A0FFA /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arial.ttf; sourceTree = "<group>"; };
+		3D2079F81715979E006A0FFA /* aPool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aPool.png; sourceTree = "<group>"; };
+		3D2079F91715979E006A0FFA /* bPool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bPool.png; sourceTree = "<group>"; };
+		3D2079FA1715979E006A0FFA /* clearPool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clearPool.png; sourceTree = "<group>"; };
+		3D2079FB1715979E006A0FFA /* dPool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dPool.png; sourceTree = "<group>"; };
+		3D2079FC1715979E006A0FFA /* ePool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ePool.png; sourceTree = "<group>"; };
+		3D2079FD1715979E006A0FFA /* fPool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fPool.png; sourceTree = "<group>"; };
+		3D2079FE1715979E006A0FFA /* gPool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gPool.png; sourceTree = "<group>"; };
+		3D2079FF1715979E006A0FFA /* hcPool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hcPool.png; sourceTree = "<group>"; };
+		3D207A001715979E006A0FFA /* lcPool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lcPool.png; sourceTree = "<group>"; };
+		3D207A011715979E006A0FFA /* ltBluePool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ltBluePool.png; sourceTree = "<group>"; };
 		3D4070BD17093A37004373A5 /* a.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = a.txt; sourceTree = "<group>"; };
 		3DC6BE1916FE33E200E682EB /* Drop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC6BE1C16FE33E200E682EB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -190,6 +223,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D2079F7171596DE006A0FFA /* pools */ = {
+			isa = PBXGroup;
+			children = (
+				3D2079F81715979E006A0FFA /* aPool.png */,
+				3D2079F91715979E006A0FFA /* bPool.png */,
+				3D2079FA1715979E006A0FFA /* clearPool.png */,
+				3D2079FB1715979E006A0FFA /* dPool.png */,
+				3D2079FC1715979E006A0FFA /* ePool.png */,
+				3D2079FD1715979E006A0FFA /* fPool.png */,
+				3D2079FE1715979E006A0FFA /* gPool.png */,
+				3D2079FF1715979E006A0FFA /* hcPool.png */,
+				3D207A001715979E006A0FFA /* lcPool.png */,
+				3D207A011715979E006A0FFA /* ltBluePool.png */,
+			);
+			name = pools;
+			path = sounds;
+			sourceTree = "<group>";
+		};
 		3DC6BE1016FE33E200E682EB = {
 			isa = PBXGroup;
 			children = (
@@ -295,6 +346,8 @@
 			isa = PBXGroup;
 			children = (
 				3D1C44E0170B90E700586C40 /* lazy.ttf */,
+				3D2079F417158175006A0FFA /* Arial.ttf */,
+				3D2079F7171596DE006A0FFA /* pools */,
 				3DD7E2CD16FE3D830052017B /* sounds */,
 				3DD7E2BA16FE3C7C0052017B /* Cups */,
 				3D4070BD17093A37004373A5 /* a.txt */,
@@ -455,6 +508,17 @@
 				3DD7E2DF16FE3D830052017B /* rain.mp3 in Resources */,
 				3D4070BE17093A37004373A5 /* a.txt in Resources */,
 				3D1C44E1170B90E700586C40 /* lazy.ttf in Resources */,
+				3D2079F617158644006A0FFA /* Arial.ttf in Resources */,
+				3D207A021715979E006A0FFA /* aPool.png in Resources */,
+				3D207A041715979E006A0FFA /* bPool.png in Resources */,
+				3D207A061715979E006A0FFA /* clearPool.png in Resources */,
+				3D207A081715979E006A0FFA /* dPool.png in Resources */,
+				3D207A0A1715979E006A0FFA /* ePool.png in Resources */,
+				3D207A0C1715979E006A0FFA /* fPool.png in Resources */,
+				3D207A0E1715979E006A0FFA /* gPool.png in Resources */,
+				3D207A101715979E006A0FFA /* hcPool.png in Resources */,
+				3D207A121715979E006A0FFA /* lcPool.png in Resources */,
+				3D207A141715979E006A0FFA /* ltBluePool.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +528,17 @@
 			files = (
 				3DC6BE4416FE33E200E682EB /* InfoPlist.strings in Resources */,
 				3D1C44E2170B90E700586C40 /* lazy.ttf in Resources */,
+				3D2079F517158175006A0FFA /* Arial.ttf in Resources */,
+				3D207A031715979E006A0FFA /* aPool.png in Resources */,
+				3D207A051715979E006A0FFA /* bPool.png in Resources */,
+				3D207A071715979E006A0FFA /* clearPool.png in Resources */,
+				3D207A091715979E006A0FFA /* dPool.png in Resources */,
+				3D207A0B1715979E006A0FFA /* ePool.png in Resources */,
+				3D207A0D1715979E006A0FFA /* fPool.png in Resources */,
+				3D207A0F1715979E006A0FFA /* gPool.png in Resources */,
+				3D207A111715979E006A0FFA /* hcPool.png in Resources */,
+				3D207A131715979E006A0FFA /* lcPool.png in Resources */,
+				3D207A151715979E006A0FFA /* ltBluePool.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
