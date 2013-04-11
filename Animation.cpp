@@ -5,8 +5,29 @@
 #include "Frame.h"
 #include "Animation.h"
 
+Animation::Animation(string fname, int column){
+    int columns, rows, width, height;
+    string imageName;
+    ifstream in(fname.c_str());
+    in>>columns>>rows>>width>>height>>imageName;
+    
+    if (column < columns) {
+        int x = column * width;
+        int y = 0;
+        totalTime = 0;
+        for (int i = 0; i<rows; i++){
+            long t;
+            in>>t;
+            totalTime += t;
+            Frame *f = new Frame(imageName, x, y, width, height, t);
+            frames.insert(frames.end(), f);
+            y += height;
+        }
+    }
+    in.close();
+}
 
-Animation::Animation(string fname){
+Animation::Animation(string fname){//get which animation
     int n;
     ifstream in(fname.c_str());
     in>>n;

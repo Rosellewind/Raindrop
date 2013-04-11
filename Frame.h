@@ -14,6 +14,7 @@
 #endif
 
 #include <string>
+#include <climits>
 
 using namespace std;
 
@@ -25,7 +26,8 @@ class Frame{
     SDL_Rect src, dest;
     long time;
 public:
-    Frame(string fname, long newTime);
+    Frame(string fname, long newTime = LONG_MAX);
+    Frame(string fname, int x, int y, int w, int h, long newTime);//for use with sprite sheet
     long getTime();
     void draw(SDL_Surface *screen, int x, int y);
     SDL_Rect getRect();

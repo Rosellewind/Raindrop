@@ -19,6 +19,7 @@ class Animation{
     long totalTime;
 public:
     Animation(string fname);
+    Animation(string fname, int column);//for use with sprite sheet
     void draw(SDL_Surface *screen, int x, int y, long elapsed);
     SDL_Rect getRect();
     ~Animation();

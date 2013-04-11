@@ -25,7 +25,7 @@ Pane::Pane(){
     levelText = new Text("1", rect2.x + rect2.w, rect2.y);
     
     //pool
-    pool = new Animation("ltBluePool.txt");
+    pool = new Animation("Resources/pools.txt", 8);///////9 is neutral
     SDL_Rect tempRect = pool->getRect();
     poolRect = {static_cast<Sint16>(rect.w/2 - tempRect.w/2), static_cast<Sint16>(rect.h/2 - tempRect.h/2 + rect.y), tempRect.w, tempRect.h};
     cout<<poolRect.x<<" "<<poolRect.y<<" "<<poolRect.w<<" "<<poolRect.h<<endl;
