@@ -1,8 +1,5 @@
 #include <iostream>
-#include <iostream>
-#include <SDL/SDL.h>
-#include <SDL/SDL_ttf.h>
-#include <SDL/SDL_mixer.h>
+
 #include "Menu.h"
 
 SDL_Surface *load_image(const char *c, Uint32 colorkey = 0) {

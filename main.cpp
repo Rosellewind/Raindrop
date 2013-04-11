@@ -24,12 +24,24 @@
 using namespace std;
 
 int main(int argc, char **argv){
+    Menu menu;
+
     //menu screen, pick level, settings
     int i = menu.run();
 
     //game screen
-    RaindropGame game("game.txt",2);//init with settings
-    game.run();
+    switch(i)
+    {
+    	case 0:{
+                //CASE 0 PLAY WAS SELECTED
+            RaindropGame game("game.txt",2);//init with settings
+            game.run();}
+    		break;
+    	case 1: 						//CASE 1 USER PRESSED QUIT
+    		break;
+    	case -1:						//CASE -1 USER HIT ESC OR CLOSED THE WINDOW
+    		break;
+    }
     
     //won/lost screen
     return 0;

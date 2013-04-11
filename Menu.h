@@ -10,6 +10,8 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_main.h>
 #include <SDL_image/SDL_image.h>
+#include <SDL_ttf/SDL_ttf.h>
+#include <SDL_mixer/SDL_mixer.h>
 
 #elif __unix__
 #endif
