@@ -5,6 +5,7 @@
 
 #ifdef _WIN32
 #include "SDL/SDL.h"
+
 #elif __APPLE__
 #include <SDL/SDL.h>
 #include <SDL/SDL_main.h>
@@ -18,12 +19,14 @@
 #include <vector>
 #include "ProtoGame.h"
 #include "RaindropGame.h"
+#include "Menu.h"
 
 using namespace std;
 
 int main(int argc, char **argv){
     //menu screen, pick level, settings
-    
+    int i = menu.run();
+
     //game screen
     RaindropGame game("game.txt",2);//init with settings
     game.run();
