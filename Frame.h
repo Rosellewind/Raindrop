@@ -26,8 +26,9 @@ class Frame{
     SDL_Rect src, dest;
     long time;
 public:
-    Frame(string fname, long newTime = LONG_MAX);
-    Frame(string fname, int x, int y, int w, int h, long newTime);//for use with sprite sheet
+    Frame(string imageName, long newTime = LONG_MAX);
+    Frame(string imageName, int x, int y, int w, int h, long newTime);//for use with sprite sheet
+    Frame(string fname, int column, int row);//single sprite image
     long getTime();
     void draw(SDL_Surface *screen, int x, int y);
     SDL_Rect getRect();

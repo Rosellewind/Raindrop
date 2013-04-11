@@ -11,7 +11,6 @@ Text::Text(string textString, int x, int y, string fontName, int fontSize, SDL_C
     font = TTF_OpenFont(fontName.c_str(), fontSize);///no font
     if(!font) {
         printf("TTF_OpenFont: %s\n", TTF_GetError());
-        // handle error
     }
     textSurface = TTF_RenderText_Blended(font, textString.c_str(), textColor);
     rect = {static_cast<Sint16>(x),static_cast<Sint16>(y),static_cast<Uint16>(textSurface->w),static_cast<Uint16>(textSurface->h)};

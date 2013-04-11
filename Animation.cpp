@@ -5,7 +5,25 @@
 #include "Frame.h"
 #include "Animation.h"
 
-Animation::Animation(string fname, int column){
+Animation::Animation(string fname, bool isRepeating){//get which animation
+    int n;
+    ifstream in(fname.c_str());
+    in>>n;
+    totalTime = 0;
+    isLoop = isRepeating;
+
+    for (int i = 0; i<n; i++){
+        long t;
+        string f2name;
+        in>>t>>f2name;
+        totalTime += t;
+        Frame *f = new Frame(f2name, t);
+        frames.insert(frames.end(), f);
+    }
+    in.close();
+}
+
+Animation::Animation(string fname, int column, bool isRepeating){
     int columns, rows, width, height;
     string imageName;
     ifstream in(fname.c_str());
@@ -26,30 +44,26 @@ Animation::Animation(string fname, int column){
     }
     in.close();
 }
-
-Animation::Animation(string fname){//get which animation
-    int n;
-    ifstream in(fname.c_str());
-    in>>n;
-    totalTime = 0;
-
-    for (int i = 0; i<n; i++){
-        long t;
-        string f2name;
-        in>>t>>f2name;
-        totalTime += t;
-        Frame *f = new Frame(f2name, t);
-        frames.insert(frames.end(), f);
-    }
-    in.close();
-}
-
+/*bool Animation::draw(SDL_Surface *screen, int x, int y, long elapsed){
+ bool stop = true;
+ long currentFrameTime = elapsed % totalTime;
+ for (int i = 0; i < frames.size(); i++) {
+ if (frames[i]->getTime() > currentFrameTime){
+ frames[i]->draw(screen, x, y);
+ if (!isLoop && i == frames.size())
+ stop = false;
+ }
+ currentFrameTime -= frames[i]->getTime();
+ 
+ }
+ return stop;
+ }
+ */
 void Animation::draw(SDL_Surface *screen, int x, int y, long elapsed){
     long currentFrameTime = elapsed % totalTime;
     for (int i = 0; i < frames.size(); i++) {        
         if (frames[i]->getTime() > currentFrameTime){
             frames[i]->draw(screen, x, y);
-            break;
         }
         currentFrameTime -= frames[i]->getTime();
         

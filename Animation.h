@@ -17,9 +17,10 @@ using namespace std;
 class Animation{
     vector<Frame*> frames;
     long totalTime;
+    bool isLoop;
 public:
-    Animation(string fname);
-    Animation(string fname, int column);//for use with sprite sheet
+    Animation(string fname, bool isRepeating = true);
+    Animation(string fname, int column, bool isRepeating = true);//for use with sprite sheet
     void draw(SDL_Surface *screen, int x, int y, long elapsed);
     SDL_Rect getRect();
     ~Animation();

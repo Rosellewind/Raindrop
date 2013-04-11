@@ -22,11 +22,11 @@
 using namespace std;
 class Pane{
     SDL_Rect rect;
-    SDL_Color paneColor;
     vector<Text*> staticText;
     Text *pointsText;
     Text *levelText;
-    Animation *pool;
+    Frame *pool;
+    Animation *poolAnimation;
     SDL_Rect poolRect;
     
 public:
