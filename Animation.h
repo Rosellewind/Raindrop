@@ -19,9 +19,9 @@ class Animation{
     long totalTime;
     bool isLoop;
 public:
-    Animation(string fname, bool isRepeating = true);
-    Animation(string fname, int column, bool isRepeating = true);//for use with sprite sheet
-    void draw(SDL_Surface *screen, int x, int y, long elapsed);
+    Animation(string fname, bool isALoop = true);
+    Animation(string fname, int column, bool isALoop);//for use with sprite sheet
+    bool draw(SDL_Surface *screen, int x, int y, long elapsed);
     SDL_Rect getRect();
     ~Animation();
 };

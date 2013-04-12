@@ -133,6 +133,13 @@ void RaindropGame::run(){
         pane->draw(screen, elapsed);
         
         SDL_Flip(screen);
+        
+        //Cap the frame rate
+        /*
+        if( fps.get_ticks() < 1000 / FRAMES_PER_SECOND )
+        {
+            SDL_Delay( ( 1000 / FRAMES_PER_SECOND ) - fps.get_ticks() );
+        }*/
     }
     soundplayer->cleanup();
         

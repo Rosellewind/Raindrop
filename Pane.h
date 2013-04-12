@@ -26,6 +26,7 @@ class Pane{
     Text *pointsText;
     Text *levelText;
     Frame *pool;
+    vector<Animation*> pools;
     Animation *poolAnimation;
     SDL_Rect poolRect;
     

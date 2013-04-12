@@ -22,7 +22,7 @@ Frame::Frame(string imageName, int x, int y, int w, int h, long newTime){
     src.h = h; dest.h = h;
 }
 
-Frame::Frame(string fname, int column, int row){
+Frame::Frame(string fname, int column, int row){//need time?
     int columns, rows, width, height;
     string imageName;
     ifstream in(fname.c_str());
@@ -51,6 +51,7 @@ void Frame::draw(SDL_Surface *screen, int x, int y){
 }
 
 SDL_Rect Frame::getRect(){
+//    cout<<"rect: "<<dest.x<<" "<<dest.y<<" "<<dest.w<<" "<<dest.h<<" "<<endl;
     return dest;
 }
  

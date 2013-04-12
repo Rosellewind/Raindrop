@@ -25,6 +25,10 @@ Pane::Pane(){
     pool = new Frame("Resources/pools.txt", 8, 2);
     SDL_Rect tempRect = pool->getRect();
     poolRect = {static_cast<Sint16>(rect.w/2 - tempRect.w/2), static_cast<Sint16>(rect.h/2 - tempRect.h/2 + rect.y), tempRect.w, tempRect.h};
+    for (int i = 0; i < 9; i++) {
+        Animation *a = new Animation("Resources/pools.txt", i, false);
+        pools.push_back(a);
+    }
 }
 
 void Pane::updatePoints(int points){
@@ -38,8 +42,7 @@ void Pane::updateLevel(int level){
 }
 
 void Pane::flashColor(Note note){
-    if (poolAnimation)delete poolAnimation;
-    poolAnimation = new Animation("Resources/pools.txt", note, false);
+        poolAnimation = pools[note];
 }
 
 void Pane::draw(SDL_Surface *screen, long elapsed){
@@ -58,8 +61,9 @@ void Pane::draw(SDL_Surface *screen, long elapsed){
     //pool
     pool->draw(screen, poolRect.x, poolRect.y);
     if (poolAnimation)
-        poolAnimation->draw(screen, poolRect.x, poolRect.y, elapsed);
-//            delete poolAnimation;
+        if (poolAnimation->draw(screen, poolRect.x, poolRect.y, elapsed)){
+            poolAnimation = NULL;
+        }
 }
 
 Pane::~Pane(){
@@ -68,5 +72,7 @@ Pane::~Pane(){
     }
     if (pointsText) delete pointsText;
     if (levelText) delete levelText;
-    if (poolAnimation) delete poolAnimation;
+    for (int i = 0; i < pools.size(); i++) {
+        ;//delete pools[i];
+    }
 }
