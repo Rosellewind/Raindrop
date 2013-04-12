@@ -42,31 +42,7 @@ void RaindropGame::run(){
     soundplayer->setMusicVolume(12);
     soundplayer->playMusic();
 
-    vector<Note> notes;
-    notes.push_back(HC);
-    notes.push_back(LC);
-    notes.push_back(HC);
-
-    
-    /*
-    notes.push_back(LC);
-    notes.push_back(D);
-    notes.push_back(E);
-    notes.push_back(F);
-    notes.push_back(G);
-    notes.push_back(A);
-    notes.push_back(B);
-    notes.push_back(HC);
-    notes.push_back(HC);
-    notes.push_back(B);
-    notes.push_back(A);
-    notes.push_back(G);
-    notes.push_back(F);
-    notes.push_back(E);
-    notes.push_back(D);
-    notes.push_back(LC);
-     */
-
+    vector<Note> notes = {HC, LC, HC};
     soundplayer->playNoteSequence(notes);
 
     //run loop
@@ -106,7 +82,7 @@ void RaindropGame::run(){
 						//check to see if it is on click/draggable object
 						if (checkClickCup(x, y)) {
                             soundplayer->playSound(objDragged->note);
-        
+                            pane->flashColor(objDragged->note);
 						}
                     }
 					break;
@@ -157,6 +133,13 @@ void RaindropGame::run(){
         pane->draw(screen, elapsed);
         
         SDL_Flip(screen);
+        
+        //Cap the frame rate
+        /*
+        if( fps.get_ticks() < 1000 / FRAMES_PER_SECOND )
+        {
+            SDL_Delay( ( 1000 / FRAMES_PER_SECOND ) - fps.get_ticks() );
+        }*/
     }
     soundplayer->cleanup();
         

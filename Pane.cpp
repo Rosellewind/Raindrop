@@ -5,9 +5,6 @@ using namespace std;
 
 Pane::Pane(){
     rect = {0,GAMESCREENHEIGHT,SCREENWIDTH,SCREENHEIGHT-GAMESCREENHEIGHT};
-    paneColor.r = 66;
-    paneColor.g = 54;
-    paneColor.b = 48;
     int pad = 6;
     
     //staticText
@@ -25,10 +22,13 @@ Pane::Pane(){
     levelText = new Text("1", rect2.x + rect2.w, rect2.y);
     
     //pool
-    pool = new Animation("ltBluePool.txt");
+    pool = new Frame("Resources/pools.txt", 8, 2);
     SDL_Rect tempRect = pool->getRect();
     poolRect = {static_cast<Sint16>(rect.w/2 - tempRect.w/2), static_cast<Sint16>(rect.h/2 - tempRect.h/2 + rect.y), tempRect.w, tempRect.h};
-    cout<<poolRect.x<<" "<<poolRect.y<<" "<<poolRect.w<<" "<<poolRect.h<<endl;
+    for (int i = 0; i < 9; i++) {
+        Animation *a = new Animation("Resources/pools.txt", i, false);
+        pools.push_back(a);
+    }
 }
 
 void Pane::updatePoints(int points){
@@ -41,18 +41,14 @@ void Pane::updateLevel(int level){
     levelText->updateText(newText);
 }
 
-void Pane::flashColor(Note note){/////////change to update instead on delete/new
-    string newFile = Note_String[note] + "Pool.txt";
-
-    delete pool;
-    pool = new Animation(newFile);
+void Pane::flashColor(Note note){
+        poolAnimation = pools[note];
 }
 
 void Pane::draw(SDL_Surface *screen, long elapsed){
     
     //background
     Uint32 color32bit = SDL_MapRGB(screen->format, 66, 54, 48);
-
     SDL_FillRect(screen, &rect, color32bit);
     
     //text
@@ -61,11 +57,22 @@ void Pane::draw(SDL_Surface *screen, long elapsed){
     }
     pointsText->draw(screen);
     levelText->draw(screen);
-    pool->draw(screen, poolRect.x, poolRect.y, elapsed);
+    
+    //pool
+    pool->draw(screen, poolRect.x, poolRect.y);
+    if (poolAnimation)
+        if (poolAnimation->draw(screen, poolRect.x, poolRect.y, elapsed)){
+            poolAnimation = NULL;
+        }
 }
 
 Pane::~Pane(){
     for (int i = 0; i<staticText.size(); i++){
         delete staticText[i];
+    }
+    if (pointsText) delete pointsText;
+    if (levelText) delete levelText;
+    for (int i = 0; i < pools.size(); i++) {
+        ;//delete pools[i];
     }
 }
