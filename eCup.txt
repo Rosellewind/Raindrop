@@ -1,2 +1,6 @@
 1 
+<<<<<<< HEAD
 100   eCup.png
+=======
+100   Resources/images/eCup.png
+>>>>>>> refs/remotes/origin/Spike

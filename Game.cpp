@@ -11,8 +11,14 @@
 Game::Game(string fname){
     string title;
     done = false;
+<<<<<<< HEAD
     Sprite *background;
     Sprite *pane;
+=======
+    Sprite *background = new Sprite;
+    Sprite *pane = new Sprite;
+
+>>>>>>> refs/remotes/origin/Spike
     ifstream in;
     
     //init sdl
@@ -33,6 +39,7 @@ Game::Game(string fname){
     
     pane = new Sprite("pane.txt", 0, GAMESCREENHEIGHT);
     sprites.insert(sprites.begin(), pane);
+
 }
 
 void Game::run(){

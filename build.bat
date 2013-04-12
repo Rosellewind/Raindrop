@@ -1,0 +1,1 @@
+g++ -enable-auto-import main.cpp Animation.cpp Cup.cpp Drop.cpp Frame.cpp Game.cpp RaindropGame.cpp Sprite.cpp SoundPlayer.cpp -o app.exe -I /Users/Jared/VGDesign/SDL/include -L /Users/Jared/VGDesign/SDL/lib -lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_mixer

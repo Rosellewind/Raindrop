@@ -1,2 +1,6 @@
 1 
+<<<<<<< HEAD
 100   hcCup.png
+=======
+100   Resources/images/hcCup.png
+>>>>>>> refs/remotes/origin/Spike

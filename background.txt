@@ -1,2 +1,6 @@
 1
+<<<<<<< HEAD
 100 back1.jpg
+=======
+100 Resources/images/back1.jpg
+>>>>>>> refs/remotes/origin/Spike
