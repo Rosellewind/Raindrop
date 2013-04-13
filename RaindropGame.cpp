@@ -1,12 +1,8 @@
-#include <vector>
-#include <string>
 #include <iostream>
 #include <fstream>
-#include "Sprite.h"
 #include "Animation.h"
 #include "ProtoGame.h"
 #include "RaindropGame.h"
-#include "Game.h"
 
 RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int latency):Game(fname){
     gameSpeed = speed;
