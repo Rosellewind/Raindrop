@@ -4,7 +4,7 @@
 #include <fstream>
 
 
-Frame::Frame(string imageName, long newTime){
+Frame::Frame(string imageName, Uint32 newTime){
     time = newTime;
     image = IMG_Load(imageName.c_str());
     
@@ -13,7 +13,7 @@ Frame::Frame(string imageName, long newTime){
     src.h = dest.h = image->h;
 }
 
-Frame::Frame(string imageName, int x, int y, int w, int h, long newTime){
+Frame::Frame(string imageName, int x, int y, int w, int h, Uint32 newTime){
     time = newTime;
     image = IMG_Load(imageName.c_str());
     
@@ -31,7 +31,7 @@ Frame::Frame(string fname, int column, int row){//need time?
     if (column < columns && row < rows) {
         int x = column * width;
         int y = row * height;
-        time = LONG_MAX;
+        time = UINT32_MAX;
         image = IMG_Load(imageName.c_str());
         src.x = x; src.y = y; dest.x = dest.y = 0;
         src.w = width; dest.w = width;
@@ -41,7 +41,8 @@ Frame::Frame(string fname, int column, int row){//need time?
 }
 
 
-long Frame::getTime(){
+Uint32 Frame::getTime(){
+//    cout<<"time: "<<time<<endl;
     return time;
 }
 
@@ -51,7 +52,6 @@ void Frame::draw(SDL_Surface *screen, int x, int y){
 }
 
 SDL_Rect Frame::getRect(){
-//    cout<<"rect: "<<dest.x<<" "<<dest.y<<" "<<dest.w<<" "<<dest.h<<" "<<endl;
     return dest;
 }
  

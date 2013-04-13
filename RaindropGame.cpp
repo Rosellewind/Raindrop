@@ -48,6 +48,32 @@ void RaindropGame::run(){
     //run loop
     while (!done) {
         long elapsed = SDL_GetTicks();
+
+        
+        
+        
+        /*
+        Uint32 currTime = SDL_GetTicks();
+        Uint32 elapsed = currTime - prevTime;
+        if(elapsed < MIN_FRAMETIME_MSECS)
+        {
+            // Not enough time has elapsed. Let's limit the frame rate
+            SDL_Delay(MIN_FRAMETIME_MSECS - elapsed);
+            currTime = SDL_GetTicks();
+            elapsed = currTime - prevTime;
+        }
+        prevTime = currTime;
+        
+        
+        
+        
+        
+//        Uint32 elapsed = SDL_GetTicks();
+        cout<<"elapsed: "<<elapsed<<"%100: "<<elapsed%100<<endl;
+        */
+        
+        
+        
         
         //add drops if needed
         while (drops.size() < numDrops && elapsed > last + minLatency) {
@@ -94,7 +120,7 @@ void RaindropGame::run(){
 					break;
 				case SDL_MOUSEMOTION: 
 					if(timestampMouseDown){
-						long now = SDL_GetTicks();
+						Uint32 now = SDL_GetTicks();
 						if (now - timestampMouseDown > 10 && objDragged){/////
 							isDragging = true;
 							int x = event.motion.x; int y = event.motion.y;

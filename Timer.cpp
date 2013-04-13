@@ -58,7 +58,7 @@ void Timer::unpause()
     }
 }
 
-long Timer::get_ticks()
+Uint32 Timer::get_ticks()
 {
     //If the timer is running
     if( started == true )

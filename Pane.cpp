@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include "Pane.h"
 
 using namespace std;
@@ -6,6 +7,7 @@ using namespace std;
 Pane::Pane(){
     rect = {0,GAMESCREENHEIGHT,SCREENWIDTH,SCREENHEIGHT-GAMESCREENHEIGHT};
     int pad = 6;
+    poolIndex = -1;
     
     //staticText
     Text *text1 = new Text("Points: ", pad, rect.y + pad/2);
@@ -21,7 +23,7 @@ Pane::Pane(){
     SDL_Rect rect2 = text3->getRect();
     levelText = new Text("1", rect2.x + rect2.w, rect2.y);
     
-    //pool
+    //pool, static frame and array for animations
     pool = new Frame("Resources/pools.txt", 8, 2);
     SDL_Rect tempRect = pool->getRect();
     poolRect = {static_cast<Sint16>(rect.w/2 - tempRect.w/2), static_cast<Sint16>(rect.h/2 - tempRect.h/2 + rect.y), tempRect.w, tempRect.h};
@@ -32,6 +34,11 @@ Pane::Pane(){
 }
 
 void Pane::updatePoints(int points){
+    /*
+    stringstream ss;
+    ss << points;
+    string str = ss.str();
+     */
     string newText = to_string(points);
     pointsText->updateText(newText);
 }
@@ -42,10 +49,10 @@ void Pane::updateLevel(int level){
 }
 
 void Pane::flashColor(Note note){
-        poolAnimation = pools[note];
+        poolIndex = note;
 }
 
-void Pane::draw(SDL_Surface *screen, long elapsed){
+void Pane::draw(SDL_Surface *screen, Uint32 elapsed){
     
     //background
     Uint32 color32bit = SDL_MapRGB(screen->format, 66, 54, 48);
@@ -58,12 +65,16 @@ void Pane::draw(SDL_Surface *screen, long elapsed){
     pointsText->draw(screen);
     levelText->draw(screen);
     
+    cout<<"poolIndex: "<<poolIndex<<endl;
     //pool
-    pool->draw(screen, poolRect.x, poolRect.y);
-    if (poolAnimation)
-        if (poolAnimation->draw(screen, poolRect.x, poolRect.y, elapsed)){
-            poolAnimation = NULL;
-        }
+    if (poolIndex == -1) {
+        pool->draw(screen, poolRect.x, poolRect.y);
+    }
+    else{
+        bool animate = pools[poolIndex]->draw(screen, poolRect.x, poolRect.y, elapsed);
+        if (!animate)
+            poolIndex = -1;
+    }
 }
 
 Pane::~Pane(){

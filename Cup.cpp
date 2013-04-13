@@ -10,7 +10,7 @@ Cup::Cup(string fname, Note n, int x):Sprite(fname, x, GAMESCREENHEIGHT-62){
     topOfCup = GAMESCREENHEIGHT - getRect().h;
 }
 
-void Cup::update(long elapsed){
+void Cup::update(Uint32 elapsed){
     Sprite::update(elapsed);
 };
 

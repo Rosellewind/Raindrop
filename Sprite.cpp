@@ -19,8 +19,8 @@ Sprite::Sprite(string fname,
     offsetX = offsetY = 0;
 }
 
-void Sprite::update(long elapsed){
-    long next = SDL_GetTicks();
+void Sprite::update(Uint32 elapsed){
+    Uint32 next = SDL_GetTicks();
     float deltaT = (float)(next-last);
     last = next;
     if (deltaT > 0.0){
@@ -36,7 +36,7 @@ void Sprite::update(long elapsed){
     }
 }
 
-void Sprite::draw(SDL_Surface *screen, long elapsed ){
+void Sprite::draw(SDL_Surface *screen, Uint32 elapsed ){
     animation->draw(screen, xPos, yPos, elapsed);
 }
 

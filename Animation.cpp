@@ -13,7 +13,7 @@ Animation::Animation(string fname, bool isALoop){//get which animation
     isLoop = isALoop;
 
     for (int i = 0; i<n; i++){
-        long t;
+        Uint32 t;
         string f2name;
         in>>t>>f2name;
         totalTime += t;
@@ -35,7 +35,7 @@ Animation::Animation(string fname, int column, bool isALoop){
         int x = column * width;
         int y = 0;
         for (int i = 0; i<rows; i++){
-            long t;
+            Uint32 t;
             in>>t;
             totalTime += t;
             Frame *f = new Frame(imageName, x, y, width, height, totalTime);
@@ -46,25 +46,27 @@ Animation::Animation(string fname, int column, bool isALoop){
     else cout<<"error in animation"<<endl;
     in.close();
 }
-bool Animation::draw(SDL_Surface *screen, int x, int y, long elapsed){
-    bool stop = false;
-    cout<<totalTime<<endl;
-    if (totalTime == 0) totalTime++;
-    long currentFrameTime = elapsed % totalTime;               //currentFrameTime 0 - 1000
+
+bool Animation::draw(SDL_Surface *screen, int x, int y, Uint32 elapsed){
+    cout<<"elapsed: "<<elapsed<<endl;
+    bool animate = true;
+    cout<<endl<<"totalTime: "<<totalTime<<endl;
+    Uint32 currentFrameTime = elapsed % totalTime;               //currentFrameTime 0 - 1000
+    int total;
      for (int i = 0; i < frames.size(); i++) {
-         if (frames[i]->getTime() <= currentFrameTime){          //getTime gives 100, 200, etc
-             cout<<"getTime: "<<frames[i]->getTime()<<endl;
+         if (frames[i]->getTime() > currentFrameTime){          //getTime gives 100, 200, etc
              frames[i]->draw(screen, x, y);
              if (!isLoop)cout<<"drawing"<<endl;
 
              if (!isLoop && i == frames.size()-1){
-             stop = true;
+                 totalTime = 1000;
+             animate = false;
              }
              break;
          }
-//         currentFrameTime -= frames[i]->getTime();
+//         totalTime -= frames[i]->getTime();
      }
-     return stop;
+     return animate;
  }
  /*
 void Animation::draw(SDL_Surface *screen, int x, int y, long elapsed){
@@ -74,7 +76,6 @@ void Animation::draw(SDL_Surface *screen, int x, int y, long elapsed){
             frames[i]->draw(screen, x, y);
         }
         currentFrameTime -= frames[i]->getTime();
-        
     }
 }
 */

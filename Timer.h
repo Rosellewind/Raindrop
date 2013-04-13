@@ -15,10 +15,10 @@ using namespace std;
 class Timer{
 private:
     //The clock time when the timer started
-    long startTicks;
+    Uint32 startTicks;
     
     //The ticks stored when the timer was paused
-    long pausedTicks;
+    Uint32 pausedTicks;
     
     //The timer status
     bool paused;
@@ -35,7 +35,7 @@ public:
     void unpause();
     
     //Gets the timer's time
-    long get_ticks();
+    Uint32 get_ticks();
     
     //Checks the status of the timer
     bool is_started();

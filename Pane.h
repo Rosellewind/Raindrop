@@ -27,12 +27,12 @@ class Pane{
     Text *levelText;
     Frame *pool;
     vector<Animation*> pools;
-    Animation *poolAnimation;
+    int poolIndex;
     SDL_Rect poolRect;
     
 public:
     Pane();
-    void draw(SDL_Surface *screen, long elapsed);
+    void draw(SDL_Surface *screen, Uint32 elapsed);
     void updatePoints(int points);
     void updateLevel(int level);
     void flashColor(Note note);

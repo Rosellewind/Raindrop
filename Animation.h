@@ -16,12 +16,13 @@ using namespace std;
 
 class Animation{
     vector<Frame*> frames;
-    long totalTime;
+    Uint32 totalTime;
+    Uint32 currentFrameTime;
     bool isLoop;
 public:
     Animation(string fname, bool isALoop = true);
     Animation(string fname, int column, bool isALoop);//for use with sprite sheet
-    bool draw(SDL_Surface *screen, int x, int y, long elapsed);
+    bool draw(SDL_Surface *screen, int x, int y, Uint32 elapsed);
     SDL_Rect getRect();
     ~Animation();
 };
