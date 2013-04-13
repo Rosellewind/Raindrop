@@ -3,7 +3,7 @@
 
 #ifdef _WIN32
 #include "SDL/SDL.h"
-#include "SDL_ttf/SDL_ttf.h"
+#include "SDL/SDL_ttf.h"
 
 #elif __APPLE__
 #include <SDL/SDL.h>

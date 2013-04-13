@@ -1,7 +1,8 @@
 #include <iostream>
 #include <sstream>
 #include "Pane.h"
-
+#include <sstream>
+#include "Functions.h"
 using namespace std;
 
 Pane::Pane(){
