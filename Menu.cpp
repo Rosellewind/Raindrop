@@ -50,6 +50,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 				case SDL_QUIT:
 					SDL_FreeSurface(menus[0]);
 					SDL_FreeSurface(menus[1]);
+					running = false;
 					status = -1;
 					break;
 				case SDL_MOUSEMOTION: //USER HOVERS OVER THE BUTTON
@@ -78,6 +79,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 						if(x>=pos[i].x && x<=pos[i].x+pos[i].w && y>=pos[i].y && y<=pos[i].y+pos[i].h) {
 							SDL_FreeSurface(menus[0]);
 							SDL_FreeSurface(menus[1]);
+							running = false;
 							status = i;
 						}
 					} break;
@@ -85,9 +87,9 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 					if(event.key.keysym.sym == SDLK_ESCAPE) {
 						SDL_FreeSurface(menus[0]);
 						SDL_FreeSurface(menus[1]);
+						running = false;
 						status = -1;
-					}
-					break;
+					}break;
 			}
 		}
 		for(int i = 0; i < NUMMENU; i += 1) {
@@ -99,7 +101,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 		}
 	}
 	status = -111;
-	return 0;
+	return status;
 }
 int Menu::show_background(SDL_Surface* screen, void *data)
 {
@@ -167,12 +169,11 @@ int Menu::run()
 	music = Mix_LoadMUS("Resources/sounds/menu_music.ogg");
 	Mix_PlayMusic(music,-1);
 	font = TTF_OpenFont("Resources/fonts/Test.ttf",30);
-
 	running = false;
 	show_menu(screen,font, NULL);
 
 	//thread2 = SDL_CreateThread( show_menu(screen,font, NULL), NULL ); //LOOP IS IN FUNCTION NOT IN RUN
-	//thread1 = SDL_CreateThread( menu_background, NULL ); //LOOP IS IN FUNCTION NOT IN RUN
+	//thread1 = SDL_CreateThread( menu_background(NULL), NULL ); //LOOP IS IN FUNCTION NOT IN RUN
 
 	SDL_WaitThread(thread1, NULL);
 	SDL_WaitThread(thread2, NULL);

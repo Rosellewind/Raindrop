@@ -32,14 +32,16 @@ int main(int argc, char **argv){
     //game screen
     switch(i)
     {
-    	case 0:{
-                //CASE 0 PLAY WAS SELECTED
+    	case 0: 	//CASE 0 PLAY WAS SELECTED
+    	{
             RaindropGame game("game.txt",2);//init with settings
-            game.run();}
+            game.run();
+
+    	}
     		break;
-    	case 1: 						//CASE 1 USER PRESSED QUIT
+    	case 1: 	//CASE 1 USER PRESSED QUIT
     		break;
-    	case -1:						//CASE -1 USER HIT ESC OR CLOSED THE WINDOW
+    	case -1:	//CASE -1 USER HIT ESC OR CLOSED THE WINDOW
     		break;
     }
     
