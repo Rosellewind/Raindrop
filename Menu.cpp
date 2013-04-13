@@ -1,4 +1,4 @@
-#include <iostream>
+/*
 #include <iostream>
 #include <string>
 #include <SDL/SDL.h>
@@ -6,6 +6,7 @@
 #include <SDL/SDL_mixer.h>
 #include <SDL/SDL_image.h>
 #include "SDL/SDL_thread.h"
+ */
 #include "Menu.h"
 #include "Sprite.h"
 #include "Animation.h"

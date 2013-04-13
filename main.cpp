@@ -36,7 +36,6 @@ int main(int argc, char **argv){
     	{
             RaindropGame game("game.txt",2);//init with settings
             game.run();
-
     	}
     		break;
     	case 1: 	//CASE 1 USER PRESSED QUIT

@@ -1,8 +1,10 @@
 #include <iostream>
-#include <sstream>
+#include <string>
 #include "Pane.h"
+////////
 #include <sstream>
 #include "Functions.h"
+
 using namespace std;
 
 Pane::Pane(){
@@ -35,15 +37,13 @@ Pane::Pane(){
 }
 
 void Pane::updatePoints(int points){
-    stringstream ss;
-    ss << points;
-    pointsText->updateText(ss.str());
+	string newText = NTS(points);
+    pointsText->updateText(newText);
 }
 
 void Pane::updateLevel(int level){
-    stringstream ss;
-    ss << level;
-    levelText->updateText(ss.str());
+	string newText = NTS(level);
+    levelText->updateText(newText);
 }
 
 void Pane::flashColor(Note note){
