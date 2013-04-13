@@ -34,18 +34,15 @@ Pane::Pane(){
 }
 
 void Pane::updatePoints(int points){
-    /*
     stringstream ss;
     ss << points;
-    string str = ss.str();
-     */
-    string newText = to_string(points);
-    pointsText->updateText(newText);
+    pointsText->updateText(ss.str());
 }
 
 void Pane::updateLevel(int level){
-    string newText = to_string(level);
-    levelText->updateText(newText);
+    stringstream ss;
+    ss << level;
+    levelText->updateText(ss.str());
 }
 
 void Pane::flashColor(Note note){
@@ -65,7 +62,6 @@ void Pane::draw(SDL_Surface *screen, Uint32 elapsed){
     pointsText->draw(screen);
     levelText->draw(screen);
     
-    cout<<"poolIndex: "<<poolIndex<<endl;
     //pool
     if (poolIndex == -1) {
         pool->draw(screen, poolRect.x, poolRect.y);

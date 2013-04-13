@@ -27,13 +27,12 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
      //setup sound
     soundplayer = new SoundPlayer();
     soundplayer->init(44100, 2, 4096);
-    soundplayer->load_sounds("Resources/audio.txt");///////////
- 
+    soundplayer->load_sounds("Resources/audio.txt");
 }
 
 void RaindropGame::run(){
     SDL_Event event;
-    long last = SDL_GetTicks();
+    Uint32 last = SDL_GetTicks();
     SDL_Delay(100);
     
     //add cups
@@ -47,33 +46,7 @@ void RaindropGame::run(){
 
     //run loop
     while (!done) {
-        long elapsed = SDL_GetTicks();
-
-        
-        
-        
-        /*
-        Uint32 currTime = SDL_GetTicks();
-        Uint32 elapsed = currTime - prevTime;
-        if(elapsed < MIN_FRAMETIME_MSECS)
-        {
-            // Not enough time has elapsed. Let's limit the frame rate
-            SDL_Delay(MIN_FRAMETIME_MSECS - elapsed);
-            currTime = SDL_GetTicks();
-            elapsed = currTime - prevTime;
-        }
-        prevTime = currTime;
-        
-        
-        
-        
-        
-//        Uint32 elapsed = SDL_GetTicks();
-        cout<<"elapsed: "<<elapsed<<"%100: "<<elapsed%100<<endl;
-        */
-        
-        
-        
+        Uint32 elapsed = SDL_GetTicks();
         
         //add drops if needed
         while (drops.size() < numDrops && elapsed > last + minLatency) {
@@ -116,7 +89,7 @@ void RaindropGame::run(){
 					timestampMouseDown = SDL_GetTicks(); //////////////////
                     int x = event.button.x; int y = event.button.y;
 					if (checkClickCup(x, y)) 
-						setDraggedObject(x, y);}//brackets are needed because of declaring variables and needing scope
+						setDraggedObject(x, y);}
 					break;
 				case SDL_MOUSEMOTION: 
 					if(timestampMouseDown){
@@ -159,16 +132,8 @@ void RaindropGame::run(){
         pane->draw(screen, elapsed);
         
         SDL_Flip(screen);
-        
-        //Cap the frame rate
-        /*
-        if( fps.get_ticks() < 1000 / FRAMES_PER_SECOND )
-        {
-            SDL_Delay( ( 1000 / FRAMES_PER_SECOND ) - fps.get_ticks() );
-        }*/
-    }
+    }//while !done loop ends
     soundplayer->cleanup();
-        
     SDL_Quit();
 }//run ends
 

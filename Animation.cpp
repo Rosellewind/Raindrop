@@ -48,37 +48,21 @@ Animation::Animation(string fname, int column, bool isALoop){
 }
 
 bool Animation::draw(SDL_Surface *screen, int x, int y, Uint32 elapsed){
-    cout<<"elapsed: "<<elapsed<<endl;
     bool animate = true;
     cout<<endl<<"totalTime: "<<totalTime<<endl;
-    Uint32 currentFrameTime = elapsed % totalTime;               //currentFrameTime 0 - 1000
-    int total;
+    Uint32 currentFrameTime = elapsed % totalTime;
      for (int i = 0; i < frames.size(); i++) {
          if (frames[i]->getTime() > currentFrameTime){          //getTime gives 100, 200, etc
              frames[i]->draw(screen, x, y);
-             if (!isLoop)cout<<"drawing"<<endl;
-
              if (!isLoop && i == frames.size()-1){
-                 totalTime = 1000;
              animate = false;
              }
              break;
          }
-//         totalTime -= frames[i]->getTime();
      }
      return animate;
  }
- /*
-void Animation::draw(SDL_Surface *screen, int x, int y, long elapsed){
-    long currentFrameTime = elapsed % totalTime;
-    for (int i = 0; i < frames.size(); i++) {        
-        if (frames[i]->getTime() > currentFrameTime){
-            frames[i]->draw(screen, x, y);
-        }
-        currentFrameTime -= frames[i]->getTime();
-    }
-}
-*/
+
 SDL_Rect Animation::getRect(){
     return frames[0]->getRect();
 }

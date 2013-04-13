@@ -17,7 +17,6 @@ using namespace std;
 class Animation{
     vector<Frame*> frames;
     Uint32 totalTime;
-    Uint32 currentFrameTime;
     bool isLoop;
 public:
     Animation(string fname, bool isALoop = true);
