@@ -4,6 +4,8 @@
 #include "ProtoGame.h"
 #include "RaindropGame.h"
 
+using namespace std;
+
 RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int latency):Game(fname){
     gameSpeed = speed;
     numCups = cups;
@@ -12,6 +14,8 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     isDragging = false;
     timestampMouseDown = 0;
     objDragged = NULL;
+    level = 1;
+    points = 0;
     
     //set background
     background = new Sprite("Resources/background.txt");
@@ -40,8 +44,8 @@ void RaindropGame::run(){
     soundplayer->playMusic();
 
     //play sound pattern
-    vector<Note> notes = {HC, LC, HC};
-    soundplayer->playNoteSequence(notes);
+    pattern = {E,E};
+    soundplayer->playNoteSequence(pattern);
     
     //run loop
     while (!done) {
@@ -67,6 +71,7 @@ void RaindropGame::run(){
 						if (checkClickCup(x, y)) {
                             soundplayer->playSound(objDragged->note);
                             pane->flashColor(objDragged->note);
+                            checkPattern(objDragged->note);
 						}
                     }
 					break;
@@ -150,6 +155,57 @@ bool RaindropGame::checkClickCup(int x, int y){
             return 1;
     }
     return 0;
+}
+
+//0110101 LC,D,D,LC,D,LC,D
+//011011
+bool RaindropGame::checkMatching(int index){
+    if (index == notesClicked.size() && index == pattern.size()){
+        notesClicked.clear();
+        return true;
+    }
+    if (index < notesClicked.size() && index < pattern.size()){
+        if (notesClicked[index] == pattern[index]) 
+            return (checkMatching(index+1));
+        else {
+            notesClicked.erase(notesClicked.begin());
+            if (notesClicked.size()==0) 
+                return false;
+            else return checkMatching(0);
+        }
+    }
+    else
+        return false;
+}
+
+void RaindropGame::checkPattern(Note note){
+    notesClicked.push_back(objDragged->note);
+    
+    //log  the pattern and notesClicked
+    for (int i = 0; i < pattern.size(); i++)
+        cout<<pattern[i];
+    cout<<endl;
+    for (int i = 0; i < notesClicked.size(); i++)
+        cout<<notesClicked[i];
+    cout<<endl;
+    
+    bool match = checkMatching(0);
+    cout<<match<<endl;
+
+    if (match) {//temp game logic
+        cout<<"match"<<endl;
+        points += 5;
+        pane->updatePoints(points);
+        if (points >= 20){
+            pane->updateLevel(2);
+            pattern = {HC, LC, HC};
+        }
+        if (points >= 30) {
+            pane->updateLevel(3);
+            pattern = {D, E, F};
+        }
+    }
+    else cout<<"nope"<<endl;
 }
 
 int RaindropGame::updateThread(void *ptr){

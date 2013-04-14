@@ -31,6 +31,8 @@ class RaindropGame: public Game{
     vector<Sprite*> backgrounds;
     vector<Drop*> drops;
     vector<Cup*> cups;
+    vector<Note> pattern;
+    vector<Note> notesClicked;
     float timestampMouseDown;
     bool isDragging;
     Uint32 elapsed;
@@ -41,11 +43,14 @@ class RaindropGame: public Game{
     Pane *pane;
     Cup *objDragged;
     SoundPlayer *soundplayer;
+    int level;
+    int points;
 
 
     bool checkClickCup(int x, int y);
     void setDraggedObject(int x, int y);
-    
+    bool checkMatching(int index);
+    void checkPattern(Note note);
     static int updateThread(void *ptr);
 
 public:
