@@ -17,7 +17,7 @@ Animation::Animation(string fname, bool isALoop){//get which animation
         string f2name;
         in>>t>>f2name;
         totalTime += t;
-        Frame *f = new Frame(f2name, t);
+        Frame *f = new Frame(f2name.c_str(), t);
         frames.insert(frames.end(), f);
     }
     in.close();

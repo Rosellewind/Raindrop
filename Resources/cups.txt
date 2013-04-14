@@ -3,4 +3,4 @@
 80
 62
 Resources/Images/cups.png
-100   Resources/images/dCup.png
+100   

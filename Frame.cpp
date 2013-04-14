@@ -7,6 +7,7 @@
 Frame::Frame(string imageName, Uint32 newTime){
     time = newTime;
     image = IMG_Load(imageName.c_str());
+    if (!image) cout<<"no image"<<endl;
     
     src.x = src.y = dest.x = dest.y = 0;
     src.w = dest.w = image->w;
