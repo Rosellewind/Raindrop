@@ -8,7 +8,7 @@ class Cup : public Sprite{
 public:
     
     Note note;
-    void update(long elapsed);
+    void update(Uint32 elapsed);
     void raiseNote();
     int topOfCup;
     

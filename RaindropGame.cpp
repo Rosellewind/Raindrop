@@ -1,12 +1,8 @@
-#include <vector>
-#include <string>
 #include <iostream>
 #include <fstream>
-#include "Sprite.h"
 #include "Animation.h"
 #include "ProtoGame.h"
 #include "RaindropGame.h"
-#include "Game.h"
 
 RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int latency):Game(fname){
     gameSpeed = speed;
@@ -27,13 +23,12 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
      //setup sound
     soundplayer = new SoundPlayer();
     soundplayer->init(44100, 2, 4096);
-    soundplayer->load_sounds("Resources/audio.txt");///////////
- 
+    soundplayer->load_sounds("Resources/audio.txt");
 }
 
 void RaindropGame::run(){
     SDL_Event event;
-    long last = SDL_GetTicks();
+    Uint32 last = SDL_GetTicks();
     SDL_Delay(100);
     
     //add cups
@@ -42,36 +37,12 @@ void RaindropGame::run(){
     soundplayer->setMusicVolume(12);
     soundplayer->playMusic();
 
-    vector<Note> notes;
-    notes.push_back(HC);
-    notes.push_back(LC);
-    notes.push_back(HC);
-
-    
-    /*
-    notes.push_back(LC);
-    notes.push_back(D);
-    notes.push_back(E);
-    notes.push_back(F);
-    notes.push_back(G);
-    notes.push_back(A);
-    notes.push_back(B);
-    notes.push_back(HC);
-    notes.push_back(HC);
-    notes.push_back(B);
-    notes.push_back(A);
-    notes.push_back(G);
-    notes.push_back(F);
-    notes.push_back(E);
-    notes.push_back(D);
-    notes.push_back(LC);
-     */
-
+    vector<Note> notes = {HC, LC, HC};
     soundplayer->playNoteSequence(notes);
 
     //run loop
     while (!done) {
-        long elapsed = SDL_GetTicks();
+        Uint32 elapsed = SDL_GetTicks();
         
         //add drops if needed
         while (drops.size() < numDrops && elapsed > last + minLatency) {
@@ -106,7 +77,7 @@ void RaindropGame::run(){
 						//check to see if it is on click/draggable object
 						if (checkClickCup(x, y)) {
                             soundplayer->playSound(objDragged->note);
-        
+                            pane->flashColor(objDragged->note);
 						}
                     }
 					break;
@@ -114,11 +85,11 @@ void RaindropGame::run(){
 					timestampMouseDown = SDL_GetTicks(); //////////////////
                     int x = event.button.x; int y = event.button.y;
 					if (checkClickCup(x, y)) 
-						setDraggedObject(x, y);}//brackets are needed because of declaring variables and needing scope
+						setDraggedObject(x, y);}
 					break;
 				case SDL_MOUSEMOTION: 
 					if(timestampMouseDown){
-						long now = SDL_GetTicks();
+						Uint32 now = SDL_GetTicks();
 						if (now - timestampMouseDown > 10 && objDragged){/////
 							isDragging = true;
 							int x = event.motion.x; int y = event.motion.y;
@@ -157,9 +128,8 @@ void RaindropGame::run(){
         pane->draw(screen, elapsed);
         
         SDL_Flip(screen);
-    }
+    }//while !done loop ends
     soundplayer->cleanup();
-        
     SDL_Quit();
 }//run ends
 

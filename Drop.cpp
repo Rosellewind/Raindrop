@@ -5,7 +5,7 @@ Drop::Drop(string fname, Type type, int x, int gameSpeed): Sprite(fname, x, 0, 0
     isCaught = 0;
 }
 
-void Drop::update(long elapsed){
+void Drop::update(Uint32 elapsed){
     Sprite::update(elapsed);
 }
 

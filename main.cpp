@@ -24,6 +24,10 @@
 using namespace std;
 
 int main(int argc, char **argv){
+    RaindropGame game("game.txt",2);//init with settings
+    game.run();
+    
+    
     Menu menu;
 
     //menu screen, pick level, settings
@@ -36,7 +40,6 @@ int main(int argc, char **argv){
     	{
             RaindropGame game("game.txt",2);//init with settings
             game.run();
-
     	}
     		break;
     	case 1: 	//CASE 1 USER PRESSED QUIT

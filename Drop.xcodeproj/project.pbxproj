@@ -19,8 +19,6 @@
 		3D5F2AFD1715CEA200AEF369 /* SDL_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5F2AFC1715CEA100AEF369 /* SDL_mixer.framework */; };
 		3D5F2B021716AAC100AEF369 /* Menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D5F2B001716AAC100AEF369 /* Menu.cpp */; };
 		3D5F2B031716AD0400AEF369 /* Menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D5F2B001716AAC100AEF369 /* Menu.cpp */; };
-		3D5F2B081716D0BF00AEF369 /* pools.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3D5F2B071716D0BF00AEF369 /* pools.txt */; };
-		3D5F2B091716D0BF00AEF369 /* pools.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3D5F2B071716D0BF00AEF369 /* pools.txt */; };
 		3DC6BE1D16FE33E200E682EB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC6BE1C16FE33E200E682EB /* Cocoa.framework */; };
 		3DC6BE2716FE33E200E682EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE2516FE33E200E682EB /* InfoPlist.strings */; };
 		3DC6BE2D16FE33E200E682EB /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3DC6BE2B16FE33E200E682EB /* Credits.rtf */; };
@@ -79,7 +77,6 @@
 		3D5F2AFC1715CEA100AEF369 /* SDL_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_mixer.framework; path = /Library/Frameworks/SDL_mixer.framework; sourceTree = "<absolute>"; };
 		3D5F2B001716AAC100AEF369 /* Menu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Menu.cpp; sourceTree = "<group>"; };
 		3D5F2B011716AAC100AEF369 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
-		3D5F2B071716D0BF00AEF369 /* pools.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = pools.txt; path = Resources/pools.txt; sourceTree = "<group>"; };
 		3DC6BE1916FE33E200E682EB /* Drop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC6BE1C16FE33E200E682EB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		3DC6BE1F16FE33E200E682EB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -143,7 +140,6 @@
 		3DC6BE1016FE33E200E682EB = {
 			isa = PBXGroup;
 			children = (
-				3D5F2B071716D0BF00AEF369 /* pools.txt */,
 				3D5F2AF51715C22B00AEF369 /* Resources */,
 				3DC6BE7516FE348300E682EB /* SDLMain.h */,
 				3DC6BE7616FE348300E682EB /* SDLMain.m */,
@@ -323,7 +319,6 @@
 				3DC6BE2716FE33E200E682EB /* InfoPlist.strings in Resources */,
 				3DC6BE2D16FE33E200E682EB /* Credits.rtf in Resources */,
 				3D5F2AF61715C22B00AEF369 /* Resources in Resources */,
-				3D5F2B081716D0BF00AEF369 /* pools.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,7 +328,6 @@
 			files = (
 				3DC6BE4416FE33E200E682EB /* InfoPlist.strings in Resources */,
 				3D5F2AF71715C22B00AEF369 /* Resources in Resources */,
-				3D5F2B091716D0BF00AEF369 /* pools.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

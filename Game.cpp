@@ -28,7 +28,7 @@ void Game::run(){
     SDL_Event event;
     SDL_Delay(100);
     while (!done) {
-        long elapsed = SDL_GetTicks();
+        Uint32 elapsed = SDL_GetTicks();
         for (int i = 0; i < sprites.size(); i++) {
             sprites[i]->update(elapsed);
             sprites[i]->draw(screen, elapsed);

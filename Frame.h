@@ -14,6 +14,7 @@
 #endif
 
 #include <string>
+#include <climits>
 
 using namespace std;
 
@@ -23,10 +24,12 @@ class Frame{
     int tag;
     SDL_Surface *image;
     SDL_Rect src, dest;
-    long time;
-public:
-    Frame(string fname, long newTime);
-    long getTime();
+    Uint32 time;
+public: 
+    Frame(string imageName, Uint32 newTime = UINT32_MAX);
+    Frame(string imageName, int x, int y, int w, int h, Uint32 newTime);//for use with animation sprite sheet
+    Frame(string fname, int column, int row);//for single image from sprite sheet
+    Uint32 getTime();
     void draw(SDL_Surface *screen, int x, int y);
     SDL_Rect getRect();
     ~Frame();

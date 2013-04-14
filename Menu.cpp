@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <iostream>
 #include <string>
 #include <cstring>
 #include <SDL/SDL.h>
