@@ -12,6 +12,8 @@
 #include <SDL_ttf/SDL_ttf.h>
 
 #elif __unix__
+#include "SDL/SDL.h"
+#include "SDL/SDL_ttf.h"
 #endif
 
 #include <string>

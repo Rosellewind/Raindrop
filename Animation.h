@@ -3,11 +3,13 @@
 
 #ifdef _WIN32
 #include "SDL/SDL.h"
+
 #elif __APPLE__
 #include <SDL/SDL.h>
 #include <SDL/SDL_main.h>
 
 #elif __unix__
+#include "SDL/SDL.h"
 #endif
 
 #include <vector>

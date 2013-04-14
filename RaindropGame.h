@@ -9,6 +9,7 @@
 #include <SDL_image/SDL_image.h>
 
 #elif __unix__
+#include "SDL/SDL.h"
 #endif
 
 #include <vector>
