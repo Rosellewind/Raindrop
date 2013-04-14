@@ -123,7 +123,7 @@ int Menu::show_background(SDL_Surface* screen, void *data)
 //        while (dropSprites.size() < numDrops && now > last + minLatency) {
 //            Drop *d = new Drop;
 //            int x = (rand()%20)*0.05*SCREENWIDTH;
-//            d->init("a.txt", PLAIN, x, gameSpeed);
+//            d->init("Resources/a.txt", PLAIN, x, gameSpeed);
 //            dropSprites.insert(drops.end(), d);
 //            last = SDL_GetTicks();
 //        }

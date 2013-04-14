@@ -24,7 +24,7 @@
 using namespace std;
 
 int main(int argc, char **argv){
-    RaindropGame game("game.txt",2);//init with settings
+    RaindropGame game("Resources/game.txt",2);//init with settings
     game.run();
     
     
@@ -38,7 +38,7 @@ int main(int argc, char **argv){
     {
     	case 0: 	//CASE 0 PLAY WAS SELECTED
     	{
-            RaindropGame game("game.txt",2);//init with settings
+            RaindropGame game("Resources/game.txt",2);//init with settings
             game.run();
     	}
     		break;

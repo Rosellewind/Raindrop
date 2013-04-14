@@ -14,7 +14,7 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     objDragged = NULL;
     
     //set background
-    background = new Sprite("background.txt");
+    background = new Sprite("Resources/background.txt");
     backgrounds.insert(backgrounds.begin(), background);
     
     //set pane
@@ -35,12 +35,14 @@ void RaindropGame::run(){
     //add cups
     cups = Cup::initCups(numCups, screen);
     
+    //play sound
     soundplayer->setMusicVolume(12);
     soundplayer->playMusic();
 
+    //play sound pattern
     vector<Note> notes = {HC, LC, HC};
     soundplayer->playNoteSequence(notes);
-
+    
     //run loop
     while (!done) {
         elapsed = SDL_GetTicks();
@@ -152,10 +154,11 @@ bool RaindropGame::checkClickCup(int x, int y){
 
 int RaindropGame::updateThread(void *ptr){
     RaindropGame* game = (RaindropGame*)ptr;
+    
     //add drops if needed
     while (game->drops.size() < game->numDrops && game->elapsed > game->lastDrop + game->minLatency) {
         int x = (rand()%20)*0.05*SCREENWIDTH;
-        Drop *d = new Drop("a.txt", PLAIN, x, game->gameSpeed);
+        Drop *d = new Drop("Resources/a.txt", PLAIN, x, game->gameSpeed);
         game->drops.insert(game->drops.end(), d);
         game->lastDrop = SDL_GetTicks();
     }

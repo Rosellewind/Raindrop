@@ -31,7 +31,7 @@ void Cup::raiseNote(){
         note = HC;
     else if (note == HC)
         note = LC;
-    string newFile = Note_String[note] + "Cup.txt";
+    string newFile = "Resources/" + Note_String[note] + "Cup.txt";
     delete animation;
     animation = new Animation(newFile.c_str());
 }
@@ -46,7 +46,7 @@ vector<Cup*> Cup::initCups(int numCups, SDL_Surface *screen){
     vector<Cup*> cups(numCups);
     for (int i = 0; i<numCups; i++) {
         int x = (rand()%10)*0.1*SCREENWIDTH;
-        Cup *c = new Cup("lcCup.txt", LC, x);
+        Cup *c = new Cup("Resources/lcCup.txt", LC, x);
         cups[i] = c;
     }
     return cups;
