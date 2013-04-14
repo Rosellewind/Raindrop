@@ -3,26 +3,29 @@
 #include <string>
 #include <fstream>
 
-
-Frame::Frame(string imageName, Uint32 newTime){
+Frame::Frame(string imageName, Uint32 newTime)
+{
+	tag = 0; //Added by Jared, should be initialized in the constructor.
     time = newTime;
     image = IMG_Load(imageName.c_str());
-    
     src.x = src.y = dest.x = dest.y = 0;
     src.w = dest.w = image->w;
     src.h = dest.h = image->h;
 }
 
-Frame::Frame(string imageName, int x, int y, int w, int h, Uint32 newTime){
+Frame::Frame(string imageName, int x, int y, int w, int h, Uint32 newTime)
+{
+	tag = 0; //Added by Jared, should be initialized in the constructor.
     time = newTime;
     image = IMG_Load(imageName.c_str());
-    
     src.x = x; src.y = y; dest.x = dest.y = 0;
     src.w = w; dest.w = w;
     src.h = h; dest.h = h;
 }
 
-Frame::Frame(string fname, int column, int row){
+Frame::Frame(string fname, int column, int row)
+{
+	tag = 0; //Added by Jared, should be initialized in the constructor.
     int columns, rows, width, height;
     string imageName;
     ifstream in(fname.c_str());

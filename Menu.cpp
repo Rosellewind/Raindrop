@@ -55,7 +55,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 					SDL_FreeSurface(menus[0]);
 					SDL_FreeSurface(menus[1]);
 					running = false;
-					status = -1;
+					return -1;
 					break;
 				case SDL_MOUSEMOTION: //USER HOVERS OVER THE BUTTON
 					x = event.motion.x;
@@ -75,7 +75,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 								menus[i] = TTF_RenderText_Solid(font,labels[i],color[0]);
 							}
 						}
-					} break;
+					}break;
 				case SDL_MOUSEBUTTONDOWN: //USER CLICKS MENU BUTTON
 					x = event.button.x;
 					y = event.button.y;
@@ -84,15 +84,15 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 							SDL_FreeSurface(menus[0]);
 							SDL_FreeSurface(menus[1]);
 							running = false;
-							status = i;
+							return  i;
 						}
-					} break;
+					}break;
 				case SDL_KEYDOWN: //USER HITS ESC
 					if(event.key.keysym.sym == SDLK_ESCAPE) {
 						SDL_FreeSurface(menus[0]);
 						SDL_FreeSurface(menus[1]);
 						running = false;
-						status = -1;
+						return  -1;
 					}break;
 			}
 		}
@@ -104,8 +104,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 			SDL_Delay(1000/30 - (SDL_GetTicks()-time)); //RESTRICT PLAYBACK TO 30 FRAMES A SECOND
 		}
 	}
-	status = -111;
-	return status;
+	return -111;
 }
 int Menu::show_background(SDL_Surface* screen, void *data)
 {
@@ -131,16 +130,12 @@ int Menu::show_background(SDL_Surface* screen, void *data)
 }
 void Menu::clean_up()
 {
-    SDL_KillThread( thread1 );
-    SDL_KillThread( thread2 );
-    SDL_FreeSurface( screen );
-    SDL_FreeSurface( icon );
-    SDL_Quit();
+
 }
 int Menu::run()
 {
-	thread1 = NULL;
-	thread2 = NULL;
+	//thread1 = NULL;
+	//thread2 = NULL;
 	screen = SDL_SetVideoMode(SCREENWIDTH,SCREENHEIGHT,32,SDL_SWSURFACE);
 	icon = load_image("Resources/images/icon.bmp"); //ICON IN THE WINDOW AND NAV BAR
 	SDL_WM_SetIcon(icon, NULL); //SETTING THE ICON
@@ -152,13 +147,11 @@ int Menu::run()
 	Mix_PlayMusic(music,-1);
 	font = TTF_OpenFont("Resources/fonts/Test.ttf",30);
 	running = false;
-	show_menu(screen,font, NULL);
-
+	int i = show_menu(screen,font, NULL);
 	//thread2 = SDL_CreateThread( show_menu(screen,font, NULL), NULL ); //LOOP IS IN FUNCTION NOT IN RUN
 	//thread1 = SDL_CreateThread( menu_background(NULL), NULL ); //LOOP IS IN FUNCTION NOT IN RUN
-
-	SDL_WaitThread(thread1, NULL);
-	SDL_WaitThread(thread2, NULL);
+	//SDL_WaitThread(thread1, NULL);
+	//SDL_WaitThread(thread2, NULL);
 	if(status==1) {running = false;} //CALL FOR QUIT GAME OR QUIT MENU
 	if(status==-111) {} //SOMETHING WENT WRONG
 	SDL_FreeSurface(icon);
@@ -166,7 +159,11 @@ int Menu::run()
 	Mix_CloseAudio();
 	TTF_CloseFont(font);
 	TTF_Quit();
-	clean_up();
-	return status;
+	//SDL_KillThread( thread1 );
+	//SDL_KillThread( thread2 );
+	SDL_FreeSurface( screen );
+	SDL_FreeSurface( icon );
+	SDL_Quit();
+	return i;
 }
 

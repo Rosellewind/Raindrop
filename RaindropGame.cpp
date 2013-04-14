@@ -99,6 +99,7 @@ void RaindropGame::run(){
                     break;
                 default:
                     cout<<"other event"<<endl;
+                    break;
 			}//ends event.type switch
         }//ends event detection while loop
         

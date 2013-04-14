@@ -15,12 +15,12 @@
 
 #include <string>
 #include <climits>
+#include <cstdint>
+#include "stdint.h"
 
+#define UINT32_MAX  (0xffffffff)
 using namespace std;
-
-
 class Frame{
-
     int tag;
     SDL_Surface *image;
     SDL_Rect src, dest;

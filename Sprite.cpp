@@ -7,7 +7,9 @@
 Sprite::Sprite(string fname,
                   float newXPos, float newYPos,
                   float newXVel, float newYVel,
-                  float newXAcc, float newYAcc){
+                  float newXAcc, float newYAcc)
+{
+	isDragging = false; //Jared added, need to be initialized in constructor.
     animation = new Animation(fname.c_str());
     xPos = newXPos;
     yPos = newYPos;
@@ -17,6 +19,7 @@ Sprite::Sprite(string fname,
     yAcc = newYAcc;
     last = SDL_GetTicks();
     offsetX = offsetY = 0;
+
 }
 
 void Sprite::update(Uint32 elapsed){

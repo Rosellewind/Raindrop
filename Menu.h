@@ -14,10 +14,9 @@
 #include <SDL_ttf/SDL_ttf.h>
 #include <SDL/SDL_thread.h>
 #include <SDL_mixer/SDL_mixer.h>
+
 #elif __unix__
 #endif
-
-
 
 #include <vector>
 #include "Drop.h"
