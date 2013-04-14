@@ -156,9 +156,11 @@ bool RaindropGame::checkClickCup(int x, int y){
     }
     return 0;
 }
+//3,4   E,F pattern in the background
+//3,4   notes clicked
 
-//0110101 LC,D,D,LC,D,LC,D
-//011011
+//0110101   LC,D,D,LC,D,LC,D pattern in the background
+//011011    notes clicked
 bool RaindropGame::checkMatching(int index){
     if (index == notesClicked.size() && index == pattern.size()){
         notesClicked.clear();
