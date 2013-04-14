@@ -36,7 +36,7 @@ void RaindropGame::run(){
     
     soundplayer->setMusicVolume(20);
     soundplayer->playMusic();
-    
+
     vector<Note> notes;
     notes.push_back(LC);
     notes.push_back(D);

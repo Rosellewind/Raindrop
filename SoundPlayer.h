@@ -30,7 +30,7 @@ class SoundPlayer{
 public:
 	int sequenceCounter;
 	vector<Note> notes;
-	
+
 	SoundPlayer();
 	void init(int freq, int channels, int chunkSize);
 	void load_sounds(string fname);
@@ -38,7 +38,7 @@ public:
 	void playMusic();
 	void setMusicVolume(int newVolume);
 	void playSound();
-	void playSound(Note n);
+	void playSound(Note n, int channel=2);
 	void togglePauseMusic();	
 	void playNoteSequence(vector<Note> notes);
 	static int sequenceThread(void *notes);

@@ -52,6 +52,7 @@ void SoundPlayer::setMusicVolume(int newVolume){
 		vol = MIX_MAX_VOLUME;
 	Mix_VolumeMusic(vol);
 }
+
 void SoundPlayer::playSound(){
 	if(sounds.size()>0){
 		if(Mix_PlayChannel(2, sounds.front(), 0) == -1){
@@ -60,14 +61,15 @@ void SoundPlayer::playSound(){
 	}
 }
 
-void SoundPlayer::playSound(Note n){
-	Mix_Volume(2,128);
+void SoundPlayer::playSound(Note n, int channel){
+	Mix_Volume(channel,128);
 	if(sounds.size()>n){
-		if(Mix_PlayChannel(2, sounds[n], 0) == -1){
+		if(Mix_PlayChannel(channel, sounds[n], 0) == -1){
 			cout<<"Error playing sound"<<endl;
 		}
 	}
 }
+
 int SoundPlayer::sequenceThread(void *player){
 	SoundPlayer *sp = (SoundPlayer*)player;
 	sp->playSound(sp->notes[sp->sequenceCounter]);
