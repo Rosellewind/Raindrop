@@ -49,7 +49,7 @@ Animation::Animation(string fname, int column, bool isALoop){
 
 bool Animation::draw(SDL_Surface *screen, int x, int y, Uint32 elapsed){
     bool animate = true;
-    cout<<endl<<"totalTime: "<<totalTime<<endl;
+    if (totalTime == 0) totalTime = -1;
     Uint32 currentFrameTime = elapsed % totalTime;
      for (int i = 0; i < frames.size(); i++) {
          if (frames[i]->getTime() > currentFrameTime){          //getTime gives 100, 200, etc

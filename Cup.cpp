@@ -5,7 +5,7 @@
 string Type_String[] = {"plain", "color", "slow", "drain"};
 
 
-Cup::Cup(string fname, Note n, int x):Sprite(fname, x, GAMESCREENHEIGHT-62){
+Cup::Cup(string fname, Note n, int x):Sprite(n, fname, true, x, GAMESCREENHEIGHT-62){
     note = n;
     topOfCup = GAMESCREENHEIGHT - getRect().h;
 }
@@ -46,7 +46,8 @@ vector<Cup*> Cup::initCups(int numCups, SDL_Surface *screen){
     vector<Cup*> cups(numCups);
     for (int i = 0; i<numCups; i++) {
         int x = (rand()%10)*0.1*SCREENWIDTH;
-        Cup *c = new Cup("Resources/lcCup.txt", LC, x);
+        Cup *c = new Cup("Resources/cups.txt", LC, x);
+//        Cup *c = new Cup("Resources/lcCup.txt", LC, x);
         cups[i] = c;
     }
     return cups;

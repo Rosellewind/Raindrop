@@ -8,7 +8,22 @@ Sprite::Sprite(string fname,
                   float newXPos, float newYPos,
                   float newXVel, float newYVel,
                   float newXAcc, float newYAcc){
-    animation = new Animation(fname.c_str());
+        animation = new Animation(fname.c_str());
+    xPos = newXPos;
+    yPos = newYPos;
+    xVel = newXVel;
+    yVel = newYVel;
+    xAcc = newXAcc;
+    yAcc = newYAcc;
+    last = SDL_GetTicks();
+    offsetX = offsetY = 0;
+}
+
+Sprite::Sprite(int column, string fname, bool isLoop,
+               float newXPos, float newYPos,
+               float newXVel, float newYVel,
+               float newXAcc, float newYAcc){
+    animation = new Animation(fname.c_str(),column, isLoop);
     xPos = newXPos;
     yPos = newYPos;
     xVel = newXVel;
@@ -36,7 +51,7 @@ void Sprite::update(Uint32 elapsed){
     }
 }
 
-void Sprite::draw(SDL_Surface *screen, Uint32 elapsed ){
+void Sprite::draw(SDL_Surface *screen, Uint32 elapsed){
     animation->draw(screen, xPos, yPos, elapsed);
 }
 

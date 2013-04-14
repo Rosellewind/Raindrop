@@ -26,6 +26,10 @@ public:
            float newXPos = 0.0, float newYPos = 0.0,
            float newXVel = 0.0, float newYVel = 0.0,
            float newXAcc = 0.0, float newYAcc = 0.0);
+    Sprite(int column, string fname, bool isLoop,
+           float newXPos = 0.0, float newYPos = 0.0,
+           float newXVel = 0.0, float newYVel = 0.0,
+           float newXAcc = 0.0, float newYAcc = 0.0);
     virtual void update(Uint32 elapsed);
     virtual void draw(SDL_Surface *screen, Uint32 elapsed );
     virtual SDL_Rect getRect();
