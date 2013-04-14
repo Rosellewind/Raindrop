@@ -13,6 +13,10 @@
 #elif __unix__
 #endif
 
+#ifndef UINT32_MAX
+#define UINT32_MAX ((uint32_t)-1)
+#endif
+
 #include <string>
 #include <climits>
 

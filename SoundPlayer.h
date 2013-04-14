@@ -25,7 +25,8 @@ using namespace std;
 class SoundPlayer{
 	Mix_Music *music;
 	vector<Mix_Chunk*> sounds;
-	
+	bool done;
+	int delay; // in ms
 	
 public:
 	int sequenceCounter;
@@ -37,9 +38,9 @@ public:
 	void playMusic();
 	void setMusicVolume(int newVolume);                    
 	void playSound();
-	void playSound(Note n);
+	void playSound(Note n, int channel = 2);
 	void togglePauseMusic();	
-	void playNoteSequence(vector<Note> notes);
+	void playNoteSequence(vector<Note> notes, int newDelay = 2000);
 	static int sequenceThread(void *notes);
 	void cleanup();
     ~SoundPlayer();

@@ -40,7 +40,10 @@ void RaindropGame::run(){
     soundplayer->playMusic();
 
     //play sound pattern
-    vector<Note> notes = {HC, LC, HC};
+    vector<Note> notes;// = {HC, LC, HC};
+    notes.push_back(HC);
+    notes.push_back(LC);
+    notes.push_back(HC);
     soundplayer->playNoteSequence(notes);
     
     //run loop
@@ -65,7 +68,7 @@ void RaindropGame::run(){
 						int x = event.button.x; int y = event.button.y;
 						//check to see if it is on click/draggable object
 						if (checkClickCup(x, y)) {
-                            soundplayer->playSound(objDragged->note);
+                            soundplayer->playSound(objDragged->note, 1);
                             pane->flashColor(objDragged->note);
 						}
                     }
