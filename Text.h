@@ -19,13 +19,13 @@
 using namespace std;
 
 
-class Text {
+class Text{
     SDL_Surface *textSurface;
     SDL_Rect rect;
     TTF_Font *font;
     SDL_Color textColor;
 public:
-    Text(string textString, int x, int y, string fontName = "Arial.ttf", int fontSize = 28, SDL_Color txtColor = { 255, 255, 255 });
+    Text(string textString, int x, int y); //moved inits into constructor JaredTS
     void updateText(string newText);
     void draw(SDL_Surface *screen);
     SDL_Rect getRect();

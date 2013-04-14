@@ -110,7 +110,7 @@ int Menu::show_background(SDL_Surface* screen, void *data)
 {
 	SDL_Surface *dropSprite[6]; //Various droplet sizes
 	SDL_Rect dropPos[6];
-	Uint32 now, last;
+	//Uint32 now, last;
 
 	for(int i = 0; i < 6; i++)
 	{
@@ -120,11 +120,11 @@ int Menu::show_background(SDL_Surface* screen, void *data)
 	}
 	while(running)
 	{
-		dropPos[6].x = (rand()%20)*0.05*SCREENWIDTH;
-		now = SDL_GetTicks(); // GRAB TIMESTAMP NOW
-		last = now; //LAST DROP WAS JUST NOW
-	    SDL_BlitSurface(dropSprite[6], NULL, screen, &dropPos[6]);
-	    SDL_UpdateRect(screen, 0, 0, 0, 0);
+		//dropPos[6].x = (rand()%20)*0.05*SCREENWIDTH;
+		//now = SDL_GetTicks(); // GRAB TIMESTAMP NOW
+		//last = now; //LAST DROP WAS JUST NOW
+	    //SDL_BlitSurface(dropSprite[6], NULL, screen, &dropPos[6]);
+	    //SDL_UpdateRect(screen, 0, 0, 0, 0);
 	}
 	return 0;
 }

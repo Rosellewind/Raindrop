@@ -1,13 +1,13 @@
 #include <iostream>
 #include <string>
 #include "Pane.h"
-////////
 #include <sstream>
 #include "Functions.h"
 
 using namespace std;
 
-Pane::Pane(){
+Pane::Pane()
+{
     rect = {0,GAMESCREENHEIGHT,SCREENWIDTH,SCREENHEIGHT-GAMESCREENHEIGHT};
     int pad = 6;
     poolIndex = -1;
@@ -57,7 +57,7 @@ void Pane::draw(SDL_Surface *screen, Uint32 elapsed){
     SDL_FillRect(screen, &rect, color32bit);
     
     //text
-    for (int i = 0; i<staticText.size(); i++) {
+    for (unsigned int i = 0; i<staticText.size(); i++) {
         staticText[i]->draw(screen);
     }
     pointsText->draw(screen);
@@ -75,12 +75,12 @@ void Pane::draw(SDL_Surface *screen, Uint32 elapsed){
 }
 
 Pane::~Pane(){
-    for (int i = 0; i<staticText.size(); i++){
+    for (unsigned int i = 0; i<staticText.size(); i++){
         delete staticText[i];
     }
     if (pointsText) delete pointsText;
     if (levelText) delete levelText;
-    for (int i = 0; i < pools.size(); i++) {
+    for (unsigned int i = 0; i < pools.size(); i++) {
         ;//delete pools[i];
     }
 }

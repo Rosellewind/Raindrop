@@ -53,13 +53,13 @@ vector<Cup*> Cup::initCups(int numCups, SDL_Surface *screen){
 }
 
 void Cup::checkCollisions(vector<Cup*> cups, vector<Drop*> drops){
-    for (int i = 0; i < drops.size(); i++) {
+    for (unsigned  int i = 0; i < drops.size(); i++) {
         SDL_Rect dropRect = drops[i]->getRect();
         int topOfCups = 0;
         if (cups.size()>0) 
             topOfCups = cups[0]->topOfCup;
         if (dropRect.y + dropRect.h > topOfCups && !drops[i]->isCaught){
-            for (int j = 0; j < cups.size(); j++) {
+            for (unsigned int j = 0; j < cups.size(); j++) {
                 if (cups[j]->checkCollisionByCenter(dropRect)){
                     drops[i]->isCaught = 1;
                     cups[j]->raiseNote();

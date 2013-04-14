@@ -45,7 +45,8 @@ void RaindropGame::run(){
         Uint32 elapsed = SDL_GetTicks();
         
         //add drops if needed
-        while (drops.size() < numDrops && elapsed > last + minLatency) {
+        unsigned int USI = numDrops;
+        while (drops.size() < USI && elapsed > last + minLatency){
             int x = (rand()%20)*0.05*SCREENWIDTH;
             Drop *d = new Drop("a.txt", PLAIN, x, gameSpeed);
             drops.insert(drops.end(), d);
@@ -108,19 +109,19 @@ void RaindropGame::run(){
         Cup::checkCollisions(cups,drops);
         
         //update background
-        for (int i = 0; i < sprites.size(); i++) {
+        for (unsigned int i = 0; i < sprites.size(); i++) {
             sprites[i]->update(elapsed);
             sprites[i]->draw(screen, elapsed);
         }
         
         //update drops
-        for (int i = 0; i < drops.size(); i++) {
+        for (unsigned int i = 0; i < drops.size(); i++) {
             drops[i]->update(elapsed);
             drops[i]->draw(screen, elapsed);
         }
         
         //update cups
-        for (int i = 0; i < cups.size(); i++) {
+        for (unsigned int i = 0; i < cups.size(); i++) {
             cups[i]->update(elapsed);
             cups[i]->draw(screen, elapsed);
         }
@@ -137,7 +138,7 @@ void RaindropGame::run(){
 void RaindropGame::setDraggedObject(int x, int y){
     bool found = 0;
     while (!found) {
-        for (int i = 0; i < cups.size(); i++) {
+        for (unsigned int i = 0; i < cups.size(); i++) {
             SDL_Rect cupRect = cups[i]->getRect();
             if( ( x > cupRect.x ) && ( x < cupRect.x + cupRect.w ) && ( y > cupRect.y ) && ( y < cupRect.y + cupRect.h ) ){
                 objDragged = cups[i];
@@ -151,7 +152,7 @@ void RaindropGame::setDraggedObject(int x, int y){
 }
 
 bool RaindropGame::checkClickCup(int x, int y){
-    for(int i = 0; i<cups.size();i++){
+    for(unsigned int i = 0; i<cups.size();i++){
         SDL_Rect cupRect = cups[i]->getRect();
         if( ( x > cupRect.x ) && ( x < cupRect.x + cupRect.w ) && ( y > cupRect.y ) && ( y < cupRect.y + cupRect.h ) )
             return 1;
@@ -160,10 +161,10 @@ bool RaindropGame::checkClickCup(int x, int y){
 }
 
 RaindropGame::~RaindropGame(){
-    for (int i = 0; i<drops.size(); i++){
+    for (unsigned int i = 0; i<drops.size(); i++){
         delete drops[i];
     }
-    for (int i = 0; i<cups.size(); i++){
+    for (unsigned int i = 0; i<cups.size(); i++){
         delete cups[i];
     }
 }

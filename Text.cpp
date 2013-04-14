@@ -3,12 +3,17 @@
 
 #include <iostream>
 
-Text::Text(string textString, int x, int y, string fontName, int fontSize, SDL_Color txtColor){
+Text::Text(string textString, int x, int y){
     if( TTF_Init() < 0)
         cout<<"tff init error"<<endl;
     atexit(TTF_Quit);
-    textColor = txtColor;
-    font = TTF_OpenFont(fontName.c_str(), fontSize);///no font
+    string fontName;
+    int fontSize;
+    SDL_Color txtColor;
+    txtColor = { 255, 255, 255 }; // Cant init in class, might as well here. --JaredTS
+    fontSize = 28;
+    fontName = "Resources/fonts/Arial.ttf";
+    font = TTF_OpenFont(fontName.c_str(), fontSize);///no font //needs to be the file location, Resources/fonts/Arial.ttf
     if(!font) {
         printf("TTF_OpenFont: %s\n", TTF_GetError());
     }
