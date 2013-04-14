@@ -31,11 +31,11 @@ public:
     virtual SDL_Rect getRect();
     virtual bool isAlive();
     virtual void dragTo(int x, int y);
-    
+    virtual ~Sprite();
     bool checkCollisionByCenter(SDL_Rect rect1);
     void startDragging(int x, int y);
     void stopDragging();
-    ~Sprite();
+
 };
 
 #endif

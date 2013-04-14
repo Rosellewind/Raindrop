@@ -1,6 +1,7 @@
 #include <iostream>
-#include <iostream>
+#include <fstream>
 #include <string>
+#include <cstring>
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 #include <SDL/SDL_mixer.h>
@@ -9,6 +10,7 @@
 #include "Menu.h"
 #include "Sprite.h"
 #include "Animation.h"
+#include "Functions.h"
 
 //Test change for repo
 using namespace std;
@@ -106,46 +108,24 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 }
 int Menu::show_background(SDL_Surface* screen, void *data)
 {
-	SDL_Surface *dropSprite[7];
-	//SDL_Rect dropletPos[7];
+	SDL_Surface *dropSprite[6]; //Various droplet sizes
+	SDL_Rect dropPos[6];
 	Uint32 now, last;
 
-	dropSprite[0] = load_image("resources/images/droplet1.png");
-	dropSprite[1] = load_image("resources/images/droplet2.png");
-	dropSprite[2] = load_image("resources/images/droplet3.png");
-	dropSprite[3] = load_image("resources/images/droplet4.png");
-	dropSprite[4] = load_image("resources/images/droplet5.png");
-	dropSprite[5] = load_image("resources/images/droplet6.png");
-	dropSprite[6] = load_image("resources/images/droplet7.png");
-
-//	while(running)
-//	{
-//		now = SDL_GetTicks(); // GRAB TIMESTAMP NOW
-//		last = now; //LAST DROP WAS JUST NOW
-//		numDrops = dropSprites;
-//
-//        while (dropSprites.size() < numDrops && now > last + minLatency) {
-//            Drop *d = new Drop;
-//            int x = (rand()%20)*0.05*SCREENWIDTH;
-//            d->init("a.txt", PLAIN, x, gameSpeed);
-//            dropSprites.insert(drops.end(), d);
-//            last = SDL_GetTicks();
-//        }
-//
-//        //erase drops that are going offscreen
-//        for (int i = (int)dropSprites.size()-1; i >= 0; i--) {
-//            if (dropSprites[i]->isAlive() == 0) {
-//                Drop *d = dropSprites[i];
-//                dropSprites.erase(drops.begin()+i);
-//                delete d;
-//            }
-//        }
-//        //update drops
-//        for (int i = 0; i < drops.size(); i++) {
-//        	dropSprites[i]->update(elapsed);
-//            dropSprites[i]->draw(screen, elapsed);
-//        }
-//	}
+	for(int i = 0; i < 6; i++)
+	{
+		std::string str = "Resources/images/droplet"+NTS(i)+".png";
+		const char * c = str.c_str();
+		dropSprite[i] = load_image(c); //DROPSPRITE CONTAINS RAINDROPS SMALL TO BIG 6-0
+	}
+	while(running)
+	{
+		dropPos[6].x = (rand()%20)*0.05*SCREENWIDTH;
+		now = SDL_GetTicks(); // GRAB TIMESTAMP NOW
+		last = now; //LAST DROP WAS JUST NOW
+	    SDL_BlitSurface(dropSprite[6], NULL, screen, &dropPos[6]);
+	    SDL_UpdateRect(screen, 0, 0, 0, 0);
+	}
 	return 0;
 }
 void Menu::clean_up()
