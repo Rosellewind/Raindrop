@@ -158,7 +158,7 @@ int RaindropGame::updateThread(void *ptr){
     //add drops if needed
     while (game->drops.size() < game->numDrops && game->elapsed > game->lastDrop + game->minLatency) {
         int x = (rand()%20)*0.05*SCREENWIDTH;
-        Drop *d = new Drop("Resources/a.txt", PLAIN, x, game->gameSpeed);
+        Drop *d = new Drop("Resources/drop.txt", PLAIN, x, game->gameSpeed);
         game->drops.insert(game->drops.end(), d);
         game->lastDrop = SDL_GetTicks();
     }
