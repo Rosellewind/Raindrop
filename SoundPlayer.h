@@ -18,6 +18,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include "Pane.h"
 #include "ProtoGame.h"
 
 using namespace std;
@@ -27,12 +28,13 @@ class SoundPlayer{
 	vector<Mix_Chunk*> sounds;
 	bool done;
 	int delay; // in ms
+	Pane *pane;
 	
 public:
 	int sequenceCounter;
 	vector<Note> notes;
 	
-	SoundPlayer();
+	SoundPlayer(Pane *newpane);
 	void init(int freq, int channels, int chunkSize);
 	void load_sounds(string fname);
 	void playMusic();
@@ -43,6 +45,7 @@ public:
 	void playNoteSequence(vector<Note> notes, int newDelay = 2000);
 	static int sequenceThread(void *notes);
 	void cleanup();
+	void stopNoteSequence();
     ~SoundPlayer();
 };
 

@@ -21,7 +21,7 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     pane = new Pane();
 
      //setup sound
-    soundplayer = new SoundPlayer();
+    soundplayer = new SoundPlayer(pane);
     soundplayer->init(44100, 2, 4096);
     soundplayer->load_sounds("Resources/audio.txt");
 }

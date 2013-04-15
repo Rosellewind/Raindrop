@@ -1,9 +1,10 @@
 #include "SoundPlayer.h"
 
-SoundPlayer::SoundPlayer(){
+SoundPlayer::SoundPlayer(Pane *newpane){
 	music = NULL;
 	sequenceCounter = 0;
 	done = false;
+	pane = newpane;
 }
 
 void SoundPlayer::init(int freq, int channels, int chunkSize){
@@ -96,6 +97,9 @@ void SoundPlayer::playNoteSequence(vector<Note> newNotes, int newDelay){
 	}
 
 }
+void SoundPlayer::stopNoteSequence(){
+	done=true;
+}
 
 int SoundPlayer::sequenceThread(void *player){
 	SoundPlayer *sp = (SoundPlayer*)player;
@@ -109,6 +113,7 @@ int SoundPlayer::sequenceThread(void *player){
 		if(Mix_Playing(2)==0){
 			cout<<"Note: "<<sp->notes[sp->sequenceCounter]<<"  counter: "<<sp->sequenceCounter<<endl;
 			sp->playSound(sp->notes[sp->sequenceCounter]);
+			//sp->pane->flashColor(sp->notes[sp->sequenceCounter]);
 			sp->sequenceCounter++;
 		}
 	}
