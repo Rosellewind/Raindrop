@@ -1,0 +1,53 @@
+loading 8 sounds...
+other event
+other event
+other event
+other event
+Note: 2  counter: 1
+Drop at: 40
+Note: 4  counter: 2
+Drop at: 40
+Note: 7  counter: 3
+Drop at: 40
+Note: 0  counter: 0
+Drop at: 40
+other event
+Note: 4  counter: 1
+Drop at: 40
+other event
+Note: 6  counter: 2
+Note: 1  counter: 3
+Drop at: 40
+Note: 3  counter: 4
+Drop at: 40
+Drop at: 40
+Drop at: 40
+Note: 2  counter: 0
+other event
+Note: 4  counter: 1
+Drop at: 40
+Note: 6  counter: 2
+Drop at: 40
+Note: 1  counter: 3
+Note: 3  counter: 4
+Drop at: 40
+Drop at: 40
+Drop at: 40
+Note: 2  counter: 0
+Note: 4  counter: 1
+Drop at: 40
+Note: 6  counter: 2
+Drop at: 40
+Note: 1  counter: 3
+Note: 3  counter: 4
+Drop at: 40
+other event
+Drop at: 40
+Drop at: 40
+Note: 2  counter: 0
+Drop at: 40
+Note: 4  counter: 1
+Note: 6  counter: 2
+Drop at: 40
+Note: 1  counter: 3
+Note: 3  counter: 4
