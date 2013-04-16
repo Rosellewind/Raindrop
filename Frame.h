@@ -16,6 +16,10 @@
 #define UINT32_MAX  (0xffffffff) //Linuc GCC bug -- JaredTS
 #endif
 
+#ifndef UINT32_MAX
+#define UINT32_MAX ((uint32_t)-1)
+#endif
+
 #include <string>
 #include <climits>
 

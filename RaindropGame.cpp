@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <ctime>
 #include "Animation.h"
 #include "ProtoGame.h"
 #include "RaindropGame.h"
@@ -27,9 +28,13 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     pane = new Pane();
 
      //setup sound
-    soundplayer = new SoundPlayer();
+    soundplayer = new SoundPlayer(pane);
     soundplayer->init(44100, 2, 4096);
     soundplayer->load_sounds("Resources/audio.txt");
+
+    //seed psuedo random number generator
+    srand (time(NULL));
+
 }
 
 void RaindropGame::run(){
@@ -48,7 +53,15 @@ void RaindropGame::run(){
     //play sound pattern
     pattern = {E,E};
     soundplayer->playNoteSequence(pattern);
+    vector<Note> notes;// = {HC, LC, HC};
+    notes.push_back(LC);
+    notes.push_back(E);
+    notes.push_back(G);
+    notes.push_back(HC);
+    soundplayer->playNoteSequence(notes);
+    vector<Note> n2 = {E,G,B,D,F};
     
+    bool test=false;
     //run loop
     while (!done) {
         elapsed = SDL_GetTicks();
@@ -56,6 +69,11 @@ void RaindropGame::run(){
 			SDL_Delay(1000/100 - (elapsed-last)); //RESTRICT PLAYBACK TO 30 FRAMES A SECOND
         last = elapsed;
 
+        //this is just to test the start new sequen
+        if(last>20000 && !test){
+            soundplayer->startNewSequence(n2);
+            test=true;
+        }
         //events loop
         while (SDL_PollEvent(&event)){//checks events one at a time
 			switch( event.type ){
@@ -71,7 +89,7 @@ void RaindropGame::run(){
 						int x = event.button.x; int y = event.button.y;
 						//check to see if it is on click/draggable object
 						if (checkClickCup(x, y)) {
-                            soundplayer->playSound(objDragged->note);
+                            soundplayer->playSound(objDragged->note, 1);
                             pane->flashColor(objDragged->note);
                             checkPattern(objDragged->note);
 						}
@@ -214,11 +232,12 @@ void RaindropGame::checkPattern(Note note){
 
 int RaindropGame::updateThread(void *ptr){
     RaindropGame* game = (RaindropGame*)ptr;
-    
+
     //add drops if needed
     while ((int)game->drops.size() < game->numDrops && game->elapsed > game->lastDrop + game->minLatency) {
         int x = (rand()%20)*0.05*SCREENWIDTH;
         Drop *d = new Drop("Resources/drop.txt", PLAIN, x, game->gameSpeed);
+        cout<<"Drop at: "<<x<<endl;
         game->drops.insert(game->drops.end(), d);
         game->lastDrop = SDL_GetTicks();
     }

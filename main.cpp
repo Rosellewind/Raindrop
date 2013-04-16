@@ -26,10 +26,11 @@ using namespace std;
 
 int main(int argc, char **argv){
     Menu menu;
+    // RaindropGame game("Resources/game.txt",2);//init with settings
+    // game.run();
 
     //menu screen, pick level, settings
     int i = menu.run();
-
     //game screen
     switch(i)
     {
