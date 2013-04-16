@@ -22,8 +22,6 @@
 #include "SDL/SDL_thread.h"
 #endif
 
-
-
 #include <vector>
 #include "Drop.h"
 
