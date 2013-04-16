@@ -14,6 +14,13 @@ SDL_Surface *load_image(const char *c, Uint32 colorkey = 0)
 	}
 	return tmp;
 }
+void DrawIMG(SDL_Surface *img, SDL_Surface* des, int x, int y)
+{
+  SDL_Rect dest;
+  dest.x = x;
+  dest.y = y;
+  SDL_BlitSurface(img, NULL, des, &dest);
+}
 int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 {
 	running = true;
@@ -25,17 +32,32 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 	SDL_Surface* menus[NUMMENU]; //SURFACES INIT FOR THE MENU ITEMS
 	bool selected[NUMMENU] = {0,0}; //CHECK WHETHER WE HAVE OUR MOUSE OVER THE BUTTON
 	SDL_Color color[2] = {{255,255,255},{255,255,0}}; //COLORS FOR EACH MENU ITEM {{DEFAULT COLOR},{HIGHLIGHT COLOR}}
-	menus[0] = TTF_RenderText_Shaded(font,labels[0],color[0],{0,0,0}); //INIT FOR EACH NUMMENU
-	menus[1] = TTF_RenderText_Shaded(font,labels[1],color[0],{0,0,0});
+	menus[0] = TTF_RenderText_Shaded(font,labels[0],color[0],{60,60,60}); //INIT FOR EACH NUMMENU
+	menus[1] = TTF_RenderText_Shaded(font,labels[1],color[1],{60,60,60});
 	SDL_Rect pos[NUMMENU]; //POSITION OF WHERE THE BUTTONS ARE
 
-	//POSITION OF THE RECTANGULAR BUTTONS
+	Uint8 *Keys;
+	Keys = SDL_GetKeyState( 0 );
+	SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGBA(screen->format,0x00,0x00,0x00,0x00));
 	pos[0].x = screen->clip_rect.w/2 - menus[0]->clip_rect.w/2;
 	pos[0].y = screen->clip_rect.h/2 - menus[0]->clip_rect.h;
 	pos[1].x = screen->clip_rect.w/2 - menus[0]->clip_rect.w/2;
 	pos[1].y = screen->clip_rect.h/2 + menus[0]->clip_rect.h;
+	cout << pos[0].x << + ":" + pos[0].y << endl;
+	cout << pos[0].w << + ":" + pos[0].h << endl;
 
-	SDL_FillRect(screen,&screen->clip_rect,SDL_MapRGB(screen->format,0x00,0x00,0x00)); //FILL COLOR OF THE MENU BACKGROUND
+	SDL_Surface* tempScreen = SDL_CreateRGBSurface( SDL_SWSURFACE | SDL_SRCALPHA, SCREENWIDTH, SCREENHEIGHT, 32, 0xff000000,0x00ff0000,0x0000ff00,0x000000ff);
+	SDL_Surface* tempScreen2 = SDL_DisplayFormat( tempScreen );
+	SDL_FreeSurface( tempScreen );
+
+
+
+
+
+
+	//SDL_FillRect(tempScreen2,&tempScreen2->clip_rect,SDL_MapRGB(tempScreen2->format,0x00,0x00,0x00)); //FILL COLOR OF THE MENU BACKGROUND
+
+	int AlphaValue = 0;
 	SDL_Event event;
 
 	while(1) {
@@ -56,22 +78,29 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 							if(!selected[i]){
 								selected[i] = 1;
 								SDL_FreeSurface(menus[i]);
-								menus[i] = TTF_RenderText_Solid(font,labels[i],color[1]);
+								menus[i] = TTF_RenderText_Shaded(font,labels[i],color[1],{0,0,0});
+								cout << i << endl;
 							}
 						}
 						else{
 							if(selected[i]) {
 								selected[i] = 0;
 								SDL_FreeSurface(menus[i]);
-								menus[i] = TTF_RenderText_Solid(font,labels[i],color[0]);
+								menus[i] = TTF_RenderText_Shaded(font,labels[i],color[0],{0,0,0});
+								cout << i << endl;
 							}
 						}
 					} break;
 				case SDL_MOUSEBUTTONDOWN: //USER CLICKS PLAY RETURNS 0, EXIT 1
 					x = event.button.x;
 					y = event.button.y;
+					cout << x << + "::" + y << endl;
+					cout << pos[0].x << + ":" + pos[0].y << endl;
+					cout << pos[0].x+pos[0].w << + ":" + pos[0].y+pos[0].h << endl;
 					for(int i = 0; i < NUMMENU; i += 1) {
-						if(x>=pos[i].x && x<=pos[i].x+pos[i].w && y>=pos[i].y && y<=pos[i].y+pos[i].h) {
+						if(x>=pos[i].x && x<=pos[i].x+pos[i].w && y>=pos[i].y && y<=pos[i].y+pos[i].h)
+						{
+							cout << "clicked " + i << endl;
 							SDL_FreeSurface(menus[0]);
 							SDL_FreeSurface(menus[1]);
 							running = false;
@@ -82,18 +111,35 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 							return i;
 						}
 					} break;
-				case SDL_KEYDOWN: //USER HITS ESC
-					if(event.key.keysym.sym == SDLK_ESCAPE) {
+				case SDL_KEYDOWN:
+					if( Keys[SDLK_ESCAPE] )
+					{
 						SDL_FreeSurface(menus[0]);
 						SDL_FreeSurface(menus[1]);
 						running = false;
+						cout << "esc" << endl;
 						return 1;
-					}break;
+					}
+					break;
 			}
 		}
-		for(int i = 0; i < NUMMENU; i += 1) {
-			SDL_BlitSurface(menus[i],NULL,screen,&pos[i]);
+		SDL_FillRect( tempScreen2, 0, SDL_MapRGBA(tempScreen2->format, 60, 60, 60, 0) );
+		SDL_FillRect( screen, 0, SDL_MapRGBA(tempScreen2->format, 0, 0, 0, 0) );
+		if(AlphaValue < 255){
+			for(int i = 0; i < NUMMENU; i += 1) {
+				DrawIMG( menus[i], tempScreen2, pos[i].x, pos[i].y );
+				SDL_SetAlpha( tempScreen2, SDL_SRCALPHA, AlphaValue);
+				DrawIMG( tempScreen2, screen, 0, 0 );
+				AlphaValue++;
+			}
 		}
+		else{
+			for(int i = 0; i < NUMMENU; i += 1) {
+				DrawIMG( menus[i], tempScreen2, pos[i].x, pos[i].y );
+				DrawIMG( tempScreen2, screen, 0, 0 );
+			}
+		}
+		SDL_Flip(tempScreen2);
 		SDL_Flip(screen);
 		if(1000/30 > (SDL_GetTicks()-time)) {
 			SDL_Delay(1000/30 - (SDL_GetTicks()-time)); //30 FRAMES A SECOND

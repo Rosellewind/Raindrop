@@ -36,11 +36,7 @@ class Menu
 		Mix_Music *music;
 		Mix_Chunk *sound;
 		bool running;
-		int numDrops;
-		vector<Sprite*> dropSprites;
-		int show_menu(SDL_Surface* screen, TTF_Font* font, void *data);
-		int show_background(SDL_Surface* screen, void *data);
-		void clean_up();
-		int run();
+		int show_menu(SDL_Surface* screen, TTF_Font* font);
+		int show_background(SDL_Surface* screen);
 };
 #endif /* MENU_H_ */
