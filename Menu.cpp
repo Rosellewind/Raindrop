@@ -92,13 +92,15 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 		}
 		SDL_Flip(screen);
 		if(1000/30 > (SDL_GetTicks()-time)) {
-			SDL_Delay(1000/30 - (SDL_GetTicks()-time)); //RESTRICT PLAYBACK TO 30 FRAMES A SECOND
+			SDL_Delay(1000/30 - (SDL_GetTicks()-time)); //30 FRAMES A SECOND
 		}
 	}
 	return -111;
 }
 int Menu::show_background(SDL_Surface* screen, void *data)
 {
+	Sprite DROP = new Sprite("Resources/images/droplet7.png");
+
 	return 0;
 }
 int Menu::run()

@@ -41,7 +41,6 @@ void Sprite::update(Uint32 elapsed){
     float deltaT = (float)(next-last);
     last = next;
     if (deltaT > 0.0){
-        
         xVel += xAcc/deltaT;
         yVel += yAcc/deltaT;
         xPos += xVel/deltaT;
