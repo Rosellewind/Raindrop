@@ -18,7 +18,7 @@ public:
     //class methods 
     static vector<Cup*> initCups(int numCups, SDL_Surface*screen);
     static void checkCollisions(vector<Cup*> cups, vector<Drop*> drops);
-    ~Cup(); // JaredTS
+
 };
 
 #endif
