@@ -105,6 +105,7 @@ int Menu::run()
 {
 	//thread1 = NULL;
 	//thread2 = NULL;
+
 	screen = SDL_SetVideoMode(SCREENWIDTH,SCREENHEIGHT,32,SDL_SWSURFACE);
 	icon = load_image("Resources/images/icon.bmp"); //ICON IN THE WINDOW AND NAV BAR
 	SDL_WM_SetIcon(icon, NULL); //SETTING THE ICON
@@ -120,18 +121,18 @@ int Menu::run()
 
 	//thread2 = SDL_CreateThread( show_menu(screen,font, NULL), NULL ); //LOOP IS IN FUNCTION NOT IN RUN
 	//thread1 = SDL_CreateThread( menu_background(NULL), NULL ); //LOOP IS IN FUNCTION NOT IN RUN
+	//SDL_WaitThread(thread1, NULL);
+	//SDL_WaitThread(thread2, NULL);
 
-	SDL_WaitThread(thread1, NULL);
-	SDL_WaitThread(thread2, NULL);
 	if(i==1) {running = false;} //CALL FOR QUIT GAME OR QUIT MENU
 	if(i==-111) {} //SOMETHING WENT WRONG
-	SDL_FreeSurface(icon);
-	Mix_FreeMusic(music);
-	TTF_CloseFont(font);
+
     //SDL_KillThread( thread1 );
     //SDL_KillThread( thread2 );
+	TTF_CloseFont(font);
     SDL_FreeSurface( screen );
     SDL_FreeSurface( icon );
+    Mix_FreeMusic(music);
     Mix_CloseAudio();
     TTF_Quit();
     SDL_Quit();
