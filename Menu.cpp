@@ -25,8 +25,8 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 	SDL_Surface* menus[NUMMENU]; //SURFACES INIT FOR THE MENU ITEMS
 	bool selected[NUMMENU] = {0,0}; //CHECK WHETHER WE HAVE OUR MOUSE OVER THE BUTTON
 	SDL_Color color[2] = {{255,255,255},{255,255,0}}; //COLORS FOR EACH MENU ITEM {{DEFAULT COLOR},{HIGHLIGHT COLOR}}
-	menus[0] = TTF_RenderText_Solid(font,labels[0],color[0]); //INIT FOR EACH NUMMENU
-	menus[1] = TTF_RenderText_Solid(font,labels[1],color[0]);
+	menus[0] = TTF_RenderText_Shaded(font,labels[0],color[0],{0,0,0}); //INIT FOR EACH NUMMENU
+	menus[1] = TTF_RenderText_Shaded(font,labels[1],color[0],{0,0,0});
 	SDL_Rect pos[NUMMENU]; //POSITION OF WHERE THE BUTTONS ARE
 
 	//POSITION OF THE RECTANGULAR BUTTONS
@@ -75,6 +75,10 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 							SDL_FreeSurface(menus[0]);
 							SDL_FreeSurface(menus[1]);
 							running = false;
+							if(i==0){
+								Mix_PlayChannel(-1,sound,1);
+								SDL_Delay(1000);
+							}
 							return i;
 						}
 					} break;
@@ -99,7 +103,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 }
 int Menu::show_background(SDL_Surface* screen, void *data)
 {
-	Sprite DROP = new Sprite("Resources/images/droplet7.png");
+	//Sprite DROP = new Sprite("Resources/images/droplet7.png");
 
 	return 0;
 }
@@ -116,6 +120,7 @@ int Menu::run()
 	SDL_Init(SDL_INIT_VIDEO);
 	Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT,2,4096);
 	music = Mix_LoadMUS("Resources/sounds/menu_music.ogg");
+	sound = Mix_LoadWAV("Resources/sounds/confirm.ogg");
 	Mix_PlayMusic(music,-1);
 	font = TTF_OpenFont("Resources/fonts/Test.ttf",30);
 	running = false;

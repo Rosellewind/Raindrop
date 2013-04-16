@@ -34,6 +34,7 @@ class Menu
 		SDL_Surface *screen, *icon;
 		TTF_Font *font;
 		Mix_Music *music;
+		Mix_Chunk *sound;
 		bool running;
 		int numDrops;
 		vector<Sprite*> dropSprites;
