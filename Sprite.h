@@ -3,12 +3,14 @@
 
 #ifdef _WIN32
 #include "SDL/SDL.h"
+
 #elif __APPLE__
 #include <SDL/SDL.h>
 #include <SDL/SDL_main.h>
 #include <SDL_image/SDL_image.h>
 
 #elif __unix__
+#include "SDL/SDL.h"
 #endif
 
 #include "Animation.h"
@@ -39,7 +41,7 @@ public:
     bool checkCollisionByCenter(SDL_Rect rect1);
     void startDragging(int x, int y);
     void stopDragging();
-    ~Sprite();
+    virtual ~Sprite();
 };
 
 #endif

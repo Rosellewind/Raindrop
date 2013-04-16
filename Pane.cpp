@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include "Pane.h"
-////////
 #include <sstream>
 #include "Functions.h"
 
@@ -75,12 +74,12 @@ void Pane::draw(SDL_Surface *screen, Uint32 elapsed){
 }
 
 Pane::~Pane(){
-    for (int i = 0; i<staticText.size(); i++){
+    for (unsigned int i = 0; i<staticText.size(); i++){
         delete staticText[i];
     }
     if (pointsText) delete pointsText;
     if (levelText) delete levelText;
-    for (int i = 0; i < pools.size(); i++) {
+    for (unsigned int i = 0; i < pools.size(); i++) {
         ;//delete pools[i];
     }
 }

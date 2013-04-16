@@ -12,6 +12,7 @@ public:
     Drop(string fname, Type type, int x, int gameSpeed);
     void update(Uint32 elapsed);
     bool isAlive();
+    ~Drop(); //Important cleaning here -- JaredTS
 };
 
 #endif

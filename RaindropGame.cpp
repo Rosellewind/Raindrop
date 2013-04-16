@@ -16,7 +16,9 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     objDragged = NULL;
     level = 1;
     points = 0;
-    
+    elapsed = 0;
+    last = 0;
+    lastDrop = 0;
     //set background
     background = new Sprite("Resources/background.txt");
     backgrounds.insert(backgrounds.begin(), background);
@@ -109,17 +111,17 @@ void RaindropGame::run(){
         
         
         //draw background
-        for (int i = 0; i < backgrounds.size(); i++) {
+        for (unsigned int i = 0; i < backgrounds.size(); i++) {
             backgrounds[i]->draw(screen, elapsed);
         }
         
         //draw drops
-        for (int i = 0; i < drops.size(); i++) {
+        for (unsigned int i = 0; i < drops.size(); i++) {
             drops[i]->draw(screen, elapsed);
         }
         
         //draw cups
-        for (int i = 0; i < cups.size(); i++) {
+        for (unsigned int i = 0; i < cups.size(); i++) {
             cups[i]->draw(screen, elapsed);
         }
         
@@ -135,7 +137,7 @@ void RaindropGame::run(){
 void RaindropGame::setDraggedObject(int x, int y){
     bool found = 0;
     while (!found) {
-        for (int i = 0; i < cups.size(); i++) {
+        for (unsigned int i = 0; i < cups.size(); i++) {
             SDL_Rect cupRect = cups[i]->getRect();
             if( ( x > cupRect.x ) && ( x < cupRect.x + cupRect.w ) && ( y > cupRect.y ) && ( y < cupRect.y + cupRect.h ) ){
                 objDragged = cups[i];
@@ -149,7 +151,7 @@ void RaindropGame::setDraggedObject(int x, int y){
 }
 
 bool RaindropGame::checkClickCup(int x, int y){
-    for(int i = 0; i<cups.size();i++){
+    for(unsigned int i = 0; i<cups.size();i++){
         SDL_Rect cupRect = cups[i]->getRect();
         if( ( x > cupRect.x ) && ( x < cupRect.x + cupRect.w ) && ( y > cupRect.y ) && ( y < cupRect.y + cupRect.h ) )
             return 1;
@@ -184,10 +186,10 @@ void RaindropGame::checkPattern(Note note){
     notesClicked.push_back(objDragged->note);
     
     //log  the pattern and notesClicked
-    for (int i = 0; i < pattern.size(); i++)
+    for (unsigned int i = 0; i < pattern.size(); i++)
         cout<<pattern[i];
     cout<<endl;
-    for (int i = 0; i < notesClicked.size(); i++)
+    for (unsigned int i = 0; i < notesClicked.size(); i++)
         cout<<notesClicked[i];
     cout<<endl;
     
@@ -214,7 +216,7 @@ int RaindropGame::updateThread(void *ptr){
     RaindropGame* game = (RaindropGame*)ptr;
     
     //add drops if needed
-    while (game->drops.size() < game->numDrops && game->elapsed > game->lastDrop + game->minLatency) {
+    while ((int)game->drops.size() < game->numDrops && game->elapsed > game->lastDrop + game->minLatency) {
         int x = (rand()%20)*0.05*SCREENWIDTH;
         Drop *d = new Drop("Resources/drop.txt", PLAIN, x, game->gameSpeed);
         game->drops.insert(game->drops.end(), d);
@@ -231,17 +233,17 @@ int RaindropGame::updateThread(void *ptr){
     }//for all, for each, algorithms part
     
     //update background
-    for (int i = 0; i < game->backgrounds.size(); i++) {
+    for (unsigned int i = 0; i < game->backgrounds.size(); i++) {
         game->backgrounds[i]->update(game->elapsed);
     }
     
     //update drops
-    for (int i = 0; i < game->drops.size(); i++) {
+    for (unsigned int i = 0; i < game->drops.size(); i++) {
         game->drops[i]->update(game->elapsed);
     }
     
     //update cups
-    for (int i = 0; i < game->cups.size(); i++) {
+    for (unsigned int i = 0; i < game->cups.size(); i++) {
         game->cups[i]->update(game->elapsed);
     }
     return 0;
@@ -250,10 +252,10 @@ int RaindropGame::updateThread(void *ptr){
 RaindropGame::~RaindropGame(){
 //    if (upThread) SDL_KillThread(evtThread);
 
-    for (int i = 0; i<drops.size(); i++){
+    for (unsigned int i = 0; i<drops.size(); i++){
         delete drops[i];
     }
-    for (int i = 0; i<cups.size(); i++){
+    for (unsigned int i = 0; i<cups.size(); i++){
         delete cups[i];
     }
 }

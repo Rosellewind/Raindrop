@@ -11,6 +11,9 @@
 #include <SDL_image/SDL_image.h>
 
 #elif __unix__
+#include "SDL/SDL.h"
+#include "SDL/SDL_image.h"
+#define UINT32_MAX  (0xffffffff) //Linuc GCC bug -- JaredTS
 #endif
 
 #include <string>

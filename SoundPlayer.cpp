@@ -110,7 +110,7 @@ int SoundPlayer::sequenceThread(void *player){
 
 void SoundPlayer::cleanup(){
 	Mix_FreeMusic(music);
-	for(int i=0; i< sounds.size();i++){
+	for(unsigned int i=0; i< sounds.size();i++){
 		Mix_FreeChunk(sounds[i]);
 	}
 	Mix_Quit();

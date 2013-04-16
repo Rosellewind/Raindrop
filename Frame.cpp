@@ -8,7 +8,7 @@ Frame::Frame(string imageName, Uint32 newTime){
     time = newTime;
     image = IMG_Load(imageName.c_str());
     if (!image) cout<<"no image"<<endl;
-    
+    tag = 0;
     src.x = src.y = dest.x = dest.y = 0;
     src.w = dest.w = image->w;
     src.h = dest.h = image->h;
@@ -17,7 +17,7 @@ Frame::Frame(string imageName, Uint32 newTime){
 Frame::Frame(string imageName, int x, int y, int w, int h, Uint32 newTime){
     time = newTime;
     image = IMG_Load(imageName.c_str());
-    
+    tag = 0;
     src.x = x; src.y = y; dest.x = dest.y = 0;
     src.w = w; dest.w = w;
     src.h = h; dest.h = h;
@@ -28,7 +28,7 @@ Frame::Frame(string fname, int column, int row){
     string imageName;
     ifstream in(fname.c_str());
     in>>columns>>rows>>width>>height>>imageName;
-    
+    tag = 0;
     if (column < columns && row < rows) {
         int x = column * width;
         int y = row * height;

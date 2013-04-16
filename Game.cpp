@@ -29,7 +29,7 @@ void Game::run(){
     SDL_Delay(100);
     while (!done) {
         Uint32 elapsed = SDL_GetTicks();
-        for (int i = 0; i < sprites.size(); i++) {
+        for (unsigned int i = 0; i < sprites.size(); i++) {
             sprites[i]->update(elapsed);
             sprites[i]->draw(screen, elapsed);
         }
@@ -45,7 +45,7 @@ void Game::run(){
 Game::~Game(){
     SDL_FreeSurface(screen);
     screen = NULL;
-    for (int i = 0; i<sprites.size(); i++) {
+    for (unsigned int i = 0; i<sprites.size(); i++) {
         delete sprites[i];
     }
 }

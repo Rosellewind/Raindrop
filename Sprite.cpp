@@ -17,6 +17,7 @@ Sprite::Sprite(string fname,
     yAcc = newYAcc;
     last = SDL_GetTicks();
     offsetX = offsetY = 0;
+    isDragging = false; //Initialize -- JaredTS
 }
 
 Sprite::Sprite(int column, string fname, bool isLoop,
@@ -32,6 +33,7 @@ Sprite::Sprite(int column, string fname, bool isLoop,
     yAcc = newYAcc;
     last = SDL_GetTicks();
     offsetX = offsetY = 0;
+    isDragging = false; //Initialize -- JaredTS
 }
 
 void Sprite::update(Uint32 elapsed){

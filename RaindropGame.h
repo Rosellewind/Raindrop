@@ -12,6 +12,8 @@
 #include <SDL/SDL_thread.h>
 
 #elif __unix__
+#include "SDL/SDL.h"
+#include "SDL/SDL_thread.h"
 #endif
 
 #include <vector>
