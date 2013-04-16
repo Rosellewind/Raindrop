@@ -51,7 +51,7 @@ bool Animation::draw(SDL_Surface *screen, int x, int y, Uint32 elapsed){
     bool animate = true;
     if (totalTime == 0) totalTime = -1;
     Uint32 currentFrameTime = elapsed % totalTime;
-     for (int i = 0; i < frames.size(); i++) {
+     for (unsigned int i = 0; i < frames.size(); i++){			//Safer to use unsigned when comparing against sizes -- JaredTS
          if (frames[i]->getTime() > currentFrameTime){          //getTime gives 100, 200, etc
              frames[i]->draw(screen, x, y);
              if (!isLoop && i == frames.size()-1){
@@ -68,7 +68,7 @@ SDL_Rect Animation::getRect(){
 }
 
 Animation::~Animation(){
-    for (int i = 0; i<frames.size(); i++) {
+    for (unsigned int i = 0; i<frames.size(); i++) {			//Safer to use unsigned when comparing against sizes -- JaredTS
         delete frames[i];
     }
 }
