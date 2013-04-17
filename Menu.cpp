@@ -25,8 +25,8 @@ bool BSprite::SpriteExists(){
 }
 BSprite* BSprite::DRAW(SDL_Surface* buffer, int x, int y){
 	if(!SpriteExists()) {
-	 std::cout << "Failed to draw, Sprite not initialized!"<< std::endl;
-	 return this;
+		std::cout << "Failed to draw, Sprite not initialized!"<< std::endl;
+		return this;
 	}
 	SDL_Rect dstrect;
 	dstrect.x = x;
@@ -57,6 +57,7 @@ void Menu::DrawIMG(SDL_Surface *img, SDL_Surface* des, int x, int y){
 	SDL_BlitSurface(img, NULL, des, &dest);
 }
 int Menu::show_menu(SDL_Surface* screen, TTF_Font* font){
+	BSprite DROPLET = BSprite(1);
 	const int NUMMENU = 3; //NUMBER OF MENU ITEMS
 	const char* labels[NUMMENU] = {"Play","Settings","Exit"}; //LABELS FOR THE MENU ITEMS
 	SDL_Surface* menus[NUMMENU]; //SURFACES INIT FOR THE MENU ITEMS
