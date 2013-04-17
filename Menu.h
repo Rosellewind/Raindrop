@@ -29,14 +29,19 @@
 class Menu
 {
 	public:
-		int status;
+		Uint32 time;
+		int x,y,AlphaValue;
 		SDL_Thread *thread1, *thread2;
 		SDL_Surface *screen, *icon;
 		TTF_Font *font;
 		Mix_Music *music;
 		Mix_Chunk *sound;
-		bool running;
+		SDL_Event event;
+		//SDL_Surface* tempScreen2;
 		int show_menu(SDL_Surface* screen, TTF_Font* font);
 		int show_background(SDL_Surface* screen);
+		void DrawIMG(SDL_Surface *img, SDL_Surface* des, int x, int y);
+		int run();
+
 };
 #endif /* MENU_H_ */

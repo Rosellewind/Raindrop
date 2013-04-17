@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <string>
+#include <stdlib.h>
 #include "Menu.h"
 #include "Sprite.h"
 #include "Animation.h"
@@ -14,52 +15,38 @@ SDL_Surface *load_image(const char *c, Uint32 colorkey = 0)
 	}
 	return tmp;
 }
-void DrawIMG(SDL_Surface *img, SDL_Surface* des, int x, int y)
+void Menu::DrawIMG(SDL_Surface *img, SDL_Surface* des, int x, int y)
 {
-  SDL_Rect dest;
-  dest.x = x;
-  dest.y = y;
-  SDL_BlitSurface(img, NULL, des, &dest);
+	SDL_Rect dest;
+	dest.x = x;
+	dest.y = y;
+	SDL_BlitSurface(img, NULL, des, &dest);
 }
-int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
+int Menu::show_menu(SDL_Surface* screen, TTF_Font* font)
 {
-	running = true;
 	//show_background(screen, NULL); //need to thread this or make new class
-	Uint32 time;
-	int x, y;
-	const int NUMMENU = 2; //NUMBER OF MENU ITEMS
-	const char* labels[NUMMENU] = {"Play","Exit"}; //LABELS FOR THE MENU ITEMS
+	const int NUMMENU = 3; //NUMBER OF MENU ITEMS
+	const char* labels[NUMMENU] = {"Play","Settings","Exit"}; //LABELS FOR THE MENU ITEMS
 	SDL_Surface* menus[NUMMENU]; //SURFACES INIT FOR THE MENU ITEMS
-	bool selected[NUMMENU] = {0,0}; //CHECK WHETHER WE HAVE OUR MOUSE OVER THE BUTTON
-	SDL_Color color[2] = {{255,255,255},{255,255,0}}; //COLORS FOR EACH MENU ITEM {{DEFAULT COLOR},{HIGHLIGHT COLOR}}
-	menus[0] = TTF_RenderText_Shaded(font,labels[0],color[0],{60,60,60}); //INIT FOR EACH NUMMENU
-	menus[1] = TTF_RenderText_Shaded(font,labels[1],color[1],{60,60,60});
+	bool selected[NUMMENU] = {0,0,0}; //CHECK WHETHER WE HAVE OUR MOUSE OVER THE BUTTON
+	SDL_Color color[3] = {{255,255,255},{255,255,0},{60,60,60}}; //COLORS FOR EACH MENU ITEM {{DEFAULT COLOR},{HIGHLIGHT COLOR}}
 	SDL_Rect pos[NUMMENU]; //POSITION OF WHERE THE BUTTONS ARE
-
 	Uint8 *Keys;
 	Keys = SDL_GetKeyState( 0 );
-	SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGBA(screen->format,0x00,0x00,0x00,0x00));
-	pos[0].x = screen->clip_rect.w/2 - menus[0]->clip_rect.w/2;
-	pos[0].y = screen->clip_rect.h/2 - menus[0]->clip_rect.h;
-	pos[1].x = screen->clip_rect.w/2 - menus[0]->clip_rect.w/2;
-	pos[1].y = screen->clip_rect.h/2 + menus[0]->clip_rect.h;
-	cout << pos[0].x << + ":" + pos[0].y << endl;
-	cout << pos[0].w << + ":" + pos[0].h << endl;
-
+	for(int i = 0; i < NUMMENU; i++) menus[i] = TTF_RenderText_Shaded(font,labels[i],color[0],color[2]);
+	for(int i = 0; i < NUMMENU; i++) //SHOULD MAKE BUTTON CLASS AT SOME POINT
+	{
+		if(i == 0) pos[i].y = screen->clip_rect.h/2 - menus[i]->clip_rect.h;
+		else pos[i].y = pos[i-1].y + menus[i]->clip_rect.h + 5; //5 Is spacing between menu items
+		pos[i].x = screen->clip_rect.w/2 - menus[i]->clip_rect.w/2;
+		pos[i].w = menus[i]->clip_rect.w;
+		pos[i].h = menus[i]->clip_rect.h;
+	}
 	SDL_Surface* tempScreen = SDL_CreateRGBSurface( SDL_SWSURFACE | SDL_SRCALPHA, SCREENWIDTH, SCREENHEIGHT, 32, 0xff000000,0x00ff0000,0x0000ff00,0x000000ff);
 	SDL_Surface* tempScreen2 = SDL_DisplayFormat( tempScreen );
 	SDL_FreeSurface( tempScreen );
-
-
-
-
-
-
-	//SDL_FillRect(tempScreen2,&tempScreen2->clip_rect,SDL_MapRGB(tempScreen2->format,0x00,0x00,0x00)); //FILL COLOR OF THE MENU BACKGROUND
-
-	int AlphaValue = 0;
-	SDL_Event event;
-
+	AlphaValue = 0;
+	int FadeValue = 2;
 	while(1) {
 		time = SDL_GetTicks();
 		while(SDL_PollEvent(&event)) {
@@ -67,7 +54,6 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 				case SDL_QUIT:
 					SDL_FreeSurface(menus[0]);
 					SDL_FreeSurface(menus[1]);
-					running = false;
 					return -1;
 					break;
 				case SDL_MOUSEMOTION: //USER HOVERS OVER THE BUTTON
@@ -78,32 +64,25 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 							if(!selected[i]){
 								selected[i] = 1;
 								SDL_FreeSurface(menus[i]);
-								menus[i] = TTF_RenderText_Shaded(font,labels[i],color[1],{0,0,0});
-								cout << i << endl;
+								menus[i] = TTF_RenderText_Shaded(font,labels[i],color[1],color[2]);
 							}
 						}
 						else{
 							if(selected[i]) {
 								selected[i] = 0;
 								SDL_FreeSurface(menus[i]);
-								menus[i] = TTF_RenderText_Shaded(font,labels[i],color[0],{0,0,0});
-								cout << i << endl;
+								menus[i] = TTF_RenderText_Shaded(font,labels[i],color[0],color[2]);
 							}
 						}
 					} break;
-				case SDL_MOUSEBUTTONDOWN: //USER CLICKS PLAY RETURNS 0, EXIT 1
+				case SDL_MOUSEBUTTONDOWN: //USER CLICKS PLAY RETURNS 0, SETTINGS 1, EXIT 3
 					x = event.button.x;
 					y = event.button.y;
-					cout << x << + "::" + y << endl;
-					cout << pos[0].x << + ":" + pos[0].y << endl;
-					cout << pos[0].x+pos[0].w << + ":" + pos[0].y+pos[0].h << endl;
 					for(int i = 0; i < NUMMENU; i += 1) {
 						if(x>=pos[i].x && x<=pos[i].x+pos[i].w && y>=pos[i].y && y<=pos[i].y+pos[i].h)
 						{
-							cout << "clicked " + i << endl;
 							SDL_FreeSurface(menus[0]);
 							SDL_FreeSurface(menus[1]);
-							running = false;
 							if(i==0){
 								Mix_PlayChannel(-1,sound,1);
 								SDL_Delay(1000);
@@ -116,8 +95,6 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 					{
 						SDL_FreeSurface(menus[0]);
 						SDL_FreeSurface(menus[1]);
-						running = false;
-						cout << "esc" << endl;
 						return 1;
 					}
 					break;
@@ -125,21 +102,10 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 		}
 		SDL_FillRect( tempScreen2, 0, SDL_MapRGBA(tempScreen2->format, 60, 60, 60, 0) );
 		SDL_FillRect( screen, 0, SDL_MapRGBA(tempScreen2->format, 0, 0, 0, 0) );
-		if(AlphaValue < 255){
-			for(int i = 0; i < NUMMENU; i += 1) {
-				DrawIMG( menus[i], tempScreen2, pos[i].x, pos[i].y );
-				SDL_SetAlpha( tempScreen2, SDL_SRCALPHA, AlphaValue);
-				DrawIMG( tempScreen2, screen, 0, 0 );
-				AlphaValue++;
-			}
-		}
-		else{
-			for(int i = 0; i < NUMMENU; i += 1) {
-				DrawIMG( menus[i], tempScreen2, pos[i].x, pos[i].y );
-				DrawIMG( tempScreen2, screen, 0, 0 );
-			}
-		}
-		SDL_Flip(tempScreen2);
+		if((AlphaValue + FadeValue) > 0 && (AlphaValue + FadeValue) < 255) AlphaValue = AlphaValue + FadeValue;
+		for(int i = 0; i < NUMMENU; i += 1) DrawIMG( menus[i], tempScreen2, pos[i].x, pos[i].y ); //DRAW ALL BUTTONS BEFORE FADE
+		DrawIMG( tempScreen2, screen, 0, 0 );
+		SDL_SetAlpha( tempScreen2, SDL_SRCALPHA, AlphaValue);
 		SDL_Flip(screen);
 		if(1000/30 > (SDL_GetTicks()-time)) {
 			SDL_Delay(1000/30 - (SDL_GetTicks()-time)); //30 FRAMES A SECOND
@@ -147,7 +113,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 	}
 	return -111;
 }
-int Menu::show_background(SDL_Surface* screen, void *data)
+int Menu::show_background(SDL_Surface* screen)
 {
 	//Sprite DROP = new Sprite("Resources/images/droplet7.png");
 
@@ -157,7 +123,6 @@ int Menu::run()
 {
 	//thread1 = NULL;
 	//thread2 = NULL;
-
 	screen = SDL_SetVideoMode(SCREENWIDTH,SCREENHEIGHT,32,SDL_SWSURFACE);
 	icon = load_image("Resources/images/icon.bmp"); //ICON IN THE WINDOW AND NAV BAR
 	SDL_WM_SetIcon(icon, NULL); //SETTING THE ICON
@@ -169,17 +134,11 @@ int Menu::run()
 	sound = Mix_LoadWAV("Resources/sounds/confirm.ogg");
 	Mix_PlayMusic(music,-1);
 	font = TTF_OpenFont("Resources/fonts/Test.ttf",30);
-	running = false;
-	int i = show_menu(screen,font, NULL);
-
+	int i = show_menu(screen,font);
 	//thread2 = SDL_CreateThread( show_menu(screen,font, NULL), NULL ); //LOOP IS IN FUNCTION NOT IN RUN
 	//thread1 = SDL_CreateThread( menu_background(NULL), NULL ); //LOOP IS IN FUNCTION NOT IN RUN
 	//SDL_WaitThread(thread1, NULL);
 	//SDL_WaitThread(thread2, NULL);
-
-	if(i==1) {running = false;} //CALL FOR QUIT GAME OR QUIT MENU
-	if(i==-111) {} //SOMETHING WENT WRONG
-
     //SDL_KillThread( thread1 );
     //SDL_KillThread( thread2 );
 	TTF_CloseFont(font);
@@ -189,6 +148,7 @@ int Menu::run()
     Mix_CloseAudio();
     TTF_Quit();
     SDL_Quit();
+    atexit(SDL_Quit);
 	return i;
 }
 
