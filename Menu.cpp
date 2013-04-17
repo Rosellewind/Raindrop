@@ -1,30 +1,62 @@
-
 #include <iostream>
 #include <string>
 #include <stdlib.h>
 #include "Menu.h"
-#include "Sprite.h"
+#include "Drop.h"
 #include "Animation.h"
+#include "Functions.h"
 
 using namespace std;
-SDL_Surface *load_image(const char *c, Uint32 colorkey = 0)
-{
+BSprite::BSprite(int num){
+    sprite = NULL;
+    xPos = 0.0; xVel = 0.0;
+    yPos = 0.0; yVel = 0.0;
+	string filename = "Resources/images/droplet"+NTS(num)+".png";
+    SDL_Surface *temp = IMG_Load(filename.c_str());
+    sprite = SDL_DisplayFormat(temp);
+    SDL_FreeSurface(temp);
+    if(sprite == NULL) {
+        std::cout << "failed to load sprite " << filename << std::endl;
+        loaded = false;
+    }
+}
+bool BSprite::SpriteExists(){
+    return loaded;
+}
+BSprite* BSprite::DRAW(SDL_Surface* buffer, int x, int y){
+	if(!SpriteExists()) {
+	 std::cout << "Failed to draw, Sprite not initialized!"<< std::endl;
+	 return this;
+	}
+	SDL_Rect dstrect;
+	dstrect.x = x;
+	dstrect.y = y;
+	SDL_BlitSurface(sprite, NULL, buffer, &dstrect);
+	return this;
+}
+BSprite::~BSprite(){
+    DESTROY();
+}
+BSprite* BSprite::DESTROY(){
+    if(SpriteExists()) {
+        SDL_FreeSurface(sprite);
+    }
+    return this;
+}
+SDL_Surface *load_image(const char *c, Uint32 colorkey = 0){
 	SDL_Surface *tmp = IMG_Load(c);
 	if(colorkey != 0) {
 		SDL_SetColorKey(tmp, SDL_SRCCOLORKEY, colorkey);
 	}
 	return tmp;
 }
-void Menu::DrawIMG(SDL_Surface *img, SDL_Surface* des, int x, int y)
-{
+void Menu::DrawIMG(SDL_Surface *img, SDL_Surface* des, int x, int y){
 	SDL_Rect dest;
 	dest.x = x;
 	dest.y = y;
 	SDL_BlitSurface(img, NULL, des, &dest);
 }
-int Menu::show_menu(SDL_Surface* screen, TTF_Font* font)
-{
-	//show_background(screen, NULL); //need to thread this or make new class
+int Menu::show_menu(SDL_Surface* screen, TTF_Font* font){
 	const int NUMMENU = 3; //NUMBER OF MENU ITEMS
 	const char* labels[NUMMENU] = {"Play","Settings","Exit"}; //LABELS FOR THE MENU ITEMS
 	SDL_Surface* menus[NUMMENU]; //SURFACES INIT FOR THE MENU ITEMS
@@ -34,7 +66,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font)
 	Uint8 *Keys;
 	Keys = SDL_GetKeyState( 0 );
 	for(int i = 0; i < NUMMENU; i++) menus[i] = TTF_RenderText_Shaded(font,labels[i],color[0],color[2]);
-	for(int i = 0; i < NUMMENU; i++) //SHOULD MAKE BUTTON CLASS AT SOME POINT
+	for(int i = 0; i < NUMMENU; i++) //SHOULD MAKE BUTTON CLASS AT SOME POINT IF TIME
 	{
 		if(i == 0) pos[i].y = screen->clip_rect.h/2 - menus[i]->clip_rect.h;
 		else pos[i].y = pos[i-1].y + menus[i]->clip_rect.h + 5; //5 Is spacing between menu items

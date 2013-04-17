@@ -24,8 +24,6 @@
 #include <climits>
 
 using namespace std;
-
-
 class Frame{
 
     int tag;
