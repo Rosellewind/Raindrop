@@ -39,6 +39,12 @@ void Cup::raiseNote(){
 void Cup::dragTo(int x, int y){
     xPos = (float)x - offsetX;
 	yPos = topOfCup;
+    int w = getRect().w;
+    cout<<"xPos: "<<xPos<<endl;
+    if (xPos < 0)
+        xPos = 0;
+    else if (xPos > SCREENWIDTH-w)
+        xPos = SCREENWIDTH - w;
 }
 
 //class methods

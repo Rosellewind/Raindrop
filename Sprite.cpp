@@ -65,6 +65,7 @@ bool Sprite::isAlive(){
 }
 
 void Sprite::dragTo(int x, int y){
+
     xPos = (float)x - offsetX;
 	yPos = (float)y - offsetY;
 }
