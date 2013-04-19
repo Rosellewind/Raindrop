@@ -5,10 +5,10 @@
 #include "Animation.h"
 
 Sprite::Sprite(string fname,
-                  float newXPos, float newYPos,
-                  float newXVel, float newYVel,
-                  float newXAcc, float newYAcc){
-        animation = new Animation(fname.c_str());
+               float newXPos, float newYPos,
+               float newXVel, float newYVel,
+               float newXAcc, float newYAcc){
+    animation = new Animation(fname.c_str());
     xPos = newXPos;
     yPos = newYPos;
     xVel = newXVel;
@@ -17,6 +17,7 @@ Sprite::Sprite(string fname,
     yAcc = newYAcc;
     last = SDL_GetTicks();
     offsetX = offsetY = 0;
+    isDragging = false; //Initialize -- JaredTS
 }
 
 Sprite::Sprite(int column, string fname, bool isLoop,
@@ -32,6 +33,7 @@ Sprite::Sprite(int column, string fname, bool isLoop,
     yAcc = newYAcc;
     last = SDL_GetTicks();
     offsetX = offsetY = 0;
+    isDragging = false; //Initialize -- JaredTS
 }
 
 void Sprite::update(Uint32 elapsed){
@@ -39,7 +41,6 @@ void Sprite::update(Uint32 elapsed){
     float deltaT = (float)(next-last);
     last = next;
     if (deltaT > 0.0){
-        
         xVel += xAcc/deltaT;
         yVel += yAcc/deltaT;
         xPos += xVel/deltaT;
@@ -91,7 +92,7 @@ void Sprite::stopDragging(){
 }
 
 Sprite::~Sprite(){
-    if (animation) 
+    if (animation)
         delete animation;
 }
 

@@ -1,45 +1,85 @@
-
 #include <iostream>
 #include <string>
- 
+#include <stdlib.h>
 #include "Menu.h"
-#include "Sprite.h"
+#include "Drop.h"
 #include "Animation.h"
+#include "Functions.h"
 
-//Test change for repo
 using namespace std;
-SDL_Surface *load_image(const char *c, Uint32 colorkey = 0)
-{
+BSprite::BSprite(int num){
+    sprite = NULL;
+    xPos = 0.0; xVel = 0.0;
+    yPos = 0.0; yVel = 0.0;
+	string filename = "Resources/images/droplet"+NTS(num)+".png";
+    SDL_Surface *temp = IMG_Load(filename.c_str());
+    sprite = SDL_DisplayFormat(temp);
+    SDL_FreeSurface(temp);
+    if(sprite == NULL) {
+        std::cout << "failed to load sprite " << filename << std::endl;
+        loaded = false;
+    }
+}
+bool BSprite::SpriteExists(){
+    return loaded;
+}
+BSprite* BSprite::DRAW(SDL_Surface* buffer, int x, int y){
+	if(!SpriteExists()) {
+		std::cout << "Failed to draw, Sprite not initialized!"<< std::endl;
+		return this;
+	}
+	SDL_Rect dstrect;
+	dstrect.x = x;
+	dstrect.y = y;
+	SDL_BlitSurface(sprite, NULL, buffer, &dstrect);
+	return this;
+}
+BSprite::~BSprite(){
+    DESTROY();
+}
+BSprite* BSprite::DESTROY(){
+    if(SpriteExists()) {
+        SDL_FreeSurface(sprite);
+    }
+    return this;
+}
+SDL_Surface *load_image(const char *c, Uint32 colorkey = 0){
 	SDL_Surface *tmp = IMG_Load(c);
 	if(colorkey != 0) {
 		SDL_SetColorKey(tmp, SDL_SRCCOLORKEY, colorkey);
 	}
 	return tmp;
 }
-int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
-{
-	running = true;
-	//show_background(screen, NULL); //need to thread this or make new class
-	Uint32 time;
-	int x, y;
-	const int NUMMENU = 2; //NUMBER OF MENU ITEMS
-	const char* labels[NUMMENU] = {"Play","Exit"}; //LABELS FOR THE MENU ITEMS
+void Menu::DrawIMG(SDL_Surface *img, SDL_Surface* des, int x, int y){
+	SDL_Rect dest;
+	dest.x = x;
+	dest.y = y;
+	SDL_BlitSurface(img, NULL, des, &dest);
+}
+int Menu::show_menu(SDL_Surface* screen, TTF_Font* font){
+	BSprite DROPLET = BSprite(1);
+	const int NUMMENU = 3; //NUMBER OF MENU ITEMS
+	const char* labels[NUMMENU] = {"Play","Settings","Exit"}; //LABELS FOR THE MENU ITEMS
 	SDL_Surface* menus[NUMMENU]; //SURFACES INIT FOR THE MENU ITEMS
-	bool selected[NUMMENU] = {0,0}; //CHECK WHETHER WE HAVE OUR MOUSE OVER THE BUTTON
-	SDL_Color color[2] = {{255,255,255},{255,255,0}}; //COLORS FOR EACH MENU ITEM {{DEFAULT COLOR},{HIGHLIGHT COLOR}}
-	menus[0] = TTF_RenderText_Solid(font,labels[0],color[0]); //INIT FOR EACH NUMMENU
-	menus[1] = TTF_RenderText_Solid(font,labels[1],color[0]);
+	bool selected[NUMMENU] = {0,0,0}; //CHECK WHETHER WE HAVE OUR MOUSE OVER THE BUTTON
+	SDL_Color color[3] = {{255,255,255},{255,255,0},{60,60,60}}; //COLORS FOR EACH MENU ITEM {{DEFAULT COLOR},{HIGHLIGHT COLOR}}
 	SDL_Rect pos[NUMMENU]; //POSITION OF WHERE THE BUTTONS ARE
-
-	//POSITION OF THE RECTANGULAR BUTTONS
-	pos[0].x = screen->clip_rect.w/2 - menus[0]->clip_rect.w/2;
-	pos[0].y = screen->clip_rect.h/2 - menus[0]->clip_rect.h;
-	pos[1].x = screen->clip_rect.w/2 - menus[0]->clip_rect.w/2;
-	pos[1].y = screen->clip_rect.h/2 + menus[0]->clip_rect.h;
-
-	SDL_FillRect(screen,&screen->clip_rect,SDL_MapRGB(screen->format,0x00,0x00,0x00)); //FILL COLOR OF THE MENU BACKGROUND
-	SDL_Event event;
-
+	Uint8 *Keys;
+	Keys = SDL_GetKeyState( 0 );
+	for(int i = 0; i < NUMMENU; i++) menus[i] = TTF_RenderText_Shaded(font,labels[i],color[0],color[2]);
+	for(int i = 0; i < NUMMENU; i++) //SHOULD MAKE BUTTON CLASS AT SOME POINT IF TIME
+	{
+		if(i == 0) pos[i].y = screen->clip_rect.h/2 - menus[i]->clip_rect.h;
+		else pos[i].y = pos[i-1].y + menus[i]->clip_rect.h + 5; //5 Is spacing between menu items
+		pos[i].x = screen->clip_rect.w/2 - menus[i]->clip_rect.w/2;
+		pos[i].w = menus[i]->clip_rect.w;
+		pos[i].h = menus[i]->clip_rect.h;
+	}
+	SDL_Surface* tempScreen = SDL_CreateRGBSurface( SDL_SWSURFACE | SDL_SRCALPHA, SCREENWIDTH, SCREENHEIGHT, 32, 0xff000000,0x00ff0000,0x0000ff00,0x000000ff);
+	SDL_Surface* tempScreen2 = SDL_DisplayFormat( tempScreen );
+	SDL_FreeSurface( tempScreen );
+	AlphaValue = 0;
+	int FadeValue = 2;
 	while(1) {
 		time = SDL_GetTicks();
 		while(SDL_PollEvent(&event)) {
@@ -47,8 +87,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 				case SDL_QUIT:
 					SDL_FreeSurface(menus[0]);
 					SDL_FreeSurface(menus[1]);
-					running = false;
-					status = -1;
+					return -1;
 					break;
 				case SDL_MOUSEMOTION: //USER HOVERS OVER THE BUTTON
 					x = event.motion.x;
@@ -58,104 +97,65 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 							if(!selected[i]){
 								selected[i] = 1;
 								SDL_FreeSurface(menus[i]);
-								menus[i] = TTF_RenderText_Solid(font,labels[i],color[1]);
+								menus[i] = TTF_RenderText_Shaded(font,labels[i],color[1],color[2]);
 							}
 						}
 						else{
 							if(selected[i]) {
 								selected[i] = 0;
 								SDL_FreeSurface(menus[i]);
-								menus[i] = TTF_RenderText_Solid(font,labels[i],color[0]);
+								menus[i] = TTF_RenderText_Shaded(font,labels[i],color[0],color[2]);
 							}
 						}
 					} break;
-				case SDL_MOUSEBUTTONDOWN: //USER CLICKS MENU BUTTON
+				case SDL_MOUSEBUTTONDOWN: //USER CLICKS PLAY RETURNS 0, SETTINGS 1, EXIT 3
 					x = event.button.x;
 					y = event.button.y;
 					for(int i = 0; i < NUMMENU; i += 1) {
-						if(x>=pos[i].x && x<=pos[i].x+pos[i].w && y>=pos[i].y && y<=pos[i].y+pos[i].h) {
+						if(x>=pos[i].x && x<=pos[i].x+pos[i].w && y>=pos[i].y && y<=pos[i].y+pos[i].h)
+						{
 							SDL_FreeSurface(menus[0]);
 							SDL_FreeSurface(menus[1]);
-							running = false;
-							status = i;
+							if(i==0){
+								Mix_PlayChannel(-1,sound,1);
+								SDL_Delay(1000);
+							}
+							return i;
 						}
 					} break;
-				case SDL_KEYDOWN: //USER HITS ESC
-					if(event.key.keysym.sym == SDLK_ESCAPE) {
+				case SDL_KEYDOWN:
+					if( Keys[SDLK_ESCAPE] )
+					{
 						SDL_FreeSurface(menus[0]);
 						SDL_FreeSurface(menus[1]);
-						running = false;
-						status = -1;
-					}break;
+						return 1;
+					}
+					break;
 			}
 		}
-		for(int i = 0; i < NUMMENU; i += 1) {
-			SDL_BlitSurface(menus[i],NULL,screen,&pos[i]);
-		}
+		SDL_FillRect( tempScreen2, 0, SDL_MapRGBA(tempScreen2->format, 60, 60, 60, 0) );
+		SDL_FillRect( screen, 0, SDL_MapRGBA(tempScreen2->format, 0, 0, 0, 0) );
+		if((AlphaValue + FadeValue) > 0 && (AlphaValue + FadeValue) < 255) AlphaValue = AlphaValue + FadeValue;
+		for(int i = 0; i < NUMMENU; i += 1) DrawIMG( menus[i], tempScreen2, pos[i].x, pos[i].y ); //DRAW ALL BUTTONS BEFORE FADE
+		DrawIMG( tempScreen2, screen, 0, 0 );
+		SDL_SetAlpha( tempScreen2, SDL_SRCALPHA, AlphaValue);
 		SDL_Flip(screen);
 		if(1000/30 > (SDL_GetTicks()-time)) {
-			SDL_Delay(1000/30 - (SDL_GetTicks()-time)); //RESTRICT PLAYBACK TO 30 FRAMES A SECOND
+			SDL_Delay(1000/30 - (SDL_GetTicks()-time)); //30 FRAMES A SECOND
 		}
 	}
-	status = -111;
-	return status;
+	return -111;
 }
-int Menu::show_background(SDL_Surface* screen, void *data)
+int Menu::show_background(SDL_Surface* screen)
 {
-	SDL_Surface *dropSprite[7];
-	//SDL_Rect dropletPos[7];
-	Uint32 now, last;
-
-	dropSprite[0] = load_image("resources/images/droplet1.png");
-	dropSprite[1] = load_image("resources/images/droplet2.png");
-	dropSprite[2] = load_image("resources/images/droplet3.png");
-	dropSprite[3] = load_image("resources/images/droplet4.png");
-	dropSprite[4] = load_image("resources/images/droplet5.png");
-	dropSprite[5] = load_image("resources/images/droplet6.png");
-	dropSprite[6] = load_image("resources/images/droplet7.png");
-
-//	while(running)
-//	{
-//		now = SDL_GetTicks(); // GRAB TIMESTAMP NOW
-//		last = now; //LAST DROP WAS JUST NOW
-//		numDrops = dropSprites;
-//
-//        while (dropSprites.size() < numDrops && now > last + minLatency) {
-//            Drop *d = new Drop;
-//            int x = (rand()%20)*0.05*SCREENWIDTH;
-//            d->init("Resources/drop.txt", PLAIN, x, gameSpeed);
-//            dropSprites.insert(drops.end(), d);
-//            last = SDL_GetTicks();
-//        }
-//
-//        //erase drops that are going offscreen
-//        for (int i = (int)dropSprites.size()-1; i >= 0; i--) {
-//            if (dropSprites[i]->isAlive() == 0) {
-//                Drop *d = dropSprites[i];
-//                dropSprites.erase(drops.begin()+i);
-//                delete d;
-//            }
-//        }
-//        //update drops
-//        for (int i = 0; i < drops.size(); i++) {
-//        	dropSprites[i]->update(elapsed);
-//            dropSprites[i]->draw(screen, elapsed);
-//        }
-//	}
+	//Sprite DROP = new Sprite("Resources/images/droplet7.png");
+    
 	return 0;
-}
-void Menu::clean_up()
-{
-    SDL_KillThread( thread1 );
-    SDL_KillThread( thread2 );
-    SDL_FreeSurface( screen );
-    SDL_FreeSurface( icon );
-    SDL_Quit();
 }
 int Menu::run()
 {
-	thread1 = NULL;
-	thread2 = NULL;
+	//thread1 = NULL;
+	//thread2 = NULL;
 	screen = SDL_SetVideoMode(SCREENWIDTH,SCREENHEIGHT,32,SDL_SWSURFACE);
 	icon = load_image("Resources/images/icon.bmp"); //ICON IN THE WINDOW AND NAV BAR
 	SDL_WM_SetIcon(icon, NULL); //SETTING THE ICON
@@ -164,24 +164,24 @@ int Menu::run()
 	SDL_Init(SDL_INIT_VIDEO);
 	Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT,2,4096);
 	music = Mix_LoadMUS("Resources/sounds/menu_music.ogg");
+	sound = Mix_LoadWAV("Resources/sounds/confirm.ogg");
 	Mix_PlayMusic(music,-1);
 	font = TTF_OpenFont("Resources/fonts/Test.ttf",30);
-	running = false;
-	show_menu(screen,font, NULL);
-
+	int i = show_menu(screen,font);
 	//thread2 = SDL_CreateThread( show_menu(screen,font, NULL), NULL ); //LOOP IS IN FUNCTION NOT IN RUN
 	//thread1 = SDL_CreateThread( menu_background(NULL), NULL ); //LOOP IS IN FUNCTION NOT IN RUN
-
-	SDL_WaitThread(thread1, NULL);
-	SDL_WaitThread(thread2, NULL);
-	if(status==1) {running = false;} //CALL FOR QUIT GAME OR QUIT MENU
-	if(status==-111) {} //SOMETHING WENT WRONG
-	SDL_FreeSurface(icon);
-	Mix_FreeMusic(music);
-	Mix_CloseAudio();
+	//SDL_WaitThread(thread1, NULL);
+	//SDL_WaitThread(thread2, NULL);
+    //SDL_KillThread( thread1 );
+    //SDL_KillThread( thread2 );
 	TTF_CloseFont(font);
-	TTF_Quit();
-	clean_up();
-	return status;
+    SDL_FreeSurface( screen );
+    SDL_FreeSurface( icon );
+    Mix_FreeMusic(music);
+    Mix_CloseAudio();
+    TTF_Quit();
+    SDL_Quit();
+    atexit(SDL_Quit);
+	return i;
 }
 

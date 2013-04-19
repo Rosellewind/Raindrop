@@ -8,6 +8,7 @@
 #include <SDL/SDL_main.h>
 
 #elif __unix__
+#include "SDL/SDL.h"
 #endif
 
 #include <vector>

@@ -16,7 +16,7 @@ Game::Game(string fname){
     //init sdl
     SDL_Init(SDL_INIT_EVERYTHING);
     screen = SDL_SetVideoMode(SCREENWIDTH, SCREENHEIGHT, 16, SDL_ANYFORMAT|SDL_HWSURFACE|SDL_DOUBLEBUF);
-
+    
     //set title
     in.open(fname.c_str());
     getline(in, title);
@@ -29,7 +29,7 @@ void Game::run(){
     SDL_Delay(100);
     while (!done) {
         Uint32 elapsed = SDL_GetTicks();
-        for (int i = 0; i < sprites.size(); i++) {
+        for (unsigned int i = 0; i < sprites.size(); i++) {
             sprites[i]->update(elapsed);
             sprites[i]->draw(screen, elapsed);
         }
@@ -45,7 +45,7 @@ void Game::run(){
 Game::~Game(){
     SDL_FreeSurface(screen);
     screen = NULL;
-    for (int i = 0; i<sprites.size(); i++) {
+    for (unsigned int i = 0; i<sprites.size(); i++) {
         delete sprites[i];
     }
 }

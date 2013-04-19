@@ -43,9 +43,17 @@ void Cup::dragTo(int x, int y){
 
 //class methods
 vector<Cup*> Cup::initCups(int numCups, SDL_Surface *screen){
+    vector<int> xtaken;
     vector<Cup*> cups(numCups);
     for (int i = 0; i<numCups; i++) {
         int x = (rand()%10)*0.1*SCREENWIDTH;
+        for (int n = 0; n<xtaken.size(); n++){
+            if(xtaken[n] == x){
+                i--;
+                break;
+            }
+        }
+        xtaken.push_back(x);
         Cup *c = new Cup("Resources/cups.txt", LC, x);
         cups[i] = c;
     }
@@ -53,13 +61,13 @@ vector<Cup*> Cup::initCups(int numCups, SDL_Surface *screen){
 }
 
 void Cup::checkCollisions(vector<Cup*> cups, vector<Drop*> drops){
-    for (int i = 0; i < drops.size(); i++) {
+    for (unsigned int i = 0; i < drops.size(); i++) {
         SDL_Rect dropRect = drops[i]->getRect();
         int topOfCups = 0;
-        if (cups.size()>0) 
+        if (cups.size()>0)
             topOfCups = cups[0]->topOfCup;
         if (dropRect.y + dropRect.h > topOfCups && !drops[i]->isCaught){
-            for (int j = 0; j < cups.size(); j++) {
+            for (unsigned int j = 0; j < cups.size(); j++) {
                 if (cups[j]->checkCollisionByCenter(dropRect)){
                     drops[i]->isCaught = 1;
                     cups[j]->raiseNote();

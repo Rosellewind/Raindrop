@@ -1,8 +1,10 @@
 #include "SoundPlayer.h"
 
-SoundPlayer::SoundPlayer(){
+SoundPlayer::SoundPlayer(Pane *newpane){
 	music = NULL;
 	sequenceCounter = 0;
+	done = false;
+	pane = newpane;
 }
 
 void SoundPlayer::init(int freq, int channels, int chunkSize){
@@ -17,14 +19,14 @@ void SoundPlayer::load_sounds(string fname){
 	int numSounds;
 	string musicName, soundName;
 	in.open(fname.c_str());
-
+    
 	//load music
 	in>>musicName;
 	music = Mix_LoadMUS(musicName.c_str());
 	if(music == NULL){
 		cout<<"Error loading music file "<<musicName<<endl;
 	}
-
+    
 	//load sounds
 	in>>numSounds;
 	cout<<"loading "<<numSounds<<" sounds..."<<endl;
@@ -63,10 +65,10 @@ void SoundPlayer::playSound(){
 	}
 }
 
-void SoundPlayer::playSound(Note n){
-	Mix_Volume(2,128);
+void SoundPlayer::playSound(Note n, int channel){
+	Mix_Volume(channel,128);
 	if(sounds.size()>n){
-		if(Mix_PlayChannel(2, sounds[n], 0) == -1){
+		if(Mix_PlayChannel(channel, sounds[n], 0) == -1){
 			cout<<"Error playing sound"<<endl;
 		}
 	}
@@ -83,25 +85,41 @@ void SoundPlayer::togglePauseMusic(){
 	}
 }
 
-void SoundPlayer::playNoteSequence(vector<Note> newNotes){
+void SoundPlayer::playNoteSequence(vector<Note> newNotes, int newDelay){
 	notes = newNotes;
 	sequenceCounter = 0;
-	SDL_Thread *thread;
+	done = false;
+	delay = newDelay;
 	thread = SDL_CreateThread(SoundPlayer::sequenceThread, this);
 	if(thread == NULL){
 		cout<<"Error starting thread..."<<endl;
 	}
-
+    
+}
+void SoundPlayer::startNewSequence(vector<Note> newNotes, int newDelay){
+	stopNoteSequence();
+	int status;
+	SDL_WaitThread(thread, &status);
+	playNoteSequence(newNotes, newDelay);
+}
+void SoundPlayer::stopNoteSequence(){
+	done=true;
 }
 
 int SoundPlayer::sequenceThread(void *player){
 	SoundPlayer *sp = (SoundPlayer*)player;
 	sp->playSound(sp->notes[sp->sequenceCounter]);
 	sp->sequenceCounter++;
-	while(sp->sequenceCounter<sp->notes.size()){
+    
+	while(!sp->done){
+		if(sp->sequenceCounter>=sp->notes.size()){
+			sp->sequenceCounter = 0;
+			SDL_Delay(sp->delay);
+		}
 		if(Mix_Playing(2)==0){
 			cout<<"Note: "<<sp->notes[sp->sequenceCounter]<<"  counter: "<<sp->sequenceCounter<<endl;
 			sp->playSound(sp->notes[sp->sequenceCounter]);
+			sp->pane->flashColor(sp->notes[sp->sequenceCounter]);
 			sp->sequenceCounter++;
 		}
 	}
@@ -110,7 +128,7 @@ int SoundPlayer::sequenceThread(void *player){
 
 void SoundPlayer::cleanup(){
 	Mix_FreeMusic(music);
-	for(int i=0; i< sounds.size();i++){
+	for(unsigned int i=0; i< sounds.size();i++){
 		Mix_FreeChunk(sounds[i]);
 	}
 	Mix_Quit();
@@ -118,5 +136,5 @@ void SoundPlayer::cleanup(){
 }
 
 SoundPlayer::~SoundPlayer(){
-    //put clean-up here?
+    cleanup();
 }

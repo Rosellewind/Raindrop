@@ -110,6 +110,7 @@
 		3DC6BE7916FE348300E682EB /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
 		3DC6BE9A16FE35B200E682EB /* SDL_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_image.framework; path = /Library/Frameworks/SDL_image.framework; sourceTree = "<absolute>"; };
 		3DC6BE9B16FE35B200E682EB /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
+		3DD654571721029C0047A8FC /* Functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +145,7 @@
 				3DC6BE7516FE348300E682EB /* SDLMain.h */,
 				3DC6BE7616FE348300E682EB /* SDLMain.m */,
 				3DC6BE7216FE348300E682EB /* ProtoGame.h */,
+				3DD654571721029C0047A8FC /* Functions.h */,
 				3DC6BE6516FE348300E682EB /* Frame.h */,
 				3DC6BE6416FE348300E682EB /* Frame.cpp */,
 				3DC6BE5416FE348300E682EB /* Animation.h */,

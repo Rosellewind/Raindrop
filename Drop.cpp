@@ -10,9 +10,9 @@ void Drop::update(Uint32 elapsed){
 }
 
 bool Drop::isAlive(){
-    if (isCaught) 
+    if (isCaught)
         return yPos < GAMESCREENHEIGHT - 60;
-    else 
+    else
         return yPos < GAMESCREENHEIGHT - 20;
 }
 
