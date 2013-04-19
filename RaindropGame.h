@@ -24,6 +24,7 @@
 #include "SoundPlayer.h"
 #include "Game.h"
 #include "Pane.h"
+#include "LevelManager.h"
 
 class RaindropGame: public Game{
     int numCups;
@@ -45,8 +46,10 @@ class RaindropGame: public Game{
     Pane *pane;
     Cup *objDragged;
     SoundPlayer *soundplayer;
-    int level;
+    LevelManager *levelManager;
+    int levelNum;
     int points;
+
     
     
     bool checkClickCup(int x, int y);
@@ -56,7 +59,7 @@ class RaindropGame: public Game{
     static int updateThread(void *ptr);
     
 public:
-    RaindropGame(string fname, int cups = 3, int drops = 10, int speed = 50, int latency = 800);
+    RaindropGame(string fname, int cups = 3, int drops = 10, int speed = 50, int latency = 800, int lvl = 1);
     void run();
     void applySurface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL);
     ~RaindropGame();

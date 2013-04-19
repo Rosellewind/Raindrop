@@ -7,15 +7,15 @@
 
 using namespace std;
 
-RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int latency):Game(fname){
+RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int latency, int lvl):Game(fname){
     gameSpeed = speed;
     numCups = cups;
     numDrops = drops;
     minLatency = latency;
+    levelNum = lvl;
     isDragging = false;
     timestampMouseDown = 0;
     objDragged = NULL;
-    level = 1;
     points = 0;
     
     //set background
@@ -30,9 +30,11 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     soundplayer->init(44100, 2, 4096);
     soundplayer->load_sounds("Resources/audio.txt");
     
+    //levelManager
+    levelManager = new LevelManager(levelNum, pane, soundplayer);
+    
     //seed psuedo random number generator
     srand ((unsigned int)time(NULL));
-    
 }
 
 void RaindropGame::run(){
@@ -76,6 +78,7 @@ void RaindropGame::run(){
 						if (checkClickCup(x, y)) {
                             soundplayer->playSound(objDragged->note, 1);
                             //                      pane->flashColor(objDragged->note);
+                            notesClicked.push_back(objDragged->note);
                             checkPattern(objDragged->note);
 						}
                     }
@@ -166,11 +169,7 @@ bool RaindropGame::checkClickCup(int x, int y){
     }
     return 0;
 }
-//3,4   E,F pattern in the background
-//3,4   notes clicked
 
-//0110101   LC,D,D,LC,D,LC,D pattern in the background
-//011011    notes clicked
 bool RaindropGame::checkMatching(int index){
     if (index == notesClicked.size() && index == pattern.size()){
         notesClicked.clear();
