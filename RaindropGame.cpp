@@ -30,7 +30,7 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     soundplayer->load_sounds("Resources/audio.txt");
     
     //gameManager
-    gameManager = new gameManager(lvl, pane, soundplayer);
+    gameManager = new GameManager(lvl, pane, soundplayer);
     
     //seed psuedo random number generator
     srand ((unsigned int)time(NULL));
