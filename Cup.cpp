@@ -5,9 +5,10 @@
 string Type_String[] = {"plain", "color", "slow", "drain"};
 
 
-Cup::Cup(string fname, Note n, int x):Sprite(n, fname, true, x, GAMESCREENHEIGHT-62){
+Cup::Cup(string fname, vector<Animation*> colCups, Note n, int x):Sprite(n, fname, true, x, GAMESCREENHEIGHT-62){
     note = n;
     topOfCup = GAMESCREENHEIGHT - getRect().h;
+    colorCups = colCups;
 }
 
 void Cup::update(Uint32 elapsed){
@@ -40,15 +41,47 @@ void Cup::dragTo(int x, int y){
     xPos = (float)x - offsetX;
 	yPos = topOfCup;
     int w = getRect().w;
-    cout<<"xPos: "<<xPos<<endl;
     if (xPos < 0)
         xPos = 0;
     else if (xPos > SCREENWIDTH-w)
         xPos = SCREENWIDTH - w;
 }
 
+void Cup::draw(SDL_Surface *screen, Uint32 elapsed){
+    Sprite::draw(screen, elapsed);
+}
+
+bool Cup::draw(SDL_Surface *screen, Uint32 elapsed, int noteClickedIndex){
+    bool animate = false;
+    if (noteClickedIndex == -1) {
+        animation->draw(screen, xPos, yPos, elapsed);
+    }
+    else{
+        animate = colorCups[noteClickedIndex]->draw(screen, xPos, yPos, elapsed);
+    }
+    return animate;
+}
+
+Cup::~Cup(){
+    if(colorCups.size() > 0){
+        for (unsigned int i = 0; i<colorCups.size(); i++){
+            delete colorCups[i];
+        }
+        colorCups.clear();
+    }
+}
+
 //class methods
 vector<Cup*> Cup::initCups(int numCups, SDL_Surface *screen){
+    
+    //setup colorCups animations
+    vector<Animation*> colorCups;
+    for (int i = 0; i < 8; i++) {
+        Animation *a = new Animation("Resources/colorCups.txt", i, false);
+        colorCups.push_back(a);
+    }
+    
+    //create cups
     vector<int> xtaken;
     vector<Cup*> cups(numCups);
     for (int i = 0; i<numCups; i++) {
@@ -60,7 +93,7 @@ vector<Cup*> Cup::initCups(int numCups, SDL_Surface *screen){
             }
         }
         xtaken.push_back(x);
-        Cup *c = new Cup("Resources/cups.txt", LC, x);
+        Cup *c = new Cup("Resources/cups.txt", colorCups, LC, x);
         cups[i] = c;
     }
     return cups;

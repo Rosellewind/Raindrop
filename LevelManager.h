@@ -24,13 +24,22 @@ class LevelManager {
     vector<Note> pattern;
     int points;
     int level;
+    int subLevel;
     Pane *pane;
     SoundPlayer *soundplayer;
-    
+    vector<Note> notesClicked;
+
 public:
     LevelManager(int lvl, Pane *p, SoundPlayer *sp);
     void checkPattern(Note note);
     bool checkMatching(int index);
+    void newPattern();
+    bool isSamePattern(vector<Note> lastPattern,vector<Note> pattern);
+    Note intToNote(int i);
+    Note raiseNote(Note note);
+    Note randomNote();
+    
+    vector<Note> getPattern();
 };
 
 

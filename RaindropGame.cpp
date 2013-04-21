@@ -12,11 +12,10 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     numCups = cups;
     numDrops = drops;
     minLatency = latency;
-    levelNum = lvl;
     isDragging = false;
     timestampMouseDown = 0;
     objDragged = NULL;
-    points = 0;
+    noteClickedIndex = -1;
     
     //set background
     background = new Sprite("Resources/background.txt");
@@ -31,7 +30,7 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     soundplayer->load_sounds("Resources/audio.txt");
     
     //levelManager
-    levelManager = new LevelManager(levelNum, pane, soundplayer);
+    levelManager = new LevelManager(lvl, pane, soundplayer);
     
     //seed psuedo random number generator
     srand ((unsigned int)time(NULL));
@@ -51,8 +50,7 @@ void RaindropGame::run(){
     soundplayer->playMusic();
     
     //play sound pattern
-    pattern = {E,E};
-    soundplayer->playNoteSequence(pattern, 6000);
+    soundplayer->playNoteSequence(levelManager->getPattern(), 6000);
     
     //run loop
     while (!done) {
@@ -77,9 +75,8 @@ void RaindropGame::run(){
 						//check to see if it is on click/draggable object
 						if (checkClickCup(x, y)) {
                             soundplayer->playSound(objDragged->note, 1);
-                            //                      pane->flashColor(objDragged->note);
-                            notesClicked.push_back(objDragged->note);
-                            checkPattern(objDragged->note);
+                            noteClickedIndex = objDragged->note;
+                            levelManager->checkPattern(objDragged->note);
 						}
                     }
 					break;
@@ -128,8 +125,15 @@ void RaindropGame::run(){
         
         //draw cups
         for (unsigned int i = 0; i < cups.size(); i++) {
-            cups[i]->draw(screen, elapsed);
+            if (cupClickedIndex == i){
+                if (!cups[i]->draw(screen, elapsed, noteClickedIndex)){
+                noteClickedIndex = -1;
+                    cupClickedIndex = -1;
+                }
+            }
+            else cups[i]->draw(screen, elapsed);
         }
+
         
         //draw control pane
         pane->draw(screen, elapsed);
@@ -164,63 +168,12 @@ void RaindropGame::setDraggedObject(int x, int y){
 bool RaindropGame::checkClickCup(int x, int y){
     for(int i = (int)cups.size()-1; i>=0;i--){
         SDL_Rect cupRect = cups[i]->getRect();
-        if( ( x > cupRect.x ) && ( x < cupRect.x + cupRect.w ) && ( y > cupRect.y ) && ( y < cupRect.y + cupRect.h ) )
+        if( ( x > cupRect.x ) && ( x < cupRect.x + cupRect.w ) && ( y > cupRect.y ) && ( y < cupRect.y + cupRect.h ) ){
+            cupClickedIndex = i;
             return 1;
+        }
     }
     return 0;
-}
-
-bool RaindropGame::checkMatching(int index){
-    if (index == notesClicked.size() && index == pattern.size()){
-        notesClicked.clear();
-        return true;
-    }
-    if (index < notesClicked.size() && index < pattern.size()){
-        if (notesClicked[index] == pattern[index])
-            return (checkMatching(index+1));
-        else {
-            notesClicked.erase(notesClicked.begin());
-            if (notesClicked.size()==0)
-                return false;
-            else return checkMatching(0);
-        }
-    }
-    else
-        return false;
-}
-
-void RaindropGame::checkPattern(Note note){
-    notesClicked.push_back(objDragged->note);
-    
-    //log  the pattern and notesClicked
-    for (unsigned int i = 0; i < pattern.size(); i++)
-        cout<<pattern[i];
-    cout<<endl;
-    for (unsigned int i = 0; i < notesClicked.size(); i++)
-        cout<<notesClicked[i];
-    cout<<endl;
-    
-    bool match = checkMatching(0);
-    cout<<match<<endl;
-    
-    if (match) {//temp game logic
-        cout<<"match"<<endl;
-        points += 5;
-        pane->updatePoints(points);
-        if (points >= 10){
-            pane->updateLevel(2);
-            soundplayer->stopNoteSequence();
-            pattern = {E,B,D};
-            soundplayer->playNoteSequence(pattern,6000);
-        }
-        else if (points >= 30) {
-            pane->updateLevel(3);
-            soundplayer->stopNoteSequence();
-            pattern = {D, G, F};
-            soundplayer->playNoteSequence(pattern,5000);
-        }
-    }
-    else cout<<"nope"<<endl;
 }
 
 int RaindropGame::updateThread(void *ptr){
@@ -263,6 +216,9 @@ int RaindropGame::updateThread(void *ptr){
 RaindropGame::~RaindropGame(){
     //    if (upThread) SDL_KillThread(evtThread);
     
+    for (unsigned int i = 0; i<backgrounds.size(); i++){
+        delete backgrounds[i];
+    }
     for (unsigned int i = 0; i<drops.size(); i++){
         delete drops[i];
     }
