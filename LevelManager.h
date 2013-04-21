@@ -28,7 +28,7 @@ class LevelManager {
     Pane *pane;
     SoundPlayer *soundplayer;
     vector<Note> notesClicked;
-
+    
 public:
     LevelManager(int lvl, Pane *p, SoundPlayer *sp);
     void checkPattern(Note note);
