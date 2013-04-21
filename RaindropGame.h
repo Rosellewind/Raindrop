@@ -24,7 +24,7 @@
 #include "SoundPlayer.h"
 #include "Game.h"
 #include "Pane.h"
-#include "LevelManager.h"
+#include "GameManager.h"
 
 class RaindropGame: public Game{
     int numCups;
@@ -44,7 +44,7 @@ class RaindropGame: public Game{
     Pane *pane;
     Cup *objDragged;
     SoundPlayer *soundplayer;
-    LevelManager *levelManager;
+    GameManager *gameManager;
     int noteClickedIndex;
     int cupClickedIndex;
 

@@ -29,8 +29,8 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     soundplayer->init(44100, 2, 4096);
     soundplayer->load_sounds("Resources/audio.txt");
     
-    //levelManager
-    levelManager = new LevelManager(lvl, pane, soundplayer);
+    //gameManager
+    gameManager = new gameManager(lvl, pane, soundplayer);
     
     //seed psuedo random number generator
     srand ((unsigned int)time(NULL));
@@ -50,7 +50,7 @@ void RaindropGame::run(){
     soundplayer->playMusic();
     
     //play sound pattern
-    soundplayer->playNoteSequence(levelManager->getPattern(), 6000);
+    soundplayer->playNoteSequence(gameManager->getPattern(), 6000);
     
     //run loop
     while (!done) {
@@ -76,7 +76,7 @@ void RaindropGame::run(){
 						if (checkClickCup(x, y)) {
                             soundplayer->playSound(objDragged->note, 1);
                             noteClickedIndex = objDragged->note;
-                            levelManager->checkPattern(objDragged->note);
+                            gameManager->checkPattern(objDragged->note);
 						}
                     }
 					break;

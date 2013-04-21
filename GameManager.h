@@ -1,5 +1,5 @@
-#ifndef LEVELMANAGER_H
-#define LEVELMANAGER_H
+#ifndef GAMEMANAGER_H
+#define GAMEMANAGER_H
 
 #ifdef _WIN32
 #include "SDL/SDL.h"
@@ -20,7 +20,7 @@
 
 
 using namespace std;
-class LevelManager {
+class GameManager {
     vector<Note> pattern;
     int points;
     int level;
@@ -30,7 +30,7 @@ class LevelManager {
     vector<Note> notesClicked;
     
 public:
-    LevelManager(int lvl, Pane *p, SoundPlayer *sp);
+    GameManager(int lvl, Pane *p, SoundPlayer *sp);
     void checkPattern(Note note);
     bool checkMatching(int index);
     void newPattern();

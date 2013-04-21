@@ -1,7 +1,7 @@
-#include "LevelManager.h"
+#include "GameManager.h"
 #include <ctime>
 
-LevelManager::LevelManager(int lvl, Pane *p, SoundPlayer *sp){
+GameManager::GameManager(int lvl, Pane *p, SoundPlayer *sp){
     level = lvl;
     subLevel = 0;
     points = 0;
@@ -12,7 +12,7 @@ LevelManager::LevelManager(int lvl, Pane *p, SoundPlayer *sp){
     srand ((unsigned int)time(NULL));
 }
 
-bool LevelManager::checkMatching(int index){
+bool GameManager::checkMatching(int index){
     if (index == notesClicked.size() && index == pattern.size()){
         notesClicked.clear();
         return true;
@@ -31,7 +31,7 @@ bool LevelManager::checkMatching(int index){
         return false;
 }
 
-void LevelManager::checkPattern(Note note){
+void GameManager::checkPattern(Note note){
     notesClicked.push_back(note);
     bool match = checkMatching(0);
     cout<<match<<endl;
@@ -56,11 +56,11 @@ void LevelManager::checkPattern(Note note){
 //easier- stepping, repeating
 //harder- random
 
-void LevelManager::newPattern(){
+void GameManager::newPattern(){
     vector<Note> lastPattern(pattern);
-
+    
     pattern.clear();
-//    vector<Note> lastPattern = pattern;
+    //    vector<Note> lastPattern = pattern;
     cout<<"lastPattern: ";
     for (int i = 0; i<lastPattern.size(); i++) {
         cout<<lastPattern[i];
@@ -102,7 +102,7 @@ void LevelManager::newPattern(){
         newPattern();
     }
 }
-bool LevelManager::isSamePattern(vector<Note> lastPattern,vector<Note> pattern){
+bool GameManager::isSamePattern(vector<Note> lastPattern,vector<Note> pattern){
     bool same = false;
     if (lastPattern.size() == pattern.size()) {
         for (int i = 0; i<lastPattern.size(); i++) {
@@ -115,7 +115,7 @@ bool LevelManager::isSamePattern(vector<Note> lastPattern,vector<Note> pattern){
     return same;
 }
 
-Note LevelManager::intToNote(int i){
+Note GameManager::intToNote(int i){
     Note newNote;
     if (i == 0)
         newNote = LC;
@@ -136,7 +136,7 @@ Note LevelManager::intToNote(int i){
     return newNote;
 }
 
-Note LevelManager::raiseNote(Note note){
+Note GameManager::raiseNote(Note note){
     Note newNote;
     if (note == LC)
         newNote = D;
@@ -157,10 +157,10 @@ Note LevelManager::raiseNote(Note note){
     return newNote;
 }
 
-Note LevelManager::randomNote(){
+Note GameManager::randomNote(){
     return intToNote(rand()%(HC+2));
 }
 
-vector<Note> LevelManager::getPattern(){
+vector<Note> GameManager::getPattern(){
     return pattern;
 }
