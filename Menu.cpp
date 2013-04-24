@@ -78,7 +78,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font){
 	SDL_Surface* tempScreen2 = SDL_DisplayFormat( tempScreen );
 	SDL_FreeSurface( tempScreen );
 	AlphaValue = 0;
-	int FadeValue = 2;
+	int FadeValue = 3;
 	while(1) {
 		time = SDL_GetTicks();
 		while(SDL_PollEvent(&event)) {
@@ -144,12 +144,6 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font){
 		}
 	}
 	return -111;
-}
-int Menu::show_background(SDL_Surface* screen)
-{
-	//Sprite DROP = new Sprite("Resources/images/droplet7.png");
-
-	return 0;
 }
 int Menu::run()
 {
