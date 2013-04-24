@@ -47,6 +47,10 @@ class RaindropGame: public Game{
     GameManager *gameManager;
     int noteClickedIndex;
     int cupClickedIndex;
+    
+    //JaredTemp 1. declare vector.
+    vector<Sprite*> tempDrops;
+
 
     
     

@@ -42,6 +42,13 @@ void RaindropGame::run(){
     lastDrop = last;
     SDL_Delay(100);
     
+    //JaredTemp 2. make sprites
+    for (int i = 0; i<20; i++) {
+        int r = (rand()%20)*0.05*SCREENWIDTH;//use # of drops that will fit, prevents overlap, then disperse over the % of the screen,ex. 100/20 = 5%
+        Sprite *drop = new Sprite(0,"Resources/tempDrops.txt", true, r, r, r, r);
+        tempDrops.push_back(drop);
+    }
+
     //add cups
     cups = Cup::initCups(numCups, screen);
     
@@ -137,6 +144,21 @@ void RaindropGame::run(){
         
         //draw control pane
         pane->draw(screen, elapsed);
+        
+        
+        
+        //JaredTemp 3. update sprites, need to be in a while (!done) loop
+        for (unsigned int i = 0; i < tempDrops.size(); i++) {
+            tempDrops[i]->update(elapsed);
+        }
+        
+        //JaredTemp 4. draw sprites, need to be in a while (!done) loop
+        for (unsigned int i = 0; i < tempDrops.size(); i++) {
+            tempDrops[i]->draw(screen, elapsed);
+        }
+        
+        //JaredTemp 5. either rotate image in the .png file and keep a constant angle and figure out corresponding xvel and yvel values, OR you can look into if sdl supports rotating images.
+        
         
         SDL_Flip(screen);
     }//while !done loop ends
