@@ -60,18 +60,4 @@ class BSprite
 		int run();
 
 };
-class BSprite
-{
-	public:
-		BSprite();
-		BSprite(int num);
-		BSprite* DRAW(SDL_Surface* buffer, int x, int y);
-		virtual ~BSprite();
-		bool SpriteExists();
-		BSprite* DESTROY();
-	private:
-		bool loaded;
-		int xVel,yVel,xPos,yPos;
-		SDL_Surface* sprite;
-};
 #endif /* MENU_H_ */
