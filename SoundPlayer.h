@@ -35,14 +35,17 @@ public:
 	int sequenceCounter;
 	vector<Note> notes;
 	bool pausedSequence;
+	static const int SEQUENCE_CHANNEL = 2;
+	static const int CLICK_CHANNEL =1;
 	
 	SoundPlayer(Pane *newpane);
 	void init(int freq, int channels, int chunkSize);
 	void load_sounds(string fname);
 	void playMusic();
-	void setMusicVolume(int newVolume);                    
+	void setMusicVolume(int newVolume);
+	void setSoundVolume(int newVolume, int channel);                    
 	void playSound();
-	void playSound(Note n, int channel = 2);
+	void playSound(Note n, int channel = SEQUENCE_CHANNEL);
 	void togglePauseMusic();	
 	void playNoteSequence(vector<Note> notes, int newDelay = 2000);
 	void startNewSequence(vector<Note> newNotes, int newDelay = 2000);

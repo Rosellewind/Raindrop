@@ -51,6 +51,8 @@ void RaindropGame::run(){
     notes.push_back(G);
     notes.push_back(HC);
     soundplayer->playNoteSequence(notes);
+    soundplayer->setSoundVolume(128,SoundPlayer::CLICK_CHANNEL);
+    soundplayer->setSoundVolume(20,SoundPlayer::SEQUENCE_CHANNEL);
     vector<Note> n2 = {E,G,B,D,F};
     
     bool test=false;
@@ -82,7 +84,7 @@ void RaindropGame::run(){
 						//check to see if it is on click/draggable object
 						if (checkClickCup(x, y)) {
                             soundplayer->pauseNoteSequence(2000);
-                            soundplayer->playSound(objDragged->note, 1);
+                            soundplayer->playSound(objDragged->note, SoundPlayer::CLICK_CHANNEL);
                             pane->flashColor(objDragged->note);
 						}
                     }
