@@ -24,20 +24,54 @@
 #endif
 
 #include <vector>
-#include "Drop.h"
+#include "Functions.h"
 
 class Menu
 {
 	public:
-		int status;
+		Uint32 time;
+		int x,y,AlphaValue;
 		SDL_Thread *thread1, *thread2;
 		SDL_Surface *screen, *icon;
 		TTF_Font *font;
 		Mix_Music *music;
 		Mix_Chunk *sound;
-		bool running;
+		SDL_Event event;
 		int show_menu(SDL_Surface* screen, TTF_Font* font);
 		int show_background(SDL_Surface* screen);
+		void DrawIMG(SDL_Surface *img, SDL_Surface* des, int x, int y);
 		int run();
+
+};
+class BSprite
+{
+	public:
+		BSprite();
+		BSprite(int num);
+		BSprite* DRAW(SDL_Surface* buffer, int x, int y);
+		virtual ~BSprite();
+		bool SpriteExists();
+		BSprite* DESTROY();
+	private:
+		bool loaded;
+		int xVel,yVel,xPos,yPos;
+		SDL_Surface* sprite;
+		void DrawIMG(SDL_Surface *img, SDL_Surface* des, int x, int y);
+		int run();
+
+};
+class BSprite
+{
+	public:
+		BSprite();
+		BSprite(int num);
+		BSprite* DRAW(SDL_Surface* buffer, int x, int y);
+		virtual ~BSprite();
+		bool SpriteExists();
+		BSprite* DESTROY();
+	private:
+		bool loaded;
+		int xVel,yVel,xPos,yPos;
+		SDL_Surface* sprite;
 };
 #endif /* MENU_H_ */
