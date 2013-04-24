@@ -52,7 +52,6 @@ void RaindropGame::run(){
     //play sound pattern
     soundplayer->playNoteSequence(gameManager->getPattern(), 6000);
     
-    bool test=false;
     //run loop
     while (!done) {
         elapsed = SDL_GetTicks();
@@ -75,9 +74,9 @@ void RaindropGame::run(){
 						int x = event.button.x; int y = event.button.y;
 						//check to see if it is on click/draggable object
 						if (checkClickCup(x, y)) {
-                            soundplayer->playSound(objDragged->note, 1);
-                            noteClickedIndex = objDragged->note;
-                            gameManager->checkPattern(objDragged->note);
+                            soundplayer->pauseNoteSequence(2000);
+                            soundplayer->playSound(objDragged->note, SoundPlayer::CLICK_CHANNEL);
+                            pane->flashColor(objDragged->note);
 						}
                     }
 					break;
@@ -184,7 +183,6 @@ int RaindropGame::updateThread(void *ptr){
     while ((int)game->drops.size() < game->numDrops && game->elapsed > game->lastDrop + game->minLatency) {
         int x = (rand()%20)*0.05*SCREENWIDTH;
         Drop *d = new Drop("Resources/drop.txt", PLAIN, x, game->gameSpeed);
-        cout<<"Drop at: "<<x<<endl;
         game->drops.insert(game->drops.end(), d);
         game->lastDrop = SDL_GetTicks();
     }

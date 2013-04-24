@@ -52,6 +52,7 @@ public:
 	void playSound(Note n, int channel = 2);
 	void togglePauseMusic();
 	void playNoteSequence(vector<Note> notes, int newDelay = 2000);
+    void pauseNoteSequence(int delay);
 	void startNewSequence(vector<Note> newNotes, int newDelay = 2000);
 	static int sequenceThread(void *notes);
 	void cleanup();

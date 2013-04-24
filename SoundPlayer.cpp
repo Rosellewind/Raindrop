@@ -5,6 +5,8 @@ SoundPlayer::SoundPlayer(Pane *newpane){
 	sequenceCounter = 0;
 	done = false;
 	pane = newpane;
+	pausedSequence = false;
+	pauseDelay = 1;
 }
 
 void SoundPlayer::init(int freq, int channels, int chunkSize){
@@ -19,14 +21,14 @@ void SoundPlayer::load_sounds(string fname){
 	int numSounds;
 	string musicName, soundName;
 	in.open(fname.c_str());
-    
+
 	//load music
 	in>>musicName;
 	music = Mix_LoadMUS(musicName.c_str());
 	if(music == NULL){
 		cout<<"Error loading music file "<<musicName<<endl;
 	}
-    
+
 	//load sounds
 	in>>numSounds;
 	cout<<"loading "<<numSounds<<" sounds..."<<endl;
@@ -75,7 +77,6 @@ void SoundPlayer::playSound(){
 }
 
 void SoundPlayer::playSound(Note n, int channel){
-	Mix_Volume(channel,128);
 	if(sounds.size()>n){
 		if(Mix_PlayChannel(channel, sounds[n], 0) == -1){
 			cout<<"Error playing sound"<<endl;
@@ -98,21 +99,13 @@ void SoundPlayer::playNoteSequence(vector<Note> newNotes, int newDelay){
 	notes = newNotes;
 	sequenceCounter = 0;
 	done = false;
+	pausedSequence = false;
 	delay = newDelay;
 	thread = SDL_CreateThread(SoundPlayer::sequenceThread, this);
 	if(thread == NULL){
 		cout<<"Error starting thread..."<<endl;
 	}
-    
-}
-void SoundPlayer::startNewSequence(vector<Note> newNotes, int newDelay){
-	stopNoteSequence();
-	int status;
-	SDL_WaitThread(thread, &status);
-	playNoteSequence(newNotes, newDelay);
-}
-void SoundPlayer::stopNoteSequence(){
-	done=true;
+
 }
 void SoundPlayer::pauseNoteSequence(int delay){
 	pausedSequence=true;
@@ -135,15 +128,22 @@ int SoundPlayer::sequenceThread(void *player){
 	sp->sequenceCounter++;
     
 	while(!sp->done){
-		if(sp->sequenceCounter>=sp->notes.size()){
-			sp->sequenceCounter = 0;
-			SDL_Delay(sp->delay);
-		}
-		if(Mix_Playing(2)==0){
-			cout<<"Note: "<<sp->notes[sp->sequenceCounter]<<"  counter: "<<sp->sequenceCounter<<endl;
-			sp->playSound(sp->notes[sp->sequenceCounter]);
-			sp->pane->flashColor(sp->notes[sp->sequenceCounter]);
-			sp->sequenceCounter++;
+		if(!sp->pausedSequence){
+			if(sp->sequenceCounter>=sp->notes.size()){
+				sp->sequenceCounter = 0;
+				SDL_Delay(sp->delay);
+			}
+			if(Mix_Playing(SEQUENCE_CHANNEL)==0){
+				cout<<"Note: "<<sp->notes[sp->sequenceCounter]<<"  counter: "<<sp->sequenceCounter<<endl;
+				sp->playSound(sp->notes[sp->sequenceCounter]);
+				sp->pane->flashColor(sp->notes[sp->sequenceCounter]);
+				sp->sequenceCounter++;
+			}
+		}else{
+			SDL_Delay(sp->pauseDelay);
+			
+			sp->pausedSequence = false;
+			Mix_Resume(SEQUENCE_CHANNEL);
 		}
 	}
 	return 0;
