@@ -56,7 +56,16 @@ void SoundPlayer::setMusicVolume(int newVolume){
 		vol = MIX_MAX_VOLUME;
 	Mix_VolumeMusic(vol);
 }
-
+void SoundPlayer::setSoundVolume(int newVolume, int channel){
+	int vol = newVolume;
+	if(vol < 0)
+		vol=0;
+	else if(vol > MIX_MAX_VOLUME)
+		vol = MIX_MAX_VOLUME;
+	cout<<"Vol Before: "<<Mix_Volume(channel,-1)<<endl;
+	Mix_Volume(channel, vol);
+	cout<<"Vol After: "<<Mix_Volume(channel,-1)<<endl;
+}
 void SoundPlayer::playSound(){
 	if(sounds.size()>0){
 		if(Mix_PlayChannel(2, sounds.front(), 0) == -1){
@@ -105,6 +114,20 @@ void SoundPlayer::startNewSequence(vector<Note> newNotes, int newDelay){
 void SoundPlayer::stopNoteSequence(){
 	done=true;
 }
+void SoundPlayer::pauseNoteSequence(int delay){
+	pausedSequence=true;
+	pauseDelay = delay;
+	Mix_Pause(SEQUENCE_CHANNEL);
+}
+void SoundPlayer::startNewSequence(vector<Note> newNotes, int newDelay){
+	stopNoteSequence();
+	playNoteSequence(newNotes, newDelay);
+}
+void SoundPlayer::stopNoteSequence(){
+	done=true;
+	int status;
+	SDL_WaitThread(thread, &status);
+}
 
 int SoundPlayer::sequenceThread(void *player){
 	SoundPlayer *sp = (SoundPlayer*)player;
@@ -125,8 +148,11 @@ int SoundPlayer::sequenceThread(void *player){
 	}
 	return 0;
 }
-
 void SoundPlayer::cleanup(){
+
+	if(!done){
+		stopNoteSequence();
+	}
 	Mix_FreeMusic(music);
 	for(unsigned int i=0; i< sounds.size();i++){
 		Mix_FreeChunk(sounds[i]);

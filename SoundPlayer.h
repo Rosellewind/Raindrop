@@ -39,6 +39,9 @@ class SoundPlayer{
 public:
 	int sequenceCounter;
 	vector<Note> notes;
+	bool pausedSequence;
+	static const int SEQUENCE_CHANNEL = 2;
+	static const int CLICK_CHANNEL =1;
 	
 	SoundPlayer(Pane *newpane);
 	void init(int freq, int channels, int chunkSize);

@@ -52,6 +52,7 @@ void RaindropGame::run(){
     //play sound pattern
     soundplayer->playNoteSequence(gameManager->getPattern(), 6000);
     
+    bool test=false;
     //run loop
     while (!done) {
         elapsed = SDL_GetTicks();
@@ -178,11 +179,12 @@ bool RaindropGame::checkClickCup(int x, int y){
 
 int RaindropGame::updateThread(void *ptr){
     RaindropGame* game = (RaindropGame*)ptr;
-    
+
     //add drops if needed
     while ((int)game->drops.size() < game->numDrops && game->elapsed > game->lastDrop + game->minLatency) {
         int x = (rand()%20)*0.05*SCREENWIDTH;
         Drop *d = new Drop("Resources/drop.txt", PLAIN, x, game->gameSpeed);
+        cout<<"Drop at: "<<x<<endl;
         game->drops.insert(game->drops.end(), d);
         game->lastDrop = SDL_GetTicks();
     }
