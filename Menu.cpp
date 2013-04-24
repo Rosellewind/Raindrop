@@ -21,7 +21,7 @@ void DrawIMG(SDL_Surface *img, SDL_Surface* des, int x, int y)
   dest.y = y;
   SDL_BlitSurface(img, NULL, des, &dest);
 }
-int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
+int Menu::show_menu(SDL_Surface* screen, TTF_Font* font)
 {
 	running = true;
 	//show_background(screen, NULL); //need to thread this or make new class
@@ -49,11 +49,6 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 	SDL_Surface* tempScreen = SDL_CreateRGBSurface( SDL_SWSURFACE | SDL_SRCALPHA, SCREENWIDTH, SCREENHEIGHT, 32, 0xff000000,0x00ff0000,0x0000ff00,0x000000ff);
 	SDL_Surface* tempScreen2 = SDL_DisplayFormat( tempScreen );
 	SDL_FreeSurface( tempScreen );
-
-
-
-
-
 
 	//SDL_FillRect(tempScreen2,&tempScreen2->clip_rect,SDL_MapRGB(tempScreen2->format,0x00,0x00,0x00)); //FILL COLOR OF THE MENU BACKGROUND
 
@@ -147,7 +142,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font, void *data)
 	}
 	return -111;
 }
-int Menu::show_background(SDL_Surface* screen, void *data)
+int Menu::show_background(SDL_Surface* screen)
 {
 	//Sprite DROP = new Sprite("Resources/images/droplet7.png");
 
@@ -170,7 +165,7 @@ int Menu::run()
 	Mix_PlayMusic(music,-1);
 	font = TTF_OpenFont("Resources/fonts/Test.ttf",30);
 	running = false;
-	int i = show_menu(screen,font, NULL);
+	int i = show_menu(screen,font);
 
 	//thread2 = SDL_CreateThread( show_menu(screen,font, NULL), NULL ); //LOOP IS IN FUNCTION NOT IN RUN
 	//thread1 = SDL_CreateThread( menu_background(NULL), NULL ); //LOOP IS IN FUNCTION NOT IN RUN

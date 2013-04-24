@@ -38,5 +38,6 @@ class Menu
 		bool running;
 		int show_menu(SDL_Surface* screen, TTF_Font* font);
 		int show_background(SDL_Surface* screen);
+		int run();
 };
 #endif /* MENU_H_ */
