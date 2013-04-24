@@ -27,13 +27,14 @@ class SoundPlayer{
 	Mix_Music *music;
 	vector<Mix_Chunk*> sounds;
 	bool done;
-	int delay; // in ms
+	int delay, pauseDelay; // in ms
 	Pane *pane;
 	SDL_Thread *thread;
 	
 public:
 	int sequenceCounter;
 	vector<Note> notes;
+	bool pausedSequence;
 	
 	SoundPlayer(Pane *newpane);
 	void init(int freq, int channels, int chunkSize);
@@ -48,6 +49,7 @@ public:
 	static int sequenceThread(void *notes);
 	void cleanup();
 	void stopNoteSequence();
+	void pauseNoteSequence(int delay);
     ~SoundPlayer();
 };
 

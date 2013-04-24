@@ -81,6 +81,7 @@ void RaindropGame::run(){
 						int x = event.button.x; int y = event.button.y;
 						//check to see if it is on click/draggable object
 						if (checkClickCup(x, y)) {
+                            soundplayer->pauseNoteSequence(2000);
                             soundplayer->playSound(objDragged->note, 1);
                             pane->flashColor(objDragged->note);
 						}

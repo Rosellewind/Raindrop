@@ -5,6 +5,8 @@ SoundPlayer::SoundPlayer(Pane *newpane){
 	sequenceCounter = 0;
 	done = false;
 	pane = newpane;
+	pausedSequence = false;
+	pauseDelay = 1;
 }
 
 void SoundPlayer::init(int freq, int channels, int chunkSize){
@@ -89,6 +91,7 @@ void SoundPlayer::playNoteSequence(vector<Note> newNotes, int newDelay){
 	notes = newNotes;
 	sequenceCounter = 0;
 	done = false;
+	pausedSequence = false;
 	delay = newDelay;
 	thread = SDL_CreateThread(SoundPlayer::sequenceThread, this);
 	if(thread == NULL){
@@ -96,14 +99,19 @@ void SoundPlayer::playNoteSequence(vector<Note> newNotes, int newDelay){
 	}
 
 }
+void SoundPlayer::pauseNoteSequence(int delay){
+	pausedSequence=true;
+	pauseDelay = delay;
+	Mix_Pause(2);
+}
 void SoundPlayer::startNewSequence(vector<Note> newNotes, int newDelay){
 	stopNoteSequence();
-	int status;
-	SDL_WaitThread(thread, &status);
 	playNoteSequence(newNotes, newDelay);
 }
 void SoundPlayer::stopNoteSequence(){
 	done=true;
+	int status;
+	SDL_WaitThread(thread, &status);
 }
 
 int SoundPlayer::sequenceThread(void *player){
@@ -112,20 +120,30 @@ int SoundPlayer::sequenceThread(void *player){
 	sp->sequenceCounter++;
 
 	while(!sp->done){
-		if(sp->sequenceCounter>=sp->notes.size()){
-			sp->sequenceCounter = 0;
-			SDL_Delay(sp->delay);
-		}
-		if(Mix_Playing(2)==0){
-			cout<<"Note: "<<sp->notes[sp->sequenceCounter]<<"  counter: "<<sp->sequenceCounter<<endl;
-			sp->playSound(sp->notes[sp->sequenceCounter]);
-			sp->pane->flashColor(sp->notes[sp->sequenceCounter]);
-			sp->sequenceCounter++;
+		if(!sp->pausedSequence){
+			if(sp->sequenceCounter>=sp->notes.size()){
+				sp->sequenceCounter = 0;
+				SDL_Delay(sp->delay);
+			}
+			if(Mix_Playing(2)==0){
+				cout<<"Note: "<<sp->notes[sp->sequenceCounter]<<"  counter: "<<sp->sequenceCounter<<endl;
+				sp->playSound(sp->notes[sp->sequenceCounter]);
+				sp->pane->flashColor(sp->notes[sp->sequenceCounter]);
+				sp->sequenceCounter++;
+			}
+		}else{
+			SDL_Delay(sp->pauseDelay);
+			sp->pausedSequence = false;
+			Mix_Resume(2);
 		}
 	}
 	return 0;
 }
 void SoundPlayer::cleanup(){
+
+	if(!done){
+		stopNoteSequence();
+	}
 	Mix_FreeMusic(music);
 	for(int i=0; i< sounds.size();i++){
 		Mix_FreeChunk(sounds[i]);
