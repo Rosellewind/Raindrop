@@ -84,8 +84,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font){
 		while(SDL_PollEvent(&event)) {
 			switch(event.type){
 				case SDL_QUIT:
-					SDL_FreeSurface(menus[0]);
-					SDL_FreeSurface(menus[1]);
+					for(int i = 0; i < NUMMENU; i += 1) SDL_FreeSurface(menus[i]);
 					return -1;
 					break;
 				case SDL_MOUSEMOTION: //USER HOVERS OVER THE BUTTON
@@ -107,26 +106,33 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font){
 							}
 						}
 					} break;
-				case SDL_MOUSEBUTTONDOWN: //USER CLICKS PLAY RETURNS 0, SETTINGS 1, EXIT 3
+				case SDL_MOUSEBUTTONDOWN: //USER CLICKS PLAY RETURNS 0, SETTINGS 1, EXIT 2
 					x = event.button.x;
 					y = event.button.y;
 					for(int i = 0; i < NUMMENU; i += 1) {
-						if(x>=pos[i].x && x<=pos[i].x+pos[i].w && y>=pos[i].y && y<=pos[i].y+pos[i].h)
-						{
-							SDL_FreeSurface(menus[0]);
-							SDL_FreeSurface(menus[1]);
+						if(x>=pos[i].x && x<=pos[i].x+pos[i].w && y>=pos[i].y && y<=pos[i].y+pos[i].h){
 							if(i==0){
-								Mix_PlayChannel(-1,sound,1);
-								SDL_Delay(1000);
+								Mix_PlayChannel(-1,sound,0);
+								FadeValue = -1;
+								while(AlphaValue > 1){
+									Uint32 now = SDL_GetTicks();
+									SDL_FillRect( tempScreen2, 0, SDL_MapRGBA(tempScreen2->format, 60, 60, 60, 0) );
+									SDL_FillRect( screen, 0, SDL_MapRGBA(tempScreen2->format, 0, 0, 0, 0) );
+									if((AlphaValue + FadeValue) > 0 && (AlphaValue + FadeValue) < 255) AlphaValue = AlphaValue + FadeValue;
+									for(int i = 0; i < NUMMENU; i += 1) DrawIMG( menus[i], tempScreen2, pos[i].x, pos[i].y );
+									DrawIMG( tempScreen2, screen, 0, 0 );
+									SDL_SetAlpha( tempScreen2, SDL_SRCALPHA, AlphaValue);
+									SDL_Flip(screen);
+									if(1000/200 > (SDL_GetTicks()-now)) SDL_Delay(1000/200 - (SDL_GetTicks()-now));
+								}
 							}
+							for(int i = 0; i < NUMMENU; i += 1) SDL_FreeSurface(menus[i]);
 							return i;
 						}
 					} break;
 				case SDL_KEYDOWN:
-					if( Keys[SDLK_ESCAPE] )
-					{
-						SDL_FreeSurface(menus[0]);
-						SDL_FreeSurface(menus[1]);
+					if( Keys[SDLK_ESCAPE] ) {
+						for(int i = 0; i < NUMMENU; i += 1) SDL_FreeSurface(menus[i]);
 						return 1;
 					}
 					break;
@@ -139,8 +145,8 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font){
 		DrawIMG( tempScreen2, screen, 0, 0 );
 		SDL_SetAlpha( tempScreen2, SDL_SRCALPHA, AlphaValue);
 		SDL_Flip(screen);
-		if(1000/30 > (SDL_GetTicks()-time)) {
-			SDL_Delay(1000/30 - (SDL_GetTicks()-time)); //30 FRAMES A SECOND
+		if(1000/40 > (SDL_GetTicks()-time)) {
+			SDL_Delay(1000/40 - (SDL_GetTicks()-time)); //30 FRAMES A SECOND
 		}
 	}
 	return -111;
