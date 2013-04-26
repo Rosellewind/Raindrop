@@ -22,12 +22,11 @@
 
 class Game{
 protected:
-    SDL_Surface *screen;
     bool done;
     vector<Sprite*> sprites;
 public:
     Game(string fname);
-    void run();
+    void run(SDL_Surface *screen);
     ~Game();
 };
 

@@ -15,7 +15,6 @@ Game::Game(string fname){
     
     //init sdl
     SDL_Init(SDL_INIT_EVERYTHING);
-    screen = SDL_SetVideoMode(SCREENWIDTH, SCREENHEIGHT, 16, SDL_ANYFORMAT|SDL_HWSURFACE|SDL_DOUBLEBUF);
     
     //set title
     in.open(fname.c_str());
@@ -24,7 +23,7 @@ Game::Game(string fname){
     SDL_WM_SetCaption(title.c_str(), NULL);
 }
 
-void Game::run(){
+void Game::run(SDL_Surface *screen){
     SDL_Event event;
     SDL_Delay(100);
     while (!done) {
@@ -43,8 +42,6 @@ void Game::run(){
 }
 
 Game::~Game(){
-    SDL_FreeSurface(screen);
-    screen = NULL;
     for (unsigned int i = 0; i<sprites.size(); i++) {
         delete sprites[i];
     }

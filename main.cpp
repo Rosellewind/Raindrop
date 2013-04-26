@@ -25,6 +25,8 @@
 using namespace std;
 
 int main(int argc, char **argv){
+    SDL_Surface *screen = SDL_SetVideoMode(SCREENWIDTH, SCREENHEIGHT, 16, SDL_ANYFORMAT|SDL_HWSURFACE|SDL_DOUBLEBUF);
+
     Menu menu;
 
     //menu screen, pick level, settings
@@ -36,7 +38,7 @@ int main(int argc, char **argv){
     	case 0: 	//CASE 0 PLAY WAS SELECTED
     	{
             RaindropGame game("Resources/game.txt",3);//init with settings
-            game.run();
+            game.run(screen);
     	}
     		break;
     	case 1: 	//CASE 1 USER PRESSED QUIT
@@ -46,6 +48,8 @@ int main(int argc, char **argv){
     }
     
     //won/lost screen
+    SDL_FreeSurface(screen);
+    screen = NULL;
     return 0;
 }
 
