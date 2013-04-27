@@ -29,10 +29,13 @@ Pane::Pane(){
     pool = new Frame("Resources/pools.txt", 8, 2);
     SDL_Rect tempRect = pool->getRect();
     poolRect = {static_cast<Sint16>(rect.w/2 - tempRect.w/2), static_cast<Sint16>(rect.h/2 - tempRect.h/2 + rect.y), tempRect.w, tempRect.h};
+
     for (int i = 0; i < 9; i++) {
         Animation *a = new Animation("Resources/pools.txt", i, false);
-        pools.push_back(a);
+        pools.insert(pools.end(), a);
+//        pools.push_back(a);//////////////
     }
+     
 }
 
 void Pane::updatePoints(int points){

@@ -13,7 +13,7 @@
 
 #include <vector>
 #include "Frame.h"
-using namespace std;
+using namespace std;////////////have 80 sdl_surface of the same images. change vector<Frame*> to a frame, position
 
 class Animation{
     vector<Frame*> frames;

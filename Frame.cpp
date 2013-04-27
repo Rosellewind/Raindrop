@@ -16,7 +16,7 @@ Frame::Frame(string imageName, Uint32 newTime){
 
 Frame::Frame(string imageName, int x, int y, int w, int h, Uint32 newTime){
     time = newTime;
-    image = IMG_Load(imageName.c_str());
+    image = IMG_Load(imageName.c_str());//////
     tag = 0;
     src.x = x; src.y = y; dest.x = dest.y = 0;
     src.w = w; dest.w = w;

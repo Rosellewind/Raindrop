@@ -5,7 +5,7 @@
 #include "Frame.h"
 #include "Animation.h"
 
-Animation::Animation(string fname, bool isALoop){//get which animation
+Animation::Animation(string fname, bool isALoop){
     totalTime = 0;
     int n;
     ifstream in(fname.c_str());
@@ -38,7 +38,7 @@ Animation::Animation(string fname, int column, bool isALoop){
             Uint32 t;
             in>>t;
             totalTime += t;
-            Frame *f = new Frame(imageName, x, y, width, height, totalTime);
+            Frame *f = new Frame(imageName.c_str(), x, y, width, height, totalTime);
             frames.insert(frames.end(), f);
             y += height;
         }
