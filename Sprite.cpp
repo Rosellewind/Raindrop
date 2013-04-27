@@ -4,21 +4,6 @@
 #include "Sprite.h"
 #include "Animation.h"
 
-Sprite::Sprite(string fname,
-               float newXPos, float newYPos,
-               float newXVel, float newYVel,
-               float newXAcc, float newYAcc){
-    animation = new Animation(fname.c_str());
-    xPos = newXPos;
-    yPos = newYPos;
-    xVel = newXVel;
-    yVel = newYVel;
-    xAcc = newXAcc;
-    yAcc = newYAcc;
-    last = SDL_GetTicks();
-    offsetX = offsetY = 0;
-    isDragging = false; //Initialize -- JaredTS
-}
 
 Sprite::Sprite(int column, string fname, bool isLoop,
                float newXPos, float newYPos,

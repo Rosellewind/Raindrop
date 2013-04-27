@@ -5,42 +5,22 @@
 #include "Frame.h"
 #include "Animation.h"
 
-Animation::Animation(string fname, bool isALoop){
-    totalTime = 0;
-    int n;
-    ifstream in(fname.c_str());
-    in>>n;
-    isLoop = isALoop;
-    
-    for (int i = 0; i<n; i++){
-        Uint32 t;
-        string f2name;
-        in>>t>>f2name;
-        totalTime += t;
-        Frame *f = new Frame(f2name.c_str(), t);
-        frames.insert(frames.end(), f);
-    }
-    in.close();
-}
 
-Animation::Animation(string fname, int column, bool isALoop){
+Animation::Animation(string fname, int col, bool isALoop){
     totalTime = 0;
-    int columns, rows, width, height;
     string imageName;
     ifstream in(fname.c_str());
     in>>columns>>rows>>width>>height>>imageName;
+    column = col;
     isLoop = isALoop;
     
     if (column < columns) {
-        int x = column * width;
-        int y = 0;
+        frame = new Frame(imageName.c_str(), 0, 0, width, height, totalTime);
         for (int i = 0; i<rows; i++){
             Uint32 t;
             in>>t;
             totalTime += t;
-            Frame *f = new Frame(imageName.c_str(), x, y, width, height, totalTime);
-            frames.insert(frames.end(), f);
-            y += height;
+            times.push_back(totalTime);
         }
     }
     else cout<<"error in animation"<<endl;
@@ -51,10 +31,14 @@ bool Animation::draw(SDL_Surface *screen, int x, int y, Uint32 elapsed){
     bool animate = true;
     if (totalTime == 0) totalTime = -1;
     Uint32 currentFrameTime = elapsed % totalTime;
-    for (unsigned int i = 0; i < frames.size(); i++){			//Safer to use unsigned when comparing against sizes -- JaredTS
-        if (frames[i]->getTime() > currentFrameTime){          //getTime gives 100, 200, etc
-            frames[i]->draw(screen, x, y);
-            if (!isLoop && i == frames.size()-1){
+    
+    int min = 0;
+    for (unsigned int i = 0; i < times.size(); i++){
+        if (i != 0)
+            min = times[i-1];
+        if (currentFrameTime >= min && currentFrameTime < times[i]){
+            frame->draw(screen, x, y, column*width, i*height);
+            if (!isLoop && i == times.size()-1){
                 animate = false;
             }
             break;
@@ -64,11 +48,9 @@ bool Animation::draw(SDL_Surface *screen, int x, int y, Uint32 elapsed){
 }
 
 SDL_Rect Animation::getRect(){
-    return frames[0]->getRect();
+    return frame->getRect();
 }
 
 Animation::~Animation(){
-    for (unsigned int i = 0; i<frames.size(); i++) {			//Safer to use unsigned when comparing against sizes -- JaredTS
-        delete frames[i];
-    }
+    delete frame;
 }

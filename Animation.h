@@ -13,15 +13,17 @@
 
 #include <vector>
 #include "Frame.h"
-using namespace std;////////////have 80 sdl_surface of the same images. change vector<Frame*> to a frame, position
+using namespace std;
 
 class Animation{
-    vector<Frame*> frames;
+    Frame *frame;
     Uint32 totalTime;
     bool isLoop;
+    int column, columns, rows, width, height;
+    vector<int> times;
+
 public:
-    Animation(string fname, bool isALoop = true);
-    Animation(string fname, int column, bool isALoop);//for use with sprite sheet
+    Animation(string fname, int col, bool isALoop);
     bool draw(SDL_Surface *screen, int x, int y, Uint32 elapsed);
     SDL_Rect getRect();
     ~Animation();

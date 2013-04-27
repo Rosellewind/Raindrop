@@ -33,9 +33,7 @@ Pane::Pane(){
     for (int i = 0; i < 9; i++) {
         Animation *a = new Animation("Resources/pools.txt", i, false);
         pools.insert(pools.end(), a);
-//        pools.push_back(a);//////////////
     }
-     
 }
 
 void Pane::updatePoints(int points){

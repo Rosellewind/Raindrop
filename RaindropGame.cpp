@@ -18,7 +18,7 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     noteClickedIndex = -1;
     
     //set background
-    background = new Sprite("Resources/background.txt");
+    background = new Sprite(0, "Resources/background.txt", true);
     backgrounds.insert(backgrounds.begin(), background);
     
     //set pane
@@ -91,7 +91,7 @@ void RaindropGame::run(SDL_Surface *screen){
                     }
 					break;
 				case SDL_MOUSEBUTTONDOWN: {
-					timestampMouseDown = SDL_GetTicks(); //////////////////
+					timestampMouseDown = SDL_GetTicks();
                     int x = event.button.x; int y = event.button.y;
 					if (checkClickCup(x, y))
 						setDraggedObject(x, y);}
@@ -99,7 +99,7 @@ void RaindropGame::run(SDL_Surface *screen){
 				case SDL_MOUSEMOTION:
 					if(timestampMouseDown){
 						Uint32 now = SDL_GetTicks();
-						if (now - timestampMouseDown > 10 && cupDragged){/////
+						if (now - timestampMouseDown > 10 && cupDragged){
 							isDragging = true;
 							int x = event.motion.x; int y = event.motion.y;
 							cupDragged->dragTo(x,y);
