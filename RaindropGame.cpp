@@ -14,7 +14,7 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     minLatency = latency;
     isDragging = false;
     timestampMouseDown = 0;
-    objDragged = NULL;
+    cupDragged = NULL;
     noteClickedIndex = -1;
     
     //set background
@@ -42,12 +42,14 @@ void RaindropGame::run(SDL_Surface *screen){
     lastDrop = last;
     SDL_Delay(100);
     
+    /*
     //JaredTemp 2. make sprites
     for (int i = 0; i<20; i++) {
         int r = (rand()%20)*0.05*SCREENWIDTH;//use # of drops that will fit, prevents overlap, then disperse over the % of the screen,ex. 100/20 = 5%
         Sprite *drop = new Sprite(0,"Resources/tempDrops.txt", true, r, r, r, r);
         tempDrops.push_back(drop);
     }
+     */
 
     //add cups
     cups = Cup::initCups(numCups, screen);
@@ -73,17 +75,18 @@ void RaindropGame::run(SDL_Surface *screen){
 				case SDL_MOUSEBUTTONUP:
 					timestampMouseDown = 0;
 					if(isDragging){
-                        objDragged->stopDragging();
+                        cupDragged->stopDragging();
                         isDragging = false;
-                        objDragged = NULL;
+                        cupDragged = NULL;
 					}
 					else{
 						int x = event.button.x; int y = event.button.y;
 						//check to see if it is on click/draggable object
 						if (checkClickCup(x, y)) {
                             soundplayer->pauseNoteSequence(2000);
-                            soundplayer->playSound(objDragged->note, SoundPlayer::CLICK_CHANNEL);
-                            pane->flashColor(objDragged->note);
+                            soundplayer->playSound(cupDragged->note, SoundPlayer::CLICK_CHANNEL);
+                            noteClickedIndex = cupDragged->note;
+                            gameManager->checkPattern(cupDragged->note);
 						}
                     }
 					break;
@@ -96,10 +99,10 @@ void RaindropGame::run(SDL_Surface *screen){
 				case SDL_MOUSEMOTION:
 					if(timestampMouseDown){
 						Uint32 now = SDL_GetTicks();
-						if (now - timestampMouseDown > 10 && objDragged){/////
+						if (now - timestampMouseDown > 10 && cupDragged){/////
 							isDragging = true;
 							int x = event.motion.x; int y = event.motion.y;
-							objDragged->dragTo(x,y);
+							cupDragged->dragTo(x,y);
 						}
 					}
                     break;
@@ -146,7 +149,7 @@ void RaindropGame::run(SDL_Surface *screen){
         pane->draw(screen, elapsed);
         
         
-        
+        /*
         //JaredTemp 3. update sprites, need to be in a while (!done) loop
         for (unsigned int i = 0; i < tempDrops.size(); i++) {
             tempDrops[i]->update(elapsed);
@@ -160,6 +163,7 @@ void RaindropGame::run(SDL_Surface *screen){
         //JaredTemp 5. nothing else is using the "bounce" in the sprite class. you can change it to drop off the screen and appear at the top if you want, or subclass to override update().
         
         //JaredTemp 6. either rotate image in the .png file and keep a constant angle and figure out corresponding xvel and yvel values, OR you can look into if sdl supports rotating images.
+         */
         
         
         SDL_Flip(screen);
@@ -174,12 +178,12 @@ void RaindropGame::setDraggedObject(int x, int y){
         for (int i = (int)cups.size()-1; i>=0;i--) {
             SDL_Rect cupRect = cups[i]->getRect();
             if( ( x > cupRect.x ) && ( x < cupRect.x + cupRect.w ) && ( y > cupRect.y ) && ( y < cupRect.y + cupRect.h ) ){
-                objDragged = cups[i];
-                objDragged->startDragging(x,y);
+                cupDragged = cups[i];
+                cupDragged->startDragging(x,y);
                 
                 cups.erase(cups.begin()+i);
-                cups.push_back(objDragged);
-                //  cups.insert(cups.begin(), objDragged);
+                cups.push_back(cupDragged);
+                //  cups.insert(cups.begin(), cupDragged);
                 
                 found = 1;
                 break;

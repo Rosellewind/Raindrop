@@ -39,17 +39,17 @@ class RaindropGame: public Game{
     Uint32 elapsed;
     Uint32 last;
     Uint32 lastDrop;
-    //    Sprite *objDragged;
+//    Sprite *objDragged;
+    Cup *cupDragged;
     Sprite *background;
     Pane *pane;
-    Cup *objDragged;
     SoundPlayer *soundplayer;
     GameManager *gameManager;
     int noteClickedIndex;
     int cupClickedIndex;
     
     //JaredTemp 1. declare vector.
-    vector<Sprite*> tempDrops;
+//    vector<Sprite*> tempDrops;
 
 
     
