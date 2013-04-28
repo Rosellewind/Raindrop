@@ -129,7 +129,8 @@ int SoundPlayer::sequenceThread(void *player){
 	SoundPlayer *sp = (SoundPlayer*)player;
 	sp->playSound(sp->notes[sp->sequenceCounter]);
 	sp->sequenceCounter++;
-    
+	Uint32 intitalTime, nextTime;
+
 	while(!sp->done){
 		if(!sp->pausedSequence){
 			if(sp->sequenceCounter>=sp->notes.size()){
@@ -159,8 +160,8 @@ void SoundPlayer::cleanup(){
 		stopNoteSequence();
 	}
 	Mix_FreeMusic(music);
-	for(unsigned int i=0; i< sounds.size();i++){
-		Mix_FreeChunk(sounds[i]);
+	for(int i=0; i< sounds[CLICK_CHANNEL].size();i++){
+		Mix_FreeChunk(sounds[CLICK_CHANNEL][i]);
 	}
 	Mix_Quit();
 	Mix_CloseAudio();
