@@ -30,7 +30,7 @@ using namespace std;
 
 class SoundPlayer{
 	Mix_Music *music;
-	vector<Mix_Chunk*> sounds;
+	vector<Mix_Chunk*> sounds[2]; 
 	bool done;
 	int delay, pauseDelay; // in ms
 	Pane *pane;
@@ -39,7 +39,8 @@ class SoundPlayer{
 public:
 	int sequenceCounter;
 	vector<Note> notes;
-	bool pausedSequence;
+	bool pausedSequence, firstClick;
+	Uint32 initialTime;
 	static const int SEQUENCE_CHANNEL = 2;
 	static const int CLICK_CHANNEL =1;
 	
