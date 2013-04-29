@@ -15,7 +15,7 @@ Game::Game(string fname){
     
     //init sdl
     SDL_Init(SDL_INIT_EVERYTHING);
-    screen = SDL_SetVideoMode(SCREENWIDTH, SCREENHEIGHT, 16, SDL_ANYFORMAT|SDL_HWSURFACE|SDL_DOUBLEBUF);
+    //screen = SDL_SetVideoMode(SCREENWIDTH, SCREENHEIGHT, 16, SDL_ANYFORMAT|SDL_HWSURFACE|SDL_DOUBLEBUF);
 
     //set title
     in.open(fname.c_str());

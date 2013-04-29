@@ -26,18 +26,18 @@ using namespace std;
 
 int main(int argc, char **argv){
     Menu menu;
-    // RaindropGame game("Resources/game.txt",2);//init with settings
-    // game.run();
-
+    SDL_Surface *screen;
+    screen = SDL_SetVideoMode(SCREENWIDTH, SCREENHEIGHT, 16, SDL_ANYFORMAT|SDL_HWSURFACE|SDL_DOUBLEBUF);
     //menu screen, pick level, settings
-    int i = menu.run();
+    int i = menu.run(screen);
+    menu.~Menu();
     //game screen
     switch(i)
     {
     	case 0: 	//CASE 0 PLAY WAS SELECTED
     	{
             RaindropGame game("Resources/game.txt",2);//init with settings
-            game.run();
+            game.run(screen);
     	}
     		break;
     	case 1: 	//CASE 1 USER PRESSED QUIT

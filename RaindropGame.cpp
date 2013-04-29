@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <ctime>
+#include <time.h>
 #include "Animation.h"
 #include "ProtoGame.h"
 #include "RaindropGame.h"
@@ -37,7 +38,7 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
 
 }
 
-void RaindropGame::run(){
+void RaindropGame::run(SDL_Surface* screen){
     SDL_Event event;
     last = SDL_GetTicks();
     lastDrop = last;
@@ -232,10 +233,11 @@ void RaindropGame::checkPattern(Note note){
 
 int RaindropGame::updateThread(void *ptr){
     RaindropGame* game = (RaindropGame*)ptr;
-
     //add drops if needed
     while ((int)game->drops.size() < game->numDrops && game->elapsed > game->lastDrop + game->minLatency) {
-        int x = (rand()%20)*0.05*SCREENWIDTH;
+        //int x = (rand()%20)*0.05*SCREENWIDTH;
+    	srand(SDL_GetTicks()/time(NULL));
+    	int x = rand()% SCREENWIDTH;
         Drop *d = new Drop("Resources/drop.txt", PLAIN, x, game->gameSpeed);
         cout<<"Drop at: "<<x<<endl;
         game->drops.insert(game->drops.end(), d);

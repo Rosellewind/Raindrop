@@ -3,6 +3,7 @@
 #include "ProtoGame.h"
 #include "Sprite.h"
 #include "Animation.h"
+#include "Functions.h"
 
 Sprite::Sprite(string fname,
                   float newXPos, float newYPos,
@@ -45,10 +46,16 @@ void Sprite::update(Uint32 elapsed){
         yVel += yAcc/deltaT;
         xPos += xVel/deltaT;
         yPos += yVel/deltaT;
-        if ((int)xPos > SCREENWIDTH) xVel = -xVel;
-        if ((int)yPos > GAMESCREENHEIGHT) yVel = -yVel;
-        if ((int)xPos < 0) xVel = -xVel;
-        if ((int)yPos < 0) yVel = -yVel;
+        if((int) xPos > SCREENWIDTH) {
+        	yPos = rand() % SCREENWIDTH - 40;
+        	xPos = -40;
+        }
+        if((int) yPos > SCREENHEIGHT) {
+        	xPos = rand() % SCREENWIDTH - 40;
+        	yPos = -40;
+        }
+        //if ((int) xPos < 0) xVel = -xVel;
+        //if ((int) yPos < 0) yVel = -yVel;
     }
 }
 
