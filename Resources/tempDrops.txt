@@ -1,0 +1,15 @@
+1
+1
+32
+45
+Resources/Images/droplet1.png
+100
+
+
+
+column
+row
+width
+height
+Resources/Images/tempDrops.png
+duration

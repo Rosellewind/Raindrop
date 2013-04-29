@@ -1,7 +1,7 @@
 /*
  on mac:
  g++ -o Raindrop -I /Library/Frameworks/SDL.framework/Headers -framework SDL -framework SDL_image -framework Cocoa SDLMain.m main.cpp Game.cpp Frame.cpp Animation.cpp Sprite.cpp Drop.cpp Cup.cpp ProtoGame.h RaindropGame.cpp Pane.cpp Text.cpp
-*/
+ */
 
 #ifdef _WIN32
 #include "SDL/SDL.h"
@@ -9,7 +9,7 @@
 #elif __APPLE__
 #include <SDL/SDL.h>
 #include <SDL/SDL_main.h>
- 
+
 #elif __unix__
 #include "SDL/SDL.h"
 #endif
@@ -25,18 +25,19 @@
 using namespace std;
 
 int main(int argc, char **argv){
+    SDL_Surface *screen = SDL_SetVideoMode(SCREENWIDTH, SCREENHEIGHT, 16, SDL_ANYFORMAT|SDL_HWSURFACE|SDL_DOUBLEBUF);
+
     Menu menu;
-    SDL_Surface *screen;
-    screen = SDL_SetVideoMode(SCREENWIDTH, SCREENHEIGHT, 16, SDL_ANYFORMAT|SDL_HWSURFACE|SDL_DOUBLEBUF);
+
     //menu screen, pick level, settings
-    int i = menu.run(screen);
-    menu.~Menu();
+        int i = menu.run();
+//    int i = 0;
     //game screen
     switch(i)
     {
     	case 0: 	//CASE 0 PLAY WAS SELECTED
     	{
-            RaindropGame game("Resources/game.txt",2);//init with settings
+            RaindropGame game("Resources/game.txt",3);//init with settings
             game.run(screen);
     	}
     		break;
@@ -47,6 +48,8 @@ int main(int argc, char **argv){
     }
     
     //won/lost screen
+    SDL_FreeSurface(screen);
+    screen = NULL;
     return 0;
 }
 

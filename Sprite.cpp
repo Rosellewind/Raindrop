@@ -3,23 +3,7 @@
 #include "ProtoGame.h"
 #include "Sprite.h"
 #include "Animation.h"
-#include "Functions.h"
 
-Sprite::Sprite(string fname,
-                  float newXPos, float newYPos,
-                  float newXVel, float newYVel,
-                  float newXAcc, float newYAcc){
-        animation = new Animation(fname.c_str());
-    xPos = newXPos;
-    yPos = newYPos;
-    xVel = newXVel;
-    yVel = newYVel;
-    xAcc = newXAcc;
-    yAcc = newYAcc;
-    last = SDL_GetTicks();
-    offsetX = offsetY = 0;
-    isDragging = false; //Initialize -- JaredTS
-}
 
 Sprite::Sprite(int column, string fname, bool isLoop,
                float newXPos, float newYPos,
@@ -46,16 +30,10 @@ void Sprite::update(Uint32 elapsed){
         yVel += yAcc/deltaT;
         xPos += xVel/deltaT;
         yPos += yVel/deltaT;
-        if((int) xPos > SCREENWIDTH) {
-        	yPos = rand() % SCREENWIDTH - 40;
-        	xPos = -40;
-        }
-        if((int) yPos > SCREENHEIGHT) {
-        	xPos = rand() % SCREENWIDTH - 40;
-        	yPos = -40;
-        }
-        //if ((int) xPos < 0) xVel = -xVel;
-        //if ((int) yPos < 0) yVel = -yVel;
+        if ((int)xPos > SCREENWIDTH) xPos = 0;
+        if ((int)yPos > GAMESCREENHEIGHT)yPos= 0;
+        if ((int)xPos < 0) xVel = -xVel;
+        if ((int)yPos < 0) yVel = -yVel;
     }
 }
 
@@ -72,6 +50,7 @@ bool Sprite::isAlive(){
 }
 
 void Sprite::dragTo(int x, int y){
+
     xPos = (float)x - offsetX;
 	yPos = (float)y - offsetY;
 }
@@ -99,7 +78,7 @@ void Sprite::stopDragging(){
 }
 
 Sprite::~Sprite(){
-    if (animation) 
+    if (animation)
         delete animation;
 }
 

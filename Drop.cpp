@@ -1,7 +1,7 @@
 #include "Drop.h"
 #include "ProtoGame.h"
 
-Drop::Drop(string fname, Type type, int x, int gameSpeed): Sprite(fname, x, 0, 0, gameSpeed){
+Drop::Drop(string fname, Type type, int x, int gameSpeed): Sprite(0, fname, true, x, 0, 0, gameSpeed){
     isCaught = 0;
 }
 
@@ -10,9 +10,9 @@ void Drop::update(Uint32 elapsed){
 }
 
 bool Drop::isAlive(){
-    if (isCaught) 
+    if (isCaught)
         return yPos < GAMESCREENHEIGHT - 60;
-    else 
+    else
         return yPos < GAMESCREENHEIGHT - 20;
 }
 

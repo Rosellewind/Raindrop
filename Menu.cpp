@@ -207,6 +207,14 @@ int Menu::run(SDL_Surface* screen)
 	//SDL_WaitThread(thread2, NULL);
     //SDL_KillThread( thread1 );
     //SDL_KillThread( thread2 );
+	TTF_CloseFont(font);
+	//SDL_FreeSurface( screen );
+    SDL_FreeSurface( icon );
+    Mix_FreeMusic(music);
+    Mix_CloseAudio();
+    TTF_Quit();
+	//SDL_Quit();
+	//atexit(SDL_Quit);
 	return i;
 }
 
