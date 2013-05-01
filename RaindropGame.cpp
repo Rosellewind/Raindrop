@@ -47,6 +47,8 @@ void RaindropGame::run(){
     
     //play sound
     soundplayer->setMusicVolume(15);
+    soundplayer->setGlassVolume(120);
+    soundplayer->setSequenceVolume(50);
     soundplayer->playMusic();
     
     //play sound pattern
@@ -75,8 +77,9 @@ void RaindropGame::run(){
 						//check to see if it is on click/draggable object
 						if (checkClickCup(x, y)) {
                             soundplayer->pauseNoteSequence(2000);
-                            soundplayer->playSound(objDragged->note, SoundPlayer::CLICK_CHANNEL);
-                            pane->flashColor(objDragged->note);
+                            Cup* tempCup = (Cup*)objDragged;
+                            soundplayer->playGlassSound(tempCup->note);
+                            pane->flashColor(tempCup->note);
 						}
                     }
 					break;
@@ -154,7 +157,7 @@ void RaindropGame::setDraggedObject(int x, int y){
                 objDragged->startDragging(x,y);
                 
                 cups.erase(cups.begin()+i);
-                cups.push_back(objDragged);
+                cups.push_back((Cup*)objDragged);
                 //  cups.insert(cups.begin(), objDragged);
                 
                 found = 1;
@@ -225,4 +228,5 @@ RaindropGame::~RaindropGame(){
     for (unsigned int i = 0; i<cups.size(); i++){
         delete cups[i];
     }
+    delete soundplayer;
 }

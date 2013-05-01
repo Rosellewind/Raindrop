@@ -42,7 +42,7 @@ class RaindropGame: public Game{
     //    Sprite *objDragged;
     Sprite *background;
     Pane *pane;
-    Cup *objDragged;
+    Sprite *objDragged;
     SoundPlayer *soundplayer;
     GameManager *gameManager;
     int noteClickedIndex;
