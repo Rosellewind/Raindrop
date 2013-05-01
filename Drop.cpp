@@ -1,7 +1,7 @@
 #include "Drop.h"
 #include "ProtoGame.h"
 
-Drop::Drop(string fname, Type type, int x, int gameSpeed): Sprite(fname, x, 0, 0, gameSpeed){
+Drop::Drop(string fname, Type type, int x, int gameSpeed): Sprite(0, fname, true, x, 0, 0, gameSpeed){
     isCaught = 0;
 }
 

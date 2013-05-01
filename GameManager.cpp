@@ -36,17 +36,16 @@ void GameManager::checkPattern(Note note){
     bool match = checkMatching(0);
     cout<<match<<endl;
     
-    if (match) {//temp game logic
+    if (match) {
         cout<<"match"<<endl;
         points += 5;
         pane->updatePoints(points);
-        int temp = (int)(level+ 3)*.6;
         if (subLevel > (int)(level+ 3)*.6){ //2,3,3,4,4,5,6,6,7,7 sublevels
             level ++;
             subLevel = 0;
             pane->updateLevel(level);
         }
-        soundplayer->stopNoteSequence();
+        soundplayer->stopNoteSequence();////taking a long time
         newPattern();
         soundplayer->playNoteSequence(pattern,6000);
     }
@@ -66,9 +65,7 @@ void GameManager::newPattern(){
         cout<<lastPattern[i];
     }
     cout<<endl;
-    
-    
-    
+
     Note previous = randomNote();
     subLevel ++;
     int numNotes = (int)(level + 6)*.35;  //2,2,3,3,3,4,4,4,5,5,5,6,6,7 numNotes

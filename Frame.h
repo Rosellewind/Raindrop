@@ -34,11 +34,10 @@ class Frame{
     SDL_Rect src, dest;
     Uint32 time;
 public:
-    Frame(string imageName, Uint32 newTime = UINT32_MAX);
     Frame(string imageName, int x, int y, int w, int h, Uint32 newTime);//for use with animation sprite sheet
     Frame(string fname, int column, int row);//for single image from sprite sheet
     Uint32 getTime();
-    void draw(SDL_Surface *screen, int x, int y);
+    void draw(SDL_Surface *screen, int x, int y, int sx = -1, int sy = -1);
     SDL_Rect getRect();
     ~Frame();
 };

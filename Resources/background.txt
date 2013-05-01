@@ -1,2 +1,6 @@
 1
-100 Resources/images/back1.jpg
+1
+800
+480
+Resources/images/back1.jpg
+100

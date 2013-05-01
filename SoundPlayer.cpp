@@ -74,6 +74,7 @@ void SoundPlayer::setSoundVolume(int newVolume, int channel){
 	Mix_Volume(channel, vol);
 	cout<<"Vol After: "<<Mix_Volume(channel,-1)<<endl;
 }
+
 void SoundPlayer::playGlassSound(Note n){
 	if(sounds[CLICK_CHANNEL].size()>0){
 		if(Mix_PlayChannel(CLICK_CHANNEL, sounds[CLICK_CHANNEL][n], 0) == -1){
@@ -156,7 +157,7 @@ int SoundPlayer::sequenceThread(void *player){
 		}else{
 			nextTime = SDL_GetTicks();
 			if(nextTime - sp->initialTime >= sp->pauseDelay){
-				cout<<"Initial Time: "<<sp->initialTime<<"  Next time: "<<nextTime<<"  Elapsed "<<(nextTime - sp->initialTime)<<endl;
+				//cout<<"Initial Time: "<<sp->initialTime<<"  Next time: "<<nextTime<<"  Elapsed "<<(nextTime - sp->initialTime)<<endl;
 				sp->pausedSequence = false;
 				Mix_Resume(SEQUENCE_CHANNEL);
 				sp->firstClick=true;		

@@ -39,14 +39,18 @@ class RaindropGame: public Game{
     Uint32 elapsed;
     Uint32 last;
     Uint32 lastDrop;
-    //    Sprite *objDragged;
+//    Sprite *objDragged;
+    Cup *cupDragged;
     Sprite *background;
     Pane *pane;
-    Sprite *objDragged;
     SoundPlayer *soundplayer;
     GameManager *gameManager;
     int noteClickedIndex;
     int cupClickedIndex;
+    
+    //JaredTemp 1. declare vector.
+//    vector<Sprite*> tempDrops;
+
 
     
     
@@ -58,7 +62,7 @@ class RaindropGame: public Game{
     
 public:
     RaindropGame(string fname, int cups = 3, int drops = 10, int speed = 50, int latency = 800, int lvl = 1);
-    void run();
+    void run(SDL_Surface *screen);
     void applySurface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL);
     ~RaindropGame();
     
