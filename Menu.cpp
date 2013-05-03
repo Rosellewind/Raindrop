@@ -92,10 +92,10 @@ void Menu::DrawDroplets(int z, int j, int num, Sprite *d)
 {
 	for (int i = 0; i<num; i++)
 	{
-		int diff = (rand() % 2) - 2;
+		//int diff = (rand() % 2) - 2;
 		int xx = (rand() % SCREENWIDTH) - 40;
 		int yy = (rand() % SCREENHEIGHT) - 40;
-		d = new Sprite(j,"Resources/menuDrops.txt", true, xx, yy, z+diff, z);
+		d = new Sprite(j,"Resources/menuDrops.txt", true, xx, yy, z, z);
 		menuRain.push_back(d);
 	}
 }
@@ -115,11 +115,11 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font){
 		pos[i].w = menus[i]->clip_rect.w;
 		pos[i].h = menus[i]->clip_rect.h;
 	}
-	DrawDroplets(10,0,4,droplets1);
-	DrawDroplets(9,1,8,droplets2);
-	DrawDroplets(8,2,12,droplets3);
-	DrawDroplets(7,3,16,droplets4);
-	DrawDroplets(6,4,20,droplets5);
+	DrawDroplets(5,0,4,droplets1);
+	DrawDroplets(4,1,8,droplets2);
+	DrawDroplets(3,2,12,droplets3);
+	DrawDroplets(2,3,16,droplets4);
+	DrawDroplets(1,4,20,droplets5);
 	SDL_Surface* tempScreen = SDL_CreateRGBSurface( SDL_SWSURFACE | SDL_SRCALPHA, SCREENWIDTH, SCREENHEIGHT, 32, 0xff000000,0x00ff0000,0x0000ff00,0x000000ff);
 	SDL_Surface* tempScreen2 = SDL_DisplayFormat( tempScreen );
 	SDL_FreeSurface( tempScreen );
@@ -169,7 +169,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font){
 									DrawIMG( tempScreen2, screen, 0, 0 );
 									SDL_SetAlpha( tempScreen2, SDL_SRCALPHA, AlphaValue);
 									SDL_Flip(screen);
-									if(1000/100 > (SDL_GetTicks()-now)) SDL_Delay(1000/100 - (SDL_GetTicks()-now));
+									if(1000/60 > (SDL_GetTicks()-now)) SDL_Delay(1000/60 - (SDL_GetTicks()-now));
 								}
 							}
 							for(int i = 0; i < NUMMENU; i += 1) SDL_FreeSurface(menus[i]);
@@ -192,7 +192,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font){
 		for (unsigned int i = 0; i < menuRain.size(); i++) menuRain[i]->draw(screen,time);
 		for(int i = 0; i < NUMMENU; i += 1) DrawIMG( menus[i], screen, pos[i].x, pos[i].y ); //DRAW ALL BUTTONS BEFORE FADE
 		SDL_Flip(screen);
-		if(1000/100 > (SDL_GetTicks()-time)) SDL_Delay(1000/100 - (SDL_GetTicks()-time));
+		if(1000/60 > (SDL_GetTicks()-time)) SDL_Delay(1000/60 - (SDL_GetTicks()-time));
 	}
 	return -111;
 }
