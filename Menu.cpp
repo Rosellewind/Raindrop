@@ -169,7 +169,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font){
 									DrawIMG( tempScreen2, screen, 0, 0 );
 									SDL_SetAlpha( tempScreen2, SDL_SRCALPHA, AlphaValue);
 									SDL_Flip(screen);
-									if(1000/60 > (SDL_GetTicks()-now)) SDL_Delay(1000/60 - (SDL_GetTicks()-now));
+									if(1000/100 > (SDL_GetTicks()-now)) SDL_Delay(1000/100 - (SDL_GetTicks()-now));
 								}
 							}
 							for(int i = 0; i < NUMMENU; i += 1) SDL_FreeSurface(menus[i]);
@@ -192,9 +192,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font){
 		for (unsigned int i = 0; i < menuRain.size(); i++) menuRain[i]->draw(screen,time);
 		for(int i = 0; i < NUMMENU; i += 1) DrawIMG( menus[i], screen, pos[i].x, pos[i].y ); //DRAW ALL BUTTONS BEFORE FADE
 		SDL_Flip(screen);
-		if(1000/60 > (SDL_GetTicks()-time)) {
-			SDL_Delay(1000/60 - (SDL_GetTicks()-time)); //30 FRAMES A SECOND
-		}
+		if(1000/100 > (SDL_GetTicks()-time)) SDL_Delay(1000/100 - (SDL_GetTicks()-time));
 	}
 	return -111;
 }

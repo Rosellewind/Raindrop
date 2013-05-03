@@ -30,10 +30,16 @@ void Sprite::update(Uint32 elapsed){
         yVel += yAcc/deltaT;
         xPos += xVel/deltaT;
         yPos += yVel/deltaT;
-        if ((int)xPos > SCREENWIDTH) xPos = 0;
-        if ((int)yPos > GAMESCREENHEIGHT)yPos= 0;
-        if ((int)xPos < 0) xVel = -xVel;
-        if ((int)yPos < 0) yVel = -yVel;
+        if ((int)xPos > SCREENWIDTH) {
+        	yPos = rand() % SCREENHEIGHT;
+        	xPos = -40;
+        }
+        if ((int)yPos > SCREENHEIGHT) {
+        	xPos = rand() % SCREENWIDTH;
+        	yPos= -40;
+        }
+        //if ((int)xPos < 0) xVel = -xVel;
+        //if ((int)yPos < 0) yVel = -yVel;
     }
 }
 

@@ -135,13 +135,14 @@ void RaindropGame::run(SDL_Surface *screen){
         
         //draw cups
         for (unsigned int i = 0; i < cups.size(); i++) {
-            if (cupClickedIndex == i){
-                if (!cups[i]->draw(screen, elapsed, noteClickedIndex)){
-                noteClickedIndex = -1;
-                    cupClickedIndex = -1;
-                }
-            }
-            else cups[i]->draw(screen, elapsed);
+//            if (cupClickedIndex == i){
+//                if (!cups[i]->draw(screen, elapsed, noteClickedIndex)){
+//                noteClickedIndex = -1;
+//                    cupClickedIndex = -1;
+//                }
+//            }
+//            else cups[i]->draw(screen, elapsed);
+        		cups[i]->draw(screen, elapsed);
         }
 
         
