@@ -1,0 +1,13 @@
+8
+1
+40
+40
+Resources/Images/dropletSheet.png
+100
+100
+100
+100
+100
+100
+100
+100

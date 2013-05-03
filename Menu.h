@@ -24,37 +24,36 @@
 #endif
 
 #include <vector>
-#include "Functions.h"
+#include "Sprite.h"
 
+using namespace std;
 class Menu
 {
 public:
-    Uint32 time;
-    int x,y,AlphaValue;
+    int x,y,AlphaValue,FadeValue;
     SDL_Thread *thread1, *thread2;
-    SDL_Surface *screen, *icon;
+    SDL_Surface *icon;
     TTF_Font *font;
     Mix_Music *music;
     Mix_Chunk *sound;
     SDL_Event event;
+    vector<Sprite*> menuRain;
+    Uint8 *Keys;
+    Uint32 time;
+    Sprite *droplets1;
+    Sprite *droplets2;
+    Sprite *droplets3;
+    Sprite *droplets4;
+    Sprite *droplets5;
+    static const int NUMMENU = 3;
+    Menu();
+    ~Menu();
     int show_menu(SDL_Surface* screen, TTF_Font* font);
-    int show_background(SDL_Surface* screen);
+    SDL_Surface* LoadIMG(const char *c, Uint32 colorkey);
     void DrawIMG(SDL_Surface *img, SDL_Surface* des, int x, int y);
-    int run();
-    
+    void DrawDroplets(int z, int j, int num, Sprite *d);
+    int run(SDL_Surface* screen);
+    Menu* DESTROY();
 };
-class BSprite
-{
-public:
-    BSprite();
-    BSprite(int num);
-    BSprite* DRAW(SDL_Surface* buffer, int x, int y);
-    virtual ~BSprite();
-    bool SpriteExists();
-    BSprite* DESTROY();
-private:
-    bool loaded;
-    int xVel,yVel,xPos,yPos;
-    SDL_Surface* sprite;
-};
+
 #endif /* MENU_H_ */
