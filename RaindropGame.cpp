@@ -159,10 +159,6 @@ void RaindropGame::run(SDL_Surface *screen){
         for (unsigned int i = 0; i < tempDrops.size(); i++) {
             tempDrops[i]->draw(screen, elapsed);
         }
-        
-        //JaredTemp 5. nothing else is using the "bounce" in the sprite class. you can change it to drop off the screen and appear at the top if you want, or subclass to override update().
-        
-        //JaredTemp 6. either rotate image in the .png file and keep a constant angle and figure out corresponding xvel and yvel values, OR you can look into if sdl supports rotating images.
          */
         
         
@@ -209,6 +205,7 @@ int RaindropGame::updateThread(void *ptr){
 
     //add drops if needed
     while ((int)game->drops.size() < game->numDrops && game->elapsed > game->lastDrop + game->minLatency) {
+        
         int x = (rand()%20)*0.05*SCREENWIDTH;
         Drop *d = new Drop("Resources/drop.txt", PLAIN, x, game->gameSpeed);
         game->drops.insert(game->drops.end(), d);
