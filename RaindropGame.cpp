@@ -87,8 +87,8 @@ void RaindropGame::run(SDL_Surface *screen){
 						if (checkClickCup(x, y)) {
                             soundplayer->pauseNoteSequence(2000);
                             noteClickedIndex = cupDragged->note;
-                            soundplayer->playGlassSound(noteClickedIndex);
-                            gameManager->checkPattern(noteClickedIndex);
+                            soundplayer->playGlassSound((Note)noteClickedIndex);
+                            gameManager->checkPattern((Note)noteClickedIndex);
 
 						}
                     }
