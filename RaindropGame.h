@@ -39,7 +39,6 @@ class RaindropGame: public Game{
     Uint32 elapsed;
     Uint32 last;
     Uint32 lastDrop;
-//    Sprite *objDragged;
     Cup *cupDragged;
     Sprite *background;
     Pane *pane;
