@@ -25,6 +25,7 @@
 #include "Game.h"
 #include "Pane.h"
 #include "GameManager.h"
+#include "RandomGenerator.h"
 
 class RaindropGame: public Game{
     int numCups;
@@ -46,7 +47,7 @@ class RaindropGame: public Game{
     GameManager *gameManager;
     int noteClickedIndex;
     int cupClickedIndex;
-    
+    RandomGenerator *rng;
     //JaredTemp 1. declare vector.
 //    vector<Sprite*> tempDrops;
 

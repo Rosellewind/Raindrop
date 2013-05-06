@@ -34,6 +34,7 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     
     //seed psuedo random number generator
     srand ((unsigned int)time(NULL));
+    rng = new RandomGenerator(0,20);
 }
 
 void RaindropGame::run(SDL_Surface *screen){
@@ -209,7 +210,8 @@ int RaindropGame::updateThread(void *ptr){
     //add drops if needed
     while ((int)game->drops.size() < game->numDrops && game->elapsed > game->lastDrop + game->minLatency) {
         
-        int x = (rand()%20)*0.05*SCREENWIDTH;
+        //int x = (rand()%20)*0.05*SCREENWIDTH;
+        int x = (game->rng->next())*0.05*SCREENWIDTH;
         Drop *d = new Drop("Resources/drop.txt", PLAIN, x, game->gameSpeed);
         game->drops.insert(game->drops.end(), d);
         game->lastDrop = SDL_GetTicks();
