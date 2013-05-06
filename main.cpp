@@ -30,7 +30,7 @@ int main(int argc, char **argv){
     Menu menu;
 
     //menu screen, pick level, settings
-        int i = menu.run();
+        int i = 0;// menu.run();
 //    int i = 0;
     //game screen
     switch(i)

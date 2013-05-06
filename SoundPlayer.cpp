@@ -123,6 +123,7 @@ void SoundPlayer::playNoteSequence(vector<Note> newNotes, int newDelay){
 void SoundPlayer::pauseNoteSequence(int delay){
 	pausedSequence=true;
 	pauseDelay = delay;
+	//remaining += delay;
 	initialTime = SDL_GetTicks();
 	Mix_Pause(SEQUENCE_CHANNEL);
 }
@@ -159,6 +160,7 @@ int SoundPlayer::sequenceThread(void *player){
 			if(nextTime - sp->initialTime >= sp->pauseDelay){
 				//cout<<"Initial Time: "<<sp->initialTime<<"  Next time: "<<nextTime<<"  Elapsed "<<(nextTime - sp->initialTime)<<endl;
 				sp->pausedSequence = false;
+				SDL_Delay(100);
 				Mix_Resume(SEQUENCE_CHANNEL);
 				sp->firstClick=true;		
 			}

@@ -85,7 +85,7 @@ void RaindropGame::run(SDL_Surface *screen){
 						int x = event.button.x; int y = event.button.y;
 						//check to see if it is on click/draggable object
 						if (checkClickCup(x, y)) {
-                            soundplayer->pauseNoteSequence(2000);
+                            soundplayer->pauseNoteSequence(3000);
                             noteClickedIndex = cupDragged->note;
                             soundplayer->playGlassSound((Note)noteClickedIndex);
                             gameManager->checkPattern((Note)noteClickedIndex);
