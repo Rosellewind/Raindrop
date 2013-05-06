@@ -26,13 +26,9 @@ using namespace std;
 
 int main(int argc, char **argv){
     SDL_Surface *screen = SDL_SetVideoMode(SCREENWIDTH, SCREENHEIGHT, 16, SDL_ANYFORMAT|SDL_HWSURFACE|SDL_DOUBLEBUF);
-
+    
     Menu menu;
-
-    //menu screen, pick level, settings
-        int i = 0;// menu.run();
-//    int i = 0;
-    //game screen
+    int i = menu.run(screen);
     switch(i)
     {
     	case 0: 	//CASE 0 PLAY WAS SELECTED
@@ -46,14 +42,8 @@ int main(int argc, char **argv){
     	case -1:	//CASE -1 USER HIT ESC OR CLOSED THE WINDOW
     		break;
     }
-    
     //won/lost screen
     SDL_FreeSurface(screen);
     screen = NULL;
     return 0;
 }
-
-
-
-
-
