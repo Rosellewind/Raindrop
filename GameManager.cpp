@@ -45,9 +45,8 @@ void GameManager::checkPattern(Note note){
             subLevel = 0;
             pane->updateLevel(level);
         }
-        soundplayer->stopNoteSequence();////taking a long time
         newPattern();
-        soundplayer->playNoteSequence(pattern,6000);
+        soundplayer->startNewSequence(pattern, 6000);
     }
     else cout<<"nope"<<endl;
 }

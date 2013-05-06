@@ -31,16 +31,20 @@ void SoundPlayer::load_sounds(string fname){
 	}
 
 	//load sounds
-	in>>numSounds;
-	cout<<"loading "<<numSounds<<" sounds..."<<endl;
-	for(int i=0;i<numSounds;i++){
-		in>>soundName;
-		Mix_Chunk *tempsound = Mix_LoadWAV(soundName.c_str());
-		if(tempsound == NULL){
-			cout<<"error loading sound "<<soundName<<endl;
+	for(int j=1;j<3;j++){
+		in>>numSounds;
+		cout<<"loading "<<numSounds<<" sounds..."<<endl;
+		for(int i=0;i<numSounds;i++){
+			in>>soundName;
+			cout<<"\t"<<soundName;
+			Mix_Chunk *tempsound = Mix_LoadWAV(soundName.c_str());
+			if(tempsound == NULL){
+				cout<<"error loading sound "<<soundName<<endl;
+			}
+			else
+				sounds[j].push_back(tempsound);
+			cout<<endl;
 		}
-		else
-			sounds[CLICK_CHANNEL].push_back(tempsound);
 	}
 	
 	in.close();
@@ -70,17 +74,24 @@ void SoundPlayer::setSoundVolume(int newVolume, int channel){
 	Mix_Volume(channel, vol);
 	cout<<"Vol After: "<<Mix_Volume(channel,-1)<<endl;
 }
-void SoundPlayer::playSound(){
+
+void SoundPlayer::playGlassSound(Note n){
 	if(sounds[CLICK_CHANNEL].size()>0){
-		if(Mix_PlayChannel(2, sounds[CLICK_CHANNEL].front(), 0) == -1){
+		if(Mix_PlayChannel(CLICK_CHANNEL, sounds[CLICK_CHANNEL][n], 0) == -1){
 			cout<<"Error playing sound"<<endl;
 		}
 	}
 }
+void SoundPlayer::setGlassVolume(int newvol){
+	setSoundVolume(newvol, CLICK_CHANNEL);
+}
+void SoundPlayer::setSequenceVolume(int newvol){
+	setSoundVolume(newvol, SEQUENCE_CHANNEL);
+}
 
 void SoundPlayer::playSound(Note n, int channel){
-	if(sounds[CLICK_CHANNEL].size()>n){
-		if(Mix_PlayChannel(channel, sounds[CLICK_CHANNEL][n], 0) == -1){
+	if(sounds[SEQUENCE_CHANNEL].size()>n){
+		if(Mix_PlayChannel(channel, sounds[SEQUENCE_CHANNEL][n], 0) == -1){
 			cout<<"Error playing sound"<<endl;
 		}
 	}
@@ -112,6 +123,7 @@ void SoundPlayer::playNoteSequence(vector<Note> newNotes, int newDelay){
 void SoundPlayer::pauseNoteSequence(int delay){
 	pausedSequence=true;
 	pauseDelay = delay;
+	//remaining += delay;
 	initialTime = SDL_GetTicks();
 	Mix_Pause(SEQUENCE_CHANNEL);
 }
@@ -139,14 +151,16 @@ int SoundPlayer::sequenceThread(void *player){
 			}
 			if(Mix_Playing(SEQUENCE_CHANNEL)==0){
 				cout<<"Note: "<<sp->notes[sp->sequenceCounter]<<"  counter: "<<sp->sequenceCounter<<endl;
-				sp->playSound(sp->notes[sp->sequenceCounter]);
+				sp->playSound(sp->notes[sp->sequenceCounter],SEQUENCE_CHANNEL);
 				sp->pane->flashColor(sp->notes[sp->sequenceCounter]);
 				sp->sequenceCounter++;
 			}
 		}else{
 			nextTime = SDL_GetTicks();
 			if(nextTime - sp->initialTime >= sp->pauseDelay){
+				//cout<<"Initial Time: "<<sp->initialTime<<"  Next time: "<<nextTime<<"  Elapsed "<<(nextTime - sp->initialTime)<<endl;
 				sp->pausedSequence = false;
+				SDL_Delay(100);
 				Mix_Resume(SEQUENCE_CHANNEL);
 				sp->firstClick=true;		
 			}

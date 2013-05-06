@@ -56,6 +56,8 @@ void RaindropGame::run(SDL_Surface *screen){
     
     //play sound
     soundplayer->setMusicVolume(15);
+    soundplayer->setGlassVolume(120);
+    soundplayer->setSequenceVolume(50);
     soundplayer->playMusic();
     
     //play sound pattern
@@ -83,10 +85,11 @@ void RaindropGame::run(SDL_Surface *screen){
 						int x = event.button.x; int y = event.button.y;
 						//check to see if it is on click/draggable object
 						if (checkClickCup(x, y)) {
-                            soundplayer->pauseNoteSequence(2000);
-                            soundplayer->playSound(cupDragged->note, SoundPlayer::CLICK_CHANNEL);
+                            soundplayer->pauseNoteSequence(3000);
                             noteClickedIndex = cupDragged->note;
-                            gameManager->checkPattern(cupDragged->note);
+                            soundplayer->playGlassSound((Note)noteClickedIndex);
+                            gameManager->checkPattern((Note)noteClickedIndex);
+
 						}
                     }
 					break;
@@ -254,4 +257,5 @@ RaindropGame::~RaindropGame(){
     for (unsigned int i = 0; i<cups.size(); i++){
         delete cups[i];
     }
+    delete soundplayer;
 }
