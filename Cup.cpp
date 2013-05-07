@@ -63,6 +63,7 @@ bool Cup::draw(SDL_Surface *screen, Uint32 elapsed, int noteClickedIndex){
 }
 
 Cup::~Cup(){
+    cout<<"...cup deconstructor..."<<endl;
     if(colorCups.size() > 0){
         for (unsigned int i = 0; i<colorCups.size(); i++){
             delete colorCups[i];

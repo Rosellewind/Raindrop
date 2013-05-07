@@ -80,7 +80,8 @@ Pane::~Pane(){
     }
     if (pointsText) delete pointsText;
     if (levelText) delete levelText;
+    if (pool) delete pool;
     for (unsigned int i = 0; i < pools.size(); i++) {
-        ;//delete pools[i];
+        delete pools[i];
     }
 }
