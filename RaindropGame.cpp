@@ -69,8 +69,7 @@ void RaindropGame::run(SDL_Surface *screen){
     //update thread
     upThread = SDL_CreateThread(updateThread, this);
     if(upThread == NULL){
-        cout<<"Error starting upThread..."<<endl;
-    }
+        cout<<"Error starting upThread..."<<endl;    }
     
     //run loop
     while (!done) {
@@ -172,6 +171,7 @@ void RaindropGame::run(SDL_Surface *screen){
         SDL_Flip(screen);
     }//while !done loop ends
     soundplayer->cleanup();
+    SDL_Quit();///////////////////////
 }//run ends
 
 void RaindropGame::setDraggedObject(int x, int y){
@@ -250,13 +250,13 @@ int RaindropGame::updateThread(void *ptr){
 
 RaindropGame::~RaindropGame(){
     if (upThread) SDL_KillThread(upThread);
-    
     for (unsigned int i = 0; i<backgrounds.size(); i++){
         delete backgrounds[i];
     }
     for (unsigned int i = 0; i<drops.size(); i++){
         delete drops[i];
     }
+    if (cupDragged != NULL)
     if (cupDragged != NULL)
         delete cupDragged;
     if (soundplayer != NULL)
@@ -265,4 +265,5 @@ RaindropGame::~RaindropGame(){
         delete pane;
     if (gameManager != NULL)
             delete gameManager;
+    delete soundplayer;
 }

@@ -39,6 +39,8 @@
 		3DC6BE9D16FE35B200E682EB /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC6BE9B16FE35B200E682EB /* SDL.framework */; };
 		3DC6BEA016FE37CB00E682EB /* SDL_image.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3DC6BE9A16FE35B200E682EB /* SDL_image.framework */; };
 		3DC6BEA116FE37CB00E682EB /* SDL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3DC6BE9B16FE35B200E682EB /* SDL.framework */; };
+		3DDA064117396D7400B07D1D /* RandomGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DDA063F17396D7400B07D1D /* RandomGenerator.cpp */; };
+		3DDA064217396D7400B07D1D /* RandomGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DDA063F17396D7400B07D1D /* RandomGenerator.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +116,8 @@
 		3DC6BE9A16FE35B200E682EB /* SDL_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_image.framework; path = /Library/Frameworks/SDL_image.framework; sourceTree = "<absolute>"; };
 		3DC6BE9B16FE35B200E682EB /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
 		3DD654571721029C0047A8FC /* Functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
+		3DDA063F17396D7400B07D1D /* RandomGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RandomGenerator.cpp; sourceTree = "<group>"; };
+		3DDA064017396D7400B07D1D /* RandomGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomGenerator.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +151,8 @@
 				3D5F2AF51715C22B00AEF369 /* Resources */,
 				3DC6BE7516FE348300E682EB /* SDLMain.h */,
 				3DC6BE7616FE348300E682EB /* SDLMain.m */,
+				3DDA063F17396D7400B07D1D /* RandomGenerator.cpp */,
+				3DDA064017396D7400B07D1D /* RandomGenerator.h */,
 				3DC6BE7216FE348300E682EB /* ProtoGame.h */,
 				3DD654571721029C0047A8FC /* Functions.h */,
 				3DC6BE6516FE348300E682EB /* Frame.h */,
@@ -375,6 +381,7 @@
 				3D5F2AFB1715CD7900AEF369 /* SoundPlayer.cpp in Sources */,
 				3D5F2B031716AD0400AEF369 /* Menu.cpp in Sources */,
 				3D95A1DF17247A04003E0BE0 /* GameManager.cpp in Sources */,
+				3DDA064117396D7400B07D1D /* RandomGenerator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +392,7 @@
 				3D1C44E6170BA59500586C40 /* Text.cpp in Sources */,
 				3D5F2AFA1715CB2A00AEF369 /* SoundPlayer.cpp in Sources */,
 				3D5F2B021716AAC100AEF369 /* Menu.cpp in Sources */,
+				3DDA064217396D7400B07D1D /* RandomGenerator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
