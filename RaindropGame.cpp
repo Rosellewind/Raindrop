@@ -16,6 +16,8 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     timestampMouseDown = 0;
     cupDragged = NULL;
     noteClickedIndex = -1;
+    upThread = NULL;
+    update = false;
     
     //set background
     background = new Sprite(0, "Resources/background.txt", true);
@@ -61,10 +63,16 @@ void RaindropGame::run(SDL_Surface *screen){
     //play sound pattern
     soundplayer->playNoteSequence(gameManager->getPattern(), 6000);
     
+    //update thread
+    upThread = SDL_CreateThread(updateThread, this);
+    if(upThread == NULL){
+        cout<<"Error starting upThread..."<<endl;
+    }
+    
     //run loop
     while (!done) {
         elapsed = SDL_GetTicks();
-        if(1000/100 > (elapsed-last))
+        if(1000/60 > (elapsed-last))
 			SDL_Delay(1000/60 - (elapsed-last)); //RESTRICT PLAYBACK TO 60 FRAMES A SECOND
         last = elapsed;
         
@@ -116,12 +124,7 @@ void RaindropGame::run(SDL_Surface *screen){
         Cup::checkCollisions(cups,drops);
         
         //update background, drops, cups
-        SDL_Thread *upThread;
-        upThread = SDL_CreateThread(updateThread, this);
-        if(upThread == NULL){
-            cout<<"Error starting upThread..."<<endl;
-        }
-        
+        update = true;
         
         //draw background
         for (unsigned int i = 0; i < backgrounds.size(); i++) {
@@ -201,44 +204,48 @@ bool RaindropGame::checkClickCup(int x, int y){
 
 int RaindropGame::updateThread(void *ptr){
     RaindropGame* game = (RaindropGame*)ptr;
-
-    //add drops if needed
-    while ((int)game->drops.size() < game->numDrops && game->elapsed > game->lastDrop + game->minLatency) {
-        
-        int x = (rand()%20)*0.05*SCREENWIDTH;
-        Drop *d = new Drop("Resources/drop.txt", PLAIN, x, game->gameSpeed);
-        game->drops.insert(game->drops.end(), d);
-        game->lastDrop = SDL_GetTicks();
-    }
-    
-    //erase drops that are going offscreen
-    for (int i = (int)game->drops.size()-1; i >= 0; i--) {
-        if (game->drops[i]->isAlive() == 0) {
-            Drop *d = game->drops[i];
-            game->drops.erase(game->drops.begin()+i);
-            delete d;
+    while (!game->done) {
+        if (game->update){
+            //add drops if needed
+            while ((int)game->drops.size() < game->numDrops && game->elapsed > game->lastDrop + game->minLatency) {
+                
+                int x = (rand()%20)*0.05*SCREENWIDTH;
+                Drop *d = new Drop("Resources/drop.txt", PLAIN, x, game->gameSpeed);
+                game->drops.insert(game->drops.end(), d);
+                game->lastDrop = SDL_GetTicks();
+            }
+            
+            //erase drops that are going offscreen
+            for (int i = (int)game->drops.size()-1; i >= 0; i--) {
+                if (game->drops[i]->isAlive() == 0) {
+                    Drop *d = game->drops[i];
+                    game->drops.erase(game->drops.begin()+i);
+                    delete d;
+                }
+            }//for all, for each, algorithms part
+            
+            //update background
+            for (unsigned int i = 0; i < game->backgrounds.size(); i++) {
+                game->backgrounds[i]->update(game->elapsed);
+            }
+            
+            //update drops
+            for (unsigned int i = 0; i < game->drops.size(); i++) {
+                game->drops[i]->update(game->elapsed);
+            }
+            
+            //update cups
+            for (unsigned int i = 0; i < game->cups.size(); i++) {
+                game->cups[i]->update(game->elapsed);
+            }
+            game->update = false;
         }
-    }//for all, for each, algorithms part
-    
-    //update background
-    for (unsigned int i = 0; i < game->backgrounds.size(); i++) {
-        game->backgrounds[i]->update(game->elapsed);
-    }
-    
-    //update drops
-    for (unsigned int i = 0; i < game->drops.size(); i++) {
-        game->drops[i]->update(game->elapsed);
-    }
-    
-    //update cups
-    for (unsigned int i = 0; i < game->cups.size(); i++) {
-        game->cups[i]->update(game->elapsed);
     }
     return 0;
 }
 
 RaindropGame::~RaindropGame(){
-        if (upThread) SDL_KillThread(evtThread);
+    if (upThread) SDL_KillThread(upThread);
     
     for (unsigned int i = 0; i<backgrounds.size(); i++){
         delete backgrounds[i];

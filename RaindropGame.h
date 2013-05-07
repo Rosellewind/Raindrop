@@ -46,7 +46,8 @@ class RaindropGame: public Game{
     GameManager *gameManager;
     int noteClickedIndex;
     int cupClickedIndex;
-    
+    SDL_Thread *upThread;
+    bool update;
     //JaredTemp 1. declare vector.
 //    vector<Sprite*> tempDrops;
 
