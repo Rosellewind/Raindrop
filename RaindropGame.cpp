@@ -257,7 +257,6 @@ RaindropGame::~RaindropGame(){
         delete drops[i];
     }
     if (cupDragged != NULL)
-    if (cupDragged != NULL)
         delete cupDragged;
     if (soundplayer != NULL)
         delete soundplayer;
