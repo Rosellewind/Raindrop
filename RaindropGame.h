@@ -25,6 +25,7 @@
 #include "Game.h"
 #include "Pane.h"
 #include "GameManager.h"
+#include "RandomGenerator.h"
 
 class RaindropGame: public Game{
     int numCups;

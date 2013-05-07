@@ -1,5 +1,14 @@
 Resources/sounds/rain.wav
 8
+Resources/sounds/waterglasses/lc.wav
+Resources/sounds/waterglasses/d.wav
+Resources/sounds/waterglasses/e.wav
+Resources/sounds/waterglasses/f.wav
+Resources/sounds/waterglasses/g.wav
+Resources/sounds/waterglasses/a.wav
+Resources/sounds/waterglasses/b.wav
+Resources/sounds/waterglasses/hc.wav
+8
 Resources/sounds/lc.wav
 Resources/sounds/d.wav
 Resources/sounds/e.wav

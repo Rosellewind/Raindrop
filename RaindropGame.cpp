@@ -36,6 +36,7 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     
     //seed psuedo random number generator
     srand ((unsigned int)time(NULL));
+    rng = new RandomGenerator(0,20);
 }
 
 void RaindropGame::run(SDL_Surface *screen){
@@ -58,6 +59,8 @@ void RaindropGame::run(SDL_Surface *screen){
     
     //play sound
     soundplayer->setMusicVolume(15);
+    soundplayer->setGlassVolume(120);
+    soundplayer->setSequenceVolume(50);
     soundplayer->playMusic();
     
     //play sound pattern
@@ -91,10 +94,11 @@ void RaindropGame::run(SDL_Surface *screen){
 						int x = event.button.x; int y = event.button.y;
 						//check to see if it is on click/draggable object
 						if (checkClickCup(x, y)) {
-                            soundplayer->pauseNoteSequence(2000);
-                            soundplayer->playSound(cupDragged->note, SoundPlayer::CLICK_CHANNEL);
+                            soundplayer->pauseNoteSequence(3000);
                             noteClickedIndex = cupDragged->note;
-                            gameManager->checkPattern(cupDragged->note);
+                            soundplayer->playGlassSound((Note)noteClickedIndex);
+                            gameManager->checkPattern((Note)noteClickedIndex);
+
 						}
                     }
 					break;
