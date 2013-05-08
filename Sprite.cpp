@@ -38,8 +38,6 @@ void Sprite::update(Uint32 elapsed){
         	xPos = rand() % SCREENWIDTH;
         	yPos= -40;
         }
-        //if ((int)xPos < 0) xVel = -xVel;
-        //if ((int)yPos < 0) yVel = -yVel;
     }
 }
 
@@ -84,6 +82,7 @@ void Sprite::stopDragging(){
 }
 
 Sprite::~Sprite(){
+    cout<<"...cup deconstructor..."<<endl;
     if (animation)
         delete animation;
 }

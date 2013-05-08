@@ -6,44 +6,7 @@
 #include "Functions.h"
 
 using namespace std;
-/*
-BSprite::BSprite(int num){
-    sprite = NULL;
-    xPos = 0.0; xVel = 0.0;
-    yPos = 0.0; yVel = 0.0;
-	string filename = "Resources/images/droplet"+NTS(num)+".png";
-    SDL_Surface *temp = IMG_Load(filename.c_str());
-    sprite = SDL_DisplayFormat(temp);
-    SDL_FreeSurface(temp);
-    if(sprite == NULL) {
-        std::cout << "failed to load sprite " << filename << std::endl;
-        loaded = false;
-    }
-}
-bool BSprite::SpriteExists(){
-    return loaded;
-}
-BSprite* BSprite::DRAW(SDL_Surface* buffer, int x, int y){
-	if(!SpriteExists()) {
-		std::cout << "Failed to draw, Sprite not initialized!"<< std::endl;
-		return this;
-	}
-	SDL_Rect dstrect;
-	dstrect.x = x;
-	dstrect.y = y;
-	SDL_BlitSurface(sprite, NULL, buffer, &dstrect);
-	return this;
-}
-BSprite::~BSprite(){
-    DESTROY();
-}
-BSprite* BSprite::DESTROY(){
-    if(SpriteExists()) {
-        SDL_FreeSurface(sprite);
-    }
-    return this;
-}
-*/
+
 Menu::Menu()
 {
 	SDL_Init(SDL_INIT_VIDEO);
@@ -134,7 +97,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font){
 	DrawObjects(8,2,12,droplets3);
 	DrawObjects(4,3,16,droplets4);
 	DrawObjects(2,4,20,droplets5);
-	tempScreen = SDL_CreateRGBSurface( SDL_SWSURFACE | SDL_SRCALPHA, SCREENWIDTH, SCREENHEIGHT, 16, 0xff000000,0x00ff0000,0x0000ff00,0x000000ff);
+	tempScreen = SDL_CreateRGBSurface( SDL_SWSURFACE | SDL_SRCALPHA, SCREENWIDTH, SCREENHEIGHT, 32, 0xff000000,0x00ff0000,0x0000ff00,0x000000ff);
 	tempScreen2 = SDL_DisplayFormat( tempScreen );
 	background2 = SDL_DisplayFormatAlpha( background );
 	SDL_FreeSurface( tempScreen );
