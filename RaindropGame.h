@@ -48,6 +48,7 @@ class RaindropGame: public Game{
     int noteClickedIndex;
     int cupClickedIndex;
     RandomGenerator *rng;
+    int waitTime;
     //JaredTemp 1. declare vector.
 //    vector<Sprite*> tempDrops;
 

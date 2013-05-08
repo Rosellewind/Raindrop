@@ -34,7 +34,7 @@ class SoundPlayer{
 public:
 	int sequenceCounter;
 	vector<Note> notes;
-	bool pausedSequence, firstClick;
+	bool pausedSequence;
 	Uint32 initialTime;
 	static const int SEQUENCE_CHANNEL = 2;
 	static const int CLICK_CHANNEL =1;

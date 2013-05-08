@@ -7,7 +7,6 @@ SoundPlayer::SoundPlayer(Pane *newpane){
 	pane = newpane;
 	pausedSequence = false;
 	pauseDelay = 1;
-	firstClick = true;
 }
 
 void SoundPlayer::init(int freq, int channels, int chunkSize){
@@ -70,9 +69,7 @@ void SoundPlayer::setSoundVolume(int newVolume, int channel){
 		vol=0;
 	else if(vol > MIX_MAX_VOLUME)
 		vol = MIX_MAX_VOLUME;
-	cout<<"Vol Before: "<<Mix_Volume(channel,-1)<<endl;
 	Mix_Volume(channel, vol);
-	cout<<"Vol After: "<<Mix_Volume(channel,-1)<<endl;
 }
 
 void SoundPlayer::playGlassSound(Note n){
@@ -125,6 +122,7 @@ void SoundPlayer::pauseNoteSequence(int delay){
 	pauseDelay = delay;
 	//remaining += delay;
 	initialTime = SDL_GetTicks();
+	//cout<<"initial time: "<<initialTime<<endl;
 	Mix_Pause(SEQUENCE_CHANNEL);
 }
 void SoundPlayer::startNewSequence(vector<Note> newNotes, int newDelay){
@@ -147,10 +145,13 @@ int SoundPlayer::sequenceThread(void *player){
 		if(!sp->pausedSequence){
 			if(sp->sequenceCounter>=sp->notes.size()){
 				sp->sequenceCounter = 0;
-				SDL_Delay(sp->delay);
+				int current = SDL_GetTicks();
+				while(SDL_GetTicks()-current<sp->delay && !sp->done){
+
+				}
+				//SDL_Delay(sp->delay);
 			}
-			if(Mix_Playing(SEQUENCE_CHANNEL)==0){
-				cout<<"Note: "<<sp->notes[sp->sequenceCounter]<<"  counter: "<<sp->sequenceCounter<<endl;
+			if(Mix_Playing(SEQUENCE_CHANNEL)==0 && !sp->pausedSequence){
 				sp->playSound(sp->notes[sp->sequenceCounter],SEQUENCE_CHANNEL);
 				sp->pane->flashColor(sp->notes[sp->sequenceCounter]);
 				sp->sequenceCounter++;
@@ -160,9 +161,7 @@ int SoundPlayer::sequenceThread(void *player){
 			if(nextTime - sp->initialTime >= sp->pauseDelay){
 				//cout<<"Initial Time: "<<sp->initialTime<<"  Next time: "<<nextTime<<"  Elapsed "<<(nextTime - sp->initialTime)<<endl;
 				sp->pausedSequence = false;
-				SDL_Delay(100);
 				Mix_Resume(SEQUENCE_CHANNEL);
-				sp->firstClick=true;		
 			}
 		}
 	}
