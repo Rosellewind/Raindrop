@@ -134,7 +134,7 @@ int Menu::show_menu(SDL_Surface* screen, TTF_Font* font){
 	DrawObjects(8,2,12,droplets3);
 	DrawObjects(4,3,16,droplets4);
 	DrawObjects(2,4,20,droplets5);
-	tempScreen = SDL_CreateRGBSurface( SDL_SWSURFACE | SDL_SRCALPHA, SCREENWIDTH, SCREENHEIGHT, 32, 0xff000000,0x00ff0000,0x0000ff00,0x000000ff);
+	tempScreen = SDL_CreateRGBSurface( SDL_SWSURFACE | SDL_SRCALPHA, SCREENWIDTH, SCREENHEIGHT, 16, 0xff000000,0x00ff0000,0x0000ff00,0x000000ff);
 	tempScreen2 = SDL_DisplayFormat( tempScreen );
 	background2 = SDL_DisplayFormatAlpha( background );
 	SDL_FreeSurface( tempScreen );
