@@ -28,7 +28,9 @@ int main(int argc, char **argv){
     SDL_Surface *screen = SDL_SetVideoMode(SCREENWIDTH, SCREENHEIGHT, 16, SDL_ANYFORMAT|SDL_HWSURFACE|SDL_DOUBLEBUF);
     
     Menu menu;
-    int i = menu.run(screen);
+    int i = 0;//menu.run(screen);
+//    int i = menu.run(screen);
+
     switch(i)
     {
     	case 0: 	//CASE 0 PLAY WAS SELECTED
@@ -42,8 +44,10 @@ int main(int argc, char **argv){
     	case -1:	//CASE -1 USER HIT ESC OR CLOSED THE WINDOW
     		break;
     }
+    
     //won/lost screen
     SDL_FreeSurface(screen);
     screen = NULL;
+    SDL_Quit();
     return 0;
 }

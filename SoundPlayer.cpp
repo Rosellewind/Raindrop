@@ -181,5 +181,5 @@ void SoundPlayer::cleanup(){
 }
 
 SoundPlayer::~SoundPlayer(){
-    cleanup();
+//    cleanup();
 }

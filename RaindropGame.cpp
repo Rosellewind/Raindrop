@@ -12,10 +12,13 @@ RaindropGame::RaindropGame(string fname, int cups, int drops, int speed, int lat
     numCups = cups;
     numDrops = drops;
     minLatency = latency;
+    minSpecialLatency = rand()%(latency*20);
     isDragging = false;
     timestampMouseDown = 0;
     cupDragged = NULL;
     noteClickedIndex = -1;
+    upThread = NULL;
+    update = false;
     
     //set background
     background = new Sprite(0, "Resources/background.txt", true);
@@ -42,16 +45,9 @@ void RaindropGame::run(SDL_Surface *screen){
     SDL_Event event;
     last = SDL_GetTicks();
     lastDrop = last;
+    lastSpecialDrop = last;
     SDL_Delay(100);
-    
-    /*
-    //JaredTemp 2. make sprites
-    for (int i = 0; i<20; i++) {
-        int r = (rand()%20)*0.05*SCREENWIDTH;//use # of drops that will fit, prevents overlap, then disperse over the % of the screen,ex. 100/20 = 5%
-        Sprite *drop = new Sprite(0,"Resources/tempDrops.txt", true, r, r, r, r);
-        tempDrops.push_back(drop);
-    }
-     */
+     
 
     //add cups
     cups = Cup::initCups(numCups, screen);
@@ -65,6 +61,11 @@ void RaindropGame::run(SDL_Surface *screen){
     //play sound pattern
     soundplayer->playNoteSequence(gameManager->getPattern(), 4000);
     
+    //update thread
+    upThread = SDL_CreateThread(updateThread, this);
+    if(upThread == NULL){
+        cout<<"Error starting upThread..."<<endl;    }
+    
     //run loop
     while (!done) {
         
@@ -72,6 +73,8 @@ void RaindropGame::run(SDL_Surface *screen){
         if(delay > 0)
             SDL_Delay((Uint32)delay);
         elapsed = SDL_GetTicks();
+        if(1000/60 > (elapsed-last))
+			SDL_Delay(1000/60 - (elapsed-last)); //RESTRICT PLAYBACK TO 60 FRAMES A SECOND
         last = elapsed;
         
         //events loop
@@ -95,13 +98,26 @@ void RaindropGame::run(SDL_Surface *screen){
                             gameManager->checkPattern((Note)noteClickedIndex);
 
 						}
+                        else if (checkClickSpecialDrop(x, y)){
+                            Note n = noteFromInt(noteClickedIndex);
+                            soundplayer->pauseNoteSequence(3000);
+                            cupClickedIndex = -2;
+                            soundplayer->playGlassSound(n);
+                            for (unsigned int i = 0; i<cups.size(); i++) {
+                                cups[i]->note = n;
+                                cups[i]->setToNote(n);
+                            }
+                        }
                     }
+
 					break;
 				case SDL_MOUSEBUTTONDOWN: {
 					timestampMouseDown = SDL_GetTicks();
                     int x = event.button.x; int y = event.button.y;
 					if (checkClickCup(x, y))
-						setDraggedObject(x, y);}
+						setDraggedObject(x, y);
+
+                }
 					break;
 				case SDL_MOUSEMOTION:
 					if(timestampMouseDown){
@@ -123,12 +139,7 @@ void RaindropGame::run(SDL_Surface *screen){
         Cup::checkCollisions(cups,drops);
         
         //update background, drops, cups
-        SDL_Thread *upThread;
-        upThread = SDL_CreateThread(updateThread, this);
-        if(upThread == NULL){
-            cout<<"Error starting upThread..."<<endl;
-        }
-        
+        update = true;
         
         //draw background
         for (unsigned int i = 0; i < backgrounds.size(); i++) {
@@ -139,6 +150,11 @@ void RaindropGame::run(SDL_Surface *screen){
         for (unsigned int i = 0; i < drops.size(); i++) {
             drops[i]->draw(screen, elapsed);
         }
+        /*
+        //draw specialDrops
+        for (unsigned int i = 0; i < specialDrops.size(); i++) {
+            specialDrops[i]->draw(screen, elapsed);
+        }*/
         
         //draw cups
         for (unsigned int i = 0; i < cups.size(); i++) {
@@ -148,31 +164,26 @@ void RaindropGame::run(SDL_Surface *screen){
                     cupClickedIndex = -1;
                 }
             }
+            else if (cupClickedIndex == -2){
+                if (!cups[i]->draw(screen, elapsed, noteClickedIndex)){
+                    noteClickedIndex = -1;
+                }
+            }
             else cups[i]->draw(screen, elapsed);
         }
-
         
         //draw control pane
         pane->draw(screen, elapsed);
         
-        
-        /*
-        //JaredTemp 3. update sprites, need to be in a while (!done) loop
-        for (unsigned int i = 0; i < tempDrops.size(); i++) {
-            tempDrops[i]->update(elapsed);
+        //draw special items
+        for (unsigned int i = 0; i<specialDrops.size(); i++) {
+            specialDrops[i]->draw(screen, elapsed);
         }
-        
-        //JaredTemp 4. draw sprites, need to be in a while (!done) loop
-        for (unsigned int i = 0; i < tempDrops.size(); i++) {
-            tempDrops[i]->draw(screen, elapsed);
-        }
-         */
-        
         
         SDL_Flip(screen);
     }//while !done loop ends
     soundplayer->cleanup();
-    SDL_Quit();
+    SDL_Quit();///////////////////////
 }//run ends
 
 void RaindropGame::setDraggedObject(int x, int y){
@@ -186,7 +197,6 @@ void RaindropGame::setDraggedObject(int x, int y){
                 
                 cups.erase(cups.begin()+i);
                 cups.push_back(cupDragged);
-                //  cups.insert(cups.begin(), cupDragged);
                 
                 found = 1;
                 break;
@@ -194,6 +204,12 @@ void RaindropGame::setDraggedObject(int x, int y){
         }
     }
     
+}
+
+void RaindropGame::setCupsToNote(Note note){
+    for (unsigned int i = 0; i<cups.size(); i++){
+        cups[i]->note = note;
+    }
 }
 
 bool RaindropGame::checkClickCup(int x, int y){
@@ -207,56 +223,131 @@ bool RaindropGame::checkClickCup(int x, int y){
     return 0;
 }
 
-int RaindropGame::updateThread(void *ptr){
-    RaindropGame* game = (RaindropGame*)ptr;
-
-    //add drops if needed
-    while ((int)game->drops.size() < game->numDrops && game->elapsed > game->lastDrop + game->minLatency) {
-        
-        //int x = (rand()%20)*0.05*SCREENWIDTH;
-        int x = (game->rng->next())*0.05*SCREENWIDTH;
-        Drop *d = new Drop("Resources/drop.txt", PLAIN, x, game->gameSpeed);
-        game->drops.insert(game->drops.end(), d);
-        game->lastDrop = SDL_GetTicks();
-    }
-    
-    //erase drops that are going offscreen
-    for (int i = (int)game->drops.size()-1; i >= 0; i--) {
-        if (game->drops[i]->isAlive() == 0) {
-            Drop *d = game->drops[i];
-            game->drops.erase(game->drops.begin()+i);
-            delete d;
+bool RaindropGame::checkClickSpecialDrop(int x, int y){
+    for(int i = (int)specialDrops.size()-1; i>=0;i--){
+        SDL_Rect dropRect = specialDrops[i]->getRect();
+        if( ( x > dropRect.x ) && ( x < dropRect.x + dropRect.w ) && ( y > dropRect.y ) && ( y < dropRect.y + dropRect.h ) ){
+            //change note of cups/animate click
+            noteClickedIndex = specialDrops[i]->note;
+            
+            return 1;
         }
-    }//for all, for each, algorithms part
-    
-    //update background
-    for (unsigned int i = 0; i < game->backgrounds.size(); i++) {
-        game->backgrounds[i]->update(game->elapsed);
-    }
-    
-    //update drops
-    for (unsigned int i = 0; i < game->drops.size(); i++) {
-        game->drops[i]->update(game->elapsed);
-    }
-    
-    //update cups
-    for (unsigned int i = 0; i < game->cups.size(); i++) {
-        game->cups[i]->update(game->elapsed);
+        
     }
     return 0;
 }
 
+int RaindropGame::updateThread(void *ptr){
+    RaindropGame* game = (RaindropGame*)ptr;
+    while (!game->done) {
+        if (game->update){
+            //add drops if needed
+            while ((int)game->drops.size() < game->numDrops && game->elapsed > game->lastDrop + game->minLatency) {
+                int x = (game->rng->next())*0.05*SCREENWIDTH;
+                //int x = (rand()%20)*0.05*SCREENWIDTH;//use # of drops that will fit, prevents overlap, then disperse over the % of the screen,ex. 100/20 = 5%
+                Drop *d = new Drop("Resources/drop.txt", PLAIN, x, game->gameSpeed);
+                game->drops.insert(game->drops.end(), d);
+                game->lastDrop = SDL_GetTicks();
+            }
+            
+            //erase drops that are going offscreen
+            for (int i = (int)game->drops.size()-1; i >= 0; i--) {
+                if (game->drops[i]->isAlive() == 0) {
+                    Drop *d = game->drops[i];
+                    game->drops.erase(game->drops.begin()+i);
+                    delete d;
+                }
+            }//for all, for each, algorithms part
+            
+            //add special drops if needed
+            if (game->elapsed > game->lastSpecialDrop + game->minSpecialLatency) {
+                int x = (rand()%20)*0.05*SCREENWIDTH;
+                int yVel;
+                int isHigh = rand()%2;//0-2
+                if (isHigh)
+                    yVel = rand()%50+65; //about 65-115
+                else
+                    yVel = rand()%15+20;//about 20-35
+                Drop *d = new Drop("Resources/colorDrops.txt", COLOR, x, yVel, noteFromInt(rand()%8));
+                cout<<"special..."<<endl;
+                game->drops.insert(game->drops.end(), d);
+                game->lastSpecialDrop= SDL_GetTicks();
+                game->minSpecialLatency = rand()%(game->minLatency*20);
+            }
+
+            //update background
+            for (unsigned int i = 0; i < game->backgrounds.size(); i++) {
+                game->backgrounds[i]->update(game->elapsed);
+            }
+            
+            //update drops, delete if needed or move to special items
+            for (int i = (int)game->drops.size()-1; i >= 0; i--) {
+                Drop *d = game->drops[i];
+                d->update(game->elapsed);
+                if (!d->isAlive()){
+                    game->drops.erase(game->drops.begin()+i);
+                    if (d->type == COLOR && d->isCaught){
+                        if (game->specialDrops.size() >= 4){
+                            Drop *tmp = game->specialDrops[0];
+                            game->specialDrops.erase(game->specialDrops.begin());
+                            delete tmp;
+                        }
+                        game->specialDrops.insert(game->specialDrops.end(), d);
+                        for (unsigned int i = 0; i < game->specialDrops.size(); i++) {
+                            game->specialDrops[i]->dragTo(i*40 + 10, SCREENHEIGHT-40);
+                        }
+                    }
+                    else
+                        delete d;
+                }
+            }
+            
+            //update cups
+            for (unsigned int i = 0; i < game->cups.size(); i++) {
+                game->cups[i]->update(game->elapsed);
+            }
+            game->update = false;
+        }
+    }
+    return 0;
+}
+
+Note RaindropGame::noteFromInt(int index){
+    Note note;
+    if (index == 0)
+        note = LC;
+    else if (index == 1)
+        note = D;
+    else if (index == 2)
+        note = E;
+    else if (index == 3)
+        note = F;
+    else if (index == 4)
+        note = G;
+    else if (index == 5)
+        note = A;
+    else if (index == 6)
+        note = B;
+    else 
+        note = HC;
+    return note;
+}
+
 RaindropGame::~RaindropGame(){
-    //    if (upThread) SDL_KillThread(evtThread);
-    
+    if (upThread) SDL_KillThread(upThread);
     for (unsigned int i = 0; i<backgrounds.size(); i++){
         delete backgrounds[i];
     }
     for (unsigned int i = 0; i<drops.size(); i++){
         delete drops[i];
     }
-    for (unsigned int i = 0; i<cups.size(); i++){
-        delete cups[i];
-    }
+    if (cupDragged != NULL)
+        delete cupDragged;
+    if (soundplayer != NULL)
+        delete soundplayer;
+    if (pane != NULL)
+        delete pane;
+    if (gameManager != NULL)
+            delete gameManager;
     delete soundplayer;
 }

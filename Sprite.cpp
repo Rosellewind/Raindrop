@@ -82,6 +82,7 @@ void Sprite::stopDragging(){
 }
 
 Sprite::~Sprite(){
+    cout<<"...cup deconstructor..."<<endl;
     if (animation)
         delete animation;
 }

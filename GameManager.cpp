@@ -160,3 +160,7 @@ Note GameManager::randomNote(){
 vector<Note> GameManager::getPattern(){
     return pattern;
 }
+
+GameManager::~GameManager(){
+    ;//pane and soundPlayer are passed in
+}

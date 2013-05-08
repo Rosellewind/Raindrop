@@ -8,10 +8,12 @@ class Drop : public Sprite{
 public:
     Type type;
     bool isCaught;
+    Note note;
     
-    Drop(string fname, Type type, int x, int gameSpeed);
+    Drop(string fname, Type kind, int x, int gameSpeed, Note n = LC);
     void update(Uint32 elapsed);
     bool isAlive();
+    void setIsCaught(bool caught);
 };
 
 #endif

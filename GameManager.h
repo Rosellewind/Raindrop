@@ -38,8 +38,8 @@ public:
     Note intToNote(int i);
     Note raiseNote(Note note);
     Note randomNote();
-    
     vector<Note> getPattern();
+    ~GameManager();
 };
 
 

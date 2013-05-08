@@ -32,6 +32,7 @@ class RaindropGame: public Game{
     int numDrops;
     int gameSpeed;
     int minLatency;
+    int minSpecialLatency;
     vector<Sprite*> backgrounds;
     vector<Drop*> drops;
     vector<Cup*> cups;
@@ -40,6 +41,7 @@ class RaindropGame: public Game{
     Uint32 elapsed;
     Uint32 last;
     Uint32 lastDrop;
+    Uint32 lastSpecialDrop;
     Cup *cupDragged;
     Sprite *background;
     Pane *pane;
@@ -47,16 +49,18 @@ class RaindropGame: public Game{
     GameManager *gameManager;
     int noteClickedIndex;
     int cupClickedIndex;
+    SDL_Thread *upThread;
+    bool update;
     RandomGenerator *rng;
-    int waitTime;
-    //JaredTemp 1. declare vector.
-//    vector<Sprite*> tempDrops;
+    vector<Drop*> specialDrops;
 
 
-    
-    
     bool checkClickCup(int x, int y);
+    bool checkClickSpecialDrop(int x, int y);
+    static Note noteFromInt(int index);
+
     void setDraggedObject(int x, int y);
+    void setCupsToNote(Note note);
     bool checkMatching(int index);
     void checkPattern(Note note);
     static int updateThread(void *ptr);

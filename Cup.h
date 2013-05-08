@@ -14,6 +14,7 @@ public:
     vector<Animation*> colorCups;
     
     Cup(string fname, vector<Animation*> colCups, Note n = LC, int x = 0);
+    void setToNote(Note n);
     void dragTo(int x, int y);
     void draw(SDL_Surface *screen, Uint32 elapsed);
     bool draw(SDL_Surface *screen, Uint32 elapsed, int noteClickedIndex);

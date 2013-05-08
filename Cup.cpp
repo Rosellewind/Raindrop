@@ -16,22 +16,28 @@ void Cup::update(Uint32 elapsed){
 };
 
 void Cup::raiseNote(){
+    Note n;
     if (note == LC)
-        note = D;
+        n = D;
     else if (note == D)
-        note = E;
+        n = E;
     else if (note == E)
-        note = F;
+        n = F;
     else if (note == F)
-        note = G;
+        n = G;
     else if (note == G)
-        note = A;
+        n = A;
     else if (note == A)
-        note = B;
+        n = B;
     else if (note == B)
-        note = HC;
-    else if (note == HC)
-        note = LC;
+        n = HC;
+    else
+        n = LC;
+    setToNote(n);
+}
+
+void Cup::setToNote(Note n){
+    note = n;
     string newFile = "Resources/cups.txt";
     delete animation;
     animation = new Animation(newFile.c_str(),note,true);
@@ -63,6 +69,7 @@ bool Cup::draw(SDL_Surface *screen, Uint32 elapsed, int noteClickedIndex){
 }
 
 Cup::~Cup(){
+    cout<<"...cup deconstructor..."<<endl;
     if(colorCups.size() > 0){
         for (unsigned int i = 0; i<colorCups.size(); i++){
             delete colorCups[i];
@@ -109,7 +116,9 @@ void Cup::checkCollisions(vector<Cup*> cups, vector<Drop*> drops){
             for (unsigned int j = 0; j < cups.size(); j++) {
                 if (cups[j]->checkCollisionByCenter(dropRect)){
                     drops[i]->isCaught = 1;
-                    cups[j]->raiseNote();
+                    if (drops[i]->type == PLAIN) {
+                        cups[j]->raiseNote();
+                    }
                 }
             }
         }
