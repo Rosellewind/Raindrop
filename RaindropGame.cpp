@@ -238,8 +238,8 @@ int RaindropGame::updateThread(void *ptr){
         if (game->update){
             //add drops if needed
             while ((int)game->drops.size() < game->numDrops && game->elapsed > game->lastDrop + game->minLatency) {
-                
-                int x = (rand()%20)*0.05*SCREENWIDTH;//use # of drops that will fit, prevents overlap, then disperse over the % of the screen,ex. 100/20 = 5%
+                int x = (game->rng->next())*0.05*SCREENWIDTH;
+                //int x = (rand()%20)*0.05*SCREENWIDTH;//use # of drops that will fit, prevents overlap, then disperse over the % of the screen,ex. 100/20 = 5%
                 Drop *d = new Drop("Resources/drop.txt", PLAIN, x, game->gameSpeed);
                 game->drops.insert(game->drops.end(), d);
                 game->lastDrop = SDL_GetTicks();

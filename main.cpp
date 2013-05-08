@@ -29,6 +29,8 @@ int main(int argc, char **argv){
     
     Menu menu;
     int i = 0;//menu.run(screen);
+//    int i = menu.run(screen);
+
     switch(i)
     {
     	case 0: 	//CASE 0 PLAY WAS SELECTED
@@ -42,6 +44,7 @@ int main(int argc, char **argv){
     	case -1:	//CASE -1 USER HIT ESC OR CLOSED THE WINDOW
     		break;
     }
+    
     //won/lost screen
     SDL_FreeSurface(screen);
     screen = NULL;

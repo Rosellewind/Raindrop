@@ -30,14 +30,15 @@ using namespace std;
 class Menu
 {
 public:
-    int x,y,AlphaValue,FadeValue;
+    int x,y,AlphaValue;
     SDL_Thread *thread1, *thread2;
-    SDL_Surface *icon;
+    SDL_Surface *icon, *logo, *background, *tempScreen, *tempScreen2, *background2;
     TTF_Font *font;
     Mix_Music *music;
     Mix_Chunk *sound;
     SDL_Event event;
     vector<Sprite*> menuRain;
+    vector<Sprite*> menuMist;
     Uint8 *Keys;
     Uint32 time;
     Sprite *droplets1;
@@ -46,12 +47,15 @@ public:
     Sprite *droplets4;
     Sprite *droplets5;
     static const int NUMMENU = 3;
+    SDL_Rect pos[NUMMENU];
+    SDL_Surface * menus[NUMMENU];
     Menu();
     ~Menu();
     int show_menu(SDL_Surface* screen, TTF_Font* font);
     SDL_Surface* LoadIMG(const char *c, Uint32 colorkey);
     void DrawIMG(SDL_Surface *img, SDL_Surface* des, int x, int y);
-    void DrawDroplets(int z, int j, int num, Sprite *d);
+    void DrawObjects(int z, int j, int num, Sprite *d);
+    void UpdateScreen(SDL_Surface* screen, int FADE, int r, int g, int b, int a);
     int run(SDL_Surface* screen);
     Menu* DESTROY();
 };
