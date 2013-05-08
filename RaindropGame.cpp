@@ -66,7 +66,7 @@ void RaindropGame::run(SDL_Surface *screen){
     //run loop
     while (!done) {
         elapsed = SDL_GetTicks();
-        if(1000/100 > (elapsed-last))
+        if(1000/60 > (elapsed-last))
 			SDL_Delay(1000/60 - (elapsed-last)); //RESTRICT PLAYBACK TO 60 FRAMES A SECOND
         last = elapsed;
         

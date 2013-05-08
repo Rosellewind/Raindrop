@@ -1,0 +1,6 @@
+8
+1
+30
+30
+Resources/Images/colorDrops.png
+100   
