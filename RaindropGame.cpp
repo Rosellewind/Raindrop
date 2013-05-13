@@ -69,9 +69,9 @@ void RaindropGame::run(SDL_Surface *screen){
     //run loop
     while (!done) {
         
-        int delay = waitTime - (SDL_GetTicks()-last);
-        if(delay > 0)
-            SDL_Delay((Uint32)delay);
+        // int fdelay = waitTime - (SDL_GetTicks()-last);
+        // if(fdelay > 0)
+        //     SDL_Delay((Uint32)fdelay);
         elapsed = SDL_GetTicks();
         if(1000/60 > (elapsed-last))
 			SDL_Delay(1000/60 - (elapsed-last)); //RESTRICT PLAYBACK TO 60 FRAMES A SECOND
@@ -92,7 +92,7 @@ void RaindropGame::run(SDL_Surface *screen){
 						int x = event.button.x; int y = event.button.y;
 						//check to see if it is on click/draggable object
 						if (checkClickCup(x, y)) {
-                            soundplayer->pauseNoteSequence(5000);
+                            soundplayer->pauseNoteSequence(4000);
                             noteClickedIndex = cupDragged->note;
                             soundplayer->playGlassSound((Note)noteClickedIndex);
                             gameManager->checkPattern((Note)noteClickedIndex);

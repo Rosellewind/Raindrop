@@ -47,6 +47,8 @@ void GameManager::checkPattern(Note note){
         }
         newPattern();
         soundplayer->startNewSequence(pattern, 6000);
+        soundplayer->pauseNoteSequence(2000);
+        
     }
     else cout<<"nope"<<endl;
 }

@@ -26,6 +26,7 @@ using namespace std;
 class SoundPlayer{
 	Mix_Music *music;
 	vector<Mix_Chunk*> sounds[3]; 
+	Mix_Chunk* victorySound;
 	bool done;
 	int delay, pauseDelay; // in ms
 	Pane *pane;
@@ -54,6 +55,7 @@ public:
 	void setGlassVolume(int newvol);
 	void setSequenceVolume(int newvol);
 	void cleanup();
+	void playSuccessSound();
 	void stopNoteSequence();
 	void pauseNoteSequence(int delay);
     ~SoundPlayer();

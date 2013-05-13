@@ -17,3 +17,5 @@ Resources/sounds/g.wav
 Resources/sounds/a.wav
 Resources/sounds/b.wav
 Resources/sounds/hc.wav
+1
+Resources/sounds/success.wav

@@ -49,6 +49,7 @@ class RaindropGame: public Game{
     GameManager *gameManager;
     int noteClickedIndex;
     int cupClickedIndex;
+    int waitTime;
     SDL_Thread *upThread;
     bool update;
     RandomGenerator *rng;

@@ -7,6 +7,7 @@ SoundPlayer::SoundPlayer(Pane *newpane){
 	pane = newpane;
 	pausedSequence = false;
 	pauseDelay = 1;
+	victorySound = NULL;
 }
 
 void SoundPlayer::init(int freq, int channels, int chunkSize){
@@ -45,7 +46,14 @@ void SoundPlayer::load_sounds(string fname){
 			cout<<endl;
 		}
 	}
-	
+	in>>numSounds;
+	if(numSounds == 1){
+		in>>soundName;
+		cout<<"loading file: "<<soundName<<endl;
+		victorySound = Mix_LoadWAV(soundName.c_str());
+	}
+	else
+		cout<<"Error loading success sound"<<endl;
 	in.close();
 }
 
@@ -92,6 +100,12 @@ void SoundPlayer::playSound(Note n, int channel){
 			cout<<"Error playing sound"<<endl;
 		}
 	}
+} 
+void SoundPlayer::playSuccessSound(){
+	if(victorySound!=NULL){
+		if(Mix_PlayChannel(3, victorySound, 0) == -1)
+			cout<<"Error playing victory sound"<<endl;
+	}
 }
 
 void SoundPlayer::togglePauseMusic(){
@@ -127,6 +141,7 @@ void SoundPlayer::pauseNoteSequence(int delay){
 }
 void SoundPlayer::startNewSequence(vector<Note> newNotes, int newDelay){
 	stopNoteSequence();
+	playSuccessSound();
 	playNoteSequence(newNotes, newDelay);
 }
 void SoundPlayer::stopNoteSequence(){
