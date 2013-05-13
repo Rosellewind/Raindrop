@@ -28,8 +28,8 @@ int main(int argc, char **argv){
     SDL_Surface *screen = SDL_SetVideoMode(SCREENWIDTH, SCREENHEIGHT, 16, SDL_ANYFORMAT|SDL_HWSURFACE|SDL_DOUBLEBUF);
     
     Menu menu;
-    int i = 0;//menu.run(screen);
-//    int i = menu.run(screen);
+//    int i = 0;//menu.run(screen);
+    int i = menu.run(screen);
 
     switch(i)
     {

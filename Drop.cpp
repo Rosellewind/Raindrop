@@ -27,7 +27,7 @@ bool Drop::isAlive(){
 void Drop::setIsCaught(bool caught){
     isCaught = caught;
     if (type == COLOR){
-        
+
     }
 }
 
